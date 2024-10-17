@@ -9,7 +9,28 @@
 
 <body>
     <header>Persona 5 Fusion Calculator</header>
-    <p>I'm working</p>
+    <div class="all-personas-container">
+        <p>Choose your DLC:</p>
+        <form>
+            <fieldset id="dlc-form">
+            </fieldset>
+        </form>
+        <label for="sorting">Sort by:</label>
+        <select name="sorting" id="sorting">
+            <option value="acrana">Arcana</option>
+            <option value="lvl">Level</option>
+        </select>
+
+        <table>
+            <thead>
+                <td>Arcana</td>
+                <td>Level</td>
+                <td>Name</td>
+                <td>Type</td>
+            </thead>
+            <tbody id="compendium"></tbody>
+        </table>
+    </div>
 </body>
 
 </html>

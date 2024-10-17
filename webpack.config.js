@@ -29,12 +29,17 @@ module.exports = {
         test: /\.scss$/,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
+        type: "asset/resource",
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: "Webpack App",
       filename: "index.html",
+      favicon: "src/assets/images/favicon.ico",
       template: "src/template.html", // создать шаблонный HTML в папке src
     }),
   ],

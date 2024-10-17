@@ -1,4 +1,4 @@
-export const personas = {
+export const compendiumData = {
   Abaddon: {
     arcana: "Judgement",
     inherits: "curse",
@@ -2874,7 +2874,7 @@ export const personas = {
     area: "Sheriruth",
     floor: "L5, 7-9 (before Palace 7) / L3 & 4 (after Palace 7)",
   },
-  "Kusi Mitama": {
+  "Kushi Mitama": {
     arcana: "Strength",
     inherits: "healing",
     lvl: 14,
