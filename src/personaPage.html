@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Persona Page</title>
+    </head>
+
+    <body>
+        <header>Persona 5 Fusion Calc</header>
+        <article class="persona-all-data">
+            <div class="name-container">
+                <div class="name-container_arcana">Lovers</div>
+                <div class="name-container_name">Saki Mitama</div>
+                <div class="name-container_lvl">Lv 6</div>
+                <div class="type" id="type">--</div>
+            </div>
+            <div class="resistance-container">
+                <div class="elem phys">phys</div>
+                <div class="elem gun">gun</div>
+                <div class="elem fire">fire</div>
+                <div class="elem ice str">ice</div>
+                <div class="elem elec">elec</div>
+                <div class="elem wind wk">wind</div>
+                <div class="elem psy">psy</div>
+                <div class="elem nuke">nuke</div>
+                <div class="elem bless">bless</div>
+                <div class="elem curse">curse</div>
+            </div>
+            <div class="skills-container">
+                <div class="skills-container skill-row">
+                    <div class="skills-container_elem">ice</div>
+                    <div class="skills-container_name">Bufu</div>
+                    <div class="skills-container_cost">4 SP</div>
+                    <div class="skills-container_effect">
+                        √40 pwr, 12% Freeze
+                    </div>
+                    <div class="skills-container_lvl">6</div>
+                </div>
+                <div class="skills-container skill-row">
+                    <div class="skills-container_elem">healing</div>
+                    <div class="skills-container_name">Energy Drop</div>
+                    <div class="skills-container_cost">4 SP</div>
+                    <div class="skills-container_effect">
+                        Cure Confuse/Fear/Despair/Rage/Brainwash of 1 ally.
+                    </div>
+                    <div class="skills-container_lvl">6</div>
+                </div>
+                <div class="skills-container skill-row">
+                    <div class="skills-container_elem">support</div>
+                    <div class="skills-container_name">Wind Wall</div>
+                    <div class="skills-container_cost">18 SP</div>
+                    <div class="skills-container_effect">
+                        Create a shield on 1 ally to reduce damage of Wind
+                        attacks for 3 turns.
+                    </div>
+                    <div class="skills-container_lvl">6</div>
+                </div>
+            </div>
+            <div class="inheritance-container">
+                <div class="inheritance-type">Healing</div>
+                <div class="inheritance-chart">
+                    <div class="elem fire">fire</div>
+                    <div class="elem ice str">ice</div>
+                    <div class="elem elec">elec</div>
+                    <div class="elem wind wk">wind</div>
+                    <div class="elem psy">psy</div>
+                    <div class="elem nuke">nuke</div>
+                    <div class="elem bless">bless</div>
+                    <div class="elem healing">healing</div>
+                    <div class="elem ailment">ailment</div>
+                </div>
+            </div>
+            <div class="mementos-location-container">
+                <p class="mementos-location_place">-</p>
+                <p class="mementos-location_personality">-</p>
+            </div>
+            <div class="stats-container">
+                <div class="stats">
+                    <div class="stats_name">St</div>
+                    <div class="stats_value">4</div>
+                    <div class="stats_progressbar"></div>
+                </div>
+                <div class="stats">
+                    <div class="stats_name">Ma</div>
+                    <div class="stats_value">6</div>
+                    <div class="stats_progressbar"></div>
+                </div>
+                <div class="stats">
+                    <div class="stats_name">En</div>
+                    <div class="stats_value">5</div>
+                    <div class="stats_progressbar"></div>
+                </div>
+                <div class="stats">
+                    <div class="stats_name">Ag</div>
+                    <div class="stats_value">6</div>
+                    <div class="stats_progressbar"></div>
+                </div>
+                <div class="stats">
+                    <div class="stats_name">Lu</div>
+                    <div class="stats_value">4</div>
+                    <div class="stats_progressbar"></div>
+                </div>
+            </div>
+        </article>
+        <article class="fusions-data">
+            <section class="fusion_to-this-persona">
+                <h2>How to fuse this persona</h2>
+                <input
+                    class="input"
+                    name="tabs"
+                    type="radio"
+                    id="ordinary-fusion"
+                    checked="checked"
+                />
+                <label class="label" for="ordinary"
+                    >with ordinary persona</label
+                >
+                <div class="table">
+                    <table>
+                        <thead>
+                            <th>Persona 1</th>
+                            <th>Persona 2</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Hermit 4 B</td>
+                                <td>Magician 2 Jack-O-Lantern</td>
+                            </tr>
+                            <tr>
+                                <td>Moon 7 Succubus</td>
+                                <td>Magician 2 Jack-O-Lantern</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <input
+                    class="input"
+                    name="tabs"
+                    type="radio"
+                    id="gem-shadow-fusion"
+                />
+                <label class="label" for="gem-shadow-fusion"
+                    >with gem shadow</label
+                >
+                <div class="table">
+                    <table>
+                        <thead>
+                            <th>Persona 1</th>
+                            <th>Levels</th>
+                            <th>Persona 2</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Lovers Pixie</td>
+                                <td>2 - 5</td>
+                                <td>Empress 15 Queen's Necklace</td>
+                            </tr>
+                            <tr>
+                                <td>Lovers Pixie</td>
+                                <td>7 - 19</td>
+                                <td>Priestess 25 Koh-i-Noor</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <section class="fusion_from-this-persona">
+                <h2>Fusions from this persona</h2>
+                <input
+                    class="input"
+                    name="tabs"
+                    type="radio"
+                    id="ordinary-fusion"
+                    checked="checked"
+                />
+                <label class="label" for="ordinary"
+                    >with ordinary persona</label
+                >
+                <div class="table">
+                    <table>
+                        <thead>
+                            <th>Persona</th>
+                            <th>Result</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Fool 1 Arsene</td>
+                                <td>Chariot 10 Slime</td>
+                            </tr>
+                            <tr>
+                                <td>Magician 2 Jack-O-Lantern</td>
+                                <td>Devil 5 Incubus</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <input
+                    class="input"
+                    name="tabs"
+                    type="radio"
+                    id="gem-shadow-fusion"
+                />
+                <label class="label" for="gem-shadow-fusion"
+                    >with gem shadow</label
+                >
+                <div class="table">
+                    <table>
+                        <thead>
+                            <th>Persona 1</th>
+                            <th>Levels</th>
+                            <th>Persona 2</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Lovers Pixie</td>
+                                <td>2 - 5</td>
+                                <td>Empress 15 Queen's Necklace</td>
+                            </tr>
+                            <tr>
+                                <td>Lovers Pixie</td>
+                                <td>7 - 19</td>
+                                <td>Priestess 25 Koh-i-Noor</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </article>
+    </body>
+</html>

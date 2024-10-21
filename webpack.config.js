@@ -1,10 +1,16 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const pages = ["compendiumPage", "personaPage"];
+
 module.exports = {
-    entry: {
-        bundle: path.resolve(__dirname, "src/scripts/index.js"),
-    },
+    entry: pages.reduce(
+        (value, page) =>
+            Object.assign(value, {
+                [page]: path.resolve(__dirname, `src/scripts/${page}.js`),
+            }),
+        {},
+    ),
     mode: "development",
     output: {
         filename: "[name].[contenthash].js", // новое название с хешом при изменении файла
@@ -12,13 +18,18 @@ module.exports = {
         clean: true,
         assetModuleFilename: "[name][ext]",
     },
+    optimization: {
+        splitChunks: {
+            chunks: "all",
+        },
+    },
     devtool: "source-map",
     devServer: {
         static: {
-            directory: path.resolve(__dirname, "dist"),
+            directory: path.join(__dirname, "dist"),
         },
         port: 3000,
-        open: true,
+        open: ["/compendiumPage", "personaPage"],
         hot: true,
         compress: true,
         historyApiFallback: true,
@@ -35,12 +46,14 @@ module.exports = {
             },
         ],
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            title: "Webpack App",
-            filename: "index.html",
-            favicon: "src/assets/images/favicon.ico",
-            template: "src/template.html", // создать шаблонный HTML в папке src
-        }),
-    ],
+    plugins: pages.map(
+        (page) =>
+            new HtmlWebpackPlugin({
+                title: `Persona 5 Fusion Calculator`,
+                filename: `${page}.html`,
+                favicon: "src/assets/images/favicon.ico",
+                template: `src/${page}.html`,
+                chunks: [page],
+            }),
+    ),
 };
