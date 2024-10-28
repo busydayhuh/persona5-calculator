@@ -1,19 +1,23 @@
-import { compendiumData } from "../data/fullCompendium.js";
+import { makePersonaList } from "./fullCompendim.js";
 import { arcanaOrder } from "../data/arcanaOrder.js";
 import { dlcNames } from "../data/dlcList.js";
-import * as _ from "lodash";
 
-const fullCompendium = Object.keys(compendiumData).map((persona) =>
-    Object.defineProperty(compendiumData[persona], "name", { value: persona }),
-);
+import * as _ from "lodash";
+import "../styles/compendiumPage.scss";
+
+// Globals saved in local storage:
 
 let sortBy = localStorage.getItem("sortBy") || "arcana";
 let checkedDLC = JSON.parse(localStorage.getItem("checkedDLC")) || [];
+
+// Render dynamic HTML:
 
 (function () {
     renderDlcSettings();
     renderPersonaTable();
 })();
+
+//Dynamic HTML components:
 
 function renderDlcSettings() {
     const dlcForm = document.getElementById("dlc-form");
@@ -47,7 +51,7 @@ function renderPersonaTable(personaList = makePersonaList(checkedDLC)) {
 
         html += `<tr><td>${persona["arcana"]}</td><td>${
             persona["lvl"]
-        }</td><td>${persona["name"]}</td><td>${hasType(persona)}</td></tr>`;
+        }</td><td><a href="personaPage.html?name=${persona["name"]}" target="_blank">${persona["name"]}</a></td><td>${hasType(persona)}</td></tr>`;
     }
 
     document.getElementById("compendium").innerHTML = html;
@@ -59,29 +63,6 @@ function renderPersonaTable(personaList = makePersonaList(checkedDLC)) {
         if (p.dlc) return "DLC";
         return "—";
     }
-}
-
-function makePersonaList(checkedDLC) {
-    const noDlcCompendium = fullCompendium.filter((persona) => !persona.dlc);
-    const dlcPersonas = fullCompendium.filter((persona) => persona.dlc);
-
-    let personaList;
-
-    if (checkedDLC.length === 0) {
-        personaList = noDlcCompendium;
-    } else {
-        let dlcPersonasToAdd = [];
-
-        for (const name of checkedDLC) {
-            for (const persona of dlcPersonas) {
-                if (persona["name"].includes(name))
-                    dlcPersonasToAdd.push(persona);
-            }
-        }
-        personaList = noDlcCompendium.concat(dlcPersonasToAdd);
-    }
-
-    return personaList;
 }
 
 function sortPersonaList(personaList) {
@@ -97,6 +78,8 @@ function sortPersonaList(personaList) {
     return sortedList;
 }
 
+// Events (re-render persona list):
+
 const sortOptions = document.getElementById("sorting");
 sortOptions.addEventListener("change", (e) => {
     sortBy = e.target.value;
@@ -106,12 +89,12 @@ sortOptions.addEventListener("change", (e) => {
 
 const dlcFilters = document.querySelectorAll('input[name = "dlc"]');
 dlcFilters.forEach((option) =>
-    option.addEventListener("change", () => {
+    option.addEventListener("click", () => {
         checkedDLC = [...dlcFilters]
             .filter((el) => el.checked)
             .map((el) => el.id);
         localStorage.setItem("checkedDLC", JSON.stringify(checkedDLC));
-
+        makePersonaList(checkedDLC);
         renderPersonaTable();
     }),
 );

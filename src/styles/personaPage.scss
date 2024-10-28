@@ -1,0 +1,98 @@
+@forward "globals";
+
+.title {
+    display: flex;
+    gap: 1em;
+}
+
+.resistance {
+    margin-bottom: 24px;
+
+    &__container {
+        display: flex;
+        justify-content: flex-start;
+        gap: 10px;
+    }
+
+    &__elem {
+        position: relative;
+    }
+
+    .wk::after {
+        content: "Wk";
+        position: absolute;
+        color: var(--white-color);
+        right: -2px;
+        bottom: -12px;
+        font-size: 1em;
+    }
+    .str::after {
+        content: "Str";
+        position: absolute;
+        color: var(--white-color);
+        right: -2px;
+        bottom: -12px;
+        font-size: 1em;
+    }
+    .nul::after {
+        content: "Nul";
+        position: absolute;
+        color: var(--white-color);
+        right: -2px;
+        bottom: -12px;
+        font-size: 1em;
+    }
+    .rpl::after {
+        content: "Rpl";
+        position: absolute;
+        color: var(--white-color);
+        right: -2px;
+        bottom: -12px;
+        font-size: 1em;
+    }
+    .dr::after {
+        content: "Dr";
+        position: absolute;
+        color: var(--white-color);
+        right: -2px;
+        bottom: -12px;
+        font-size: 1em;
+    }
+}
+
+.skills {
+    max-width: 600px;
+
+    &__container {
+        display: grid;
+        grid-template-columns: 1fr 2fr 2fr 5fr 1fr;
+
+        div {
+            border: 1px solid white;
+            padding: 0.5em;
+        }
+    }
+}
+
+.inheritance {
+    max-width: 400px;
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        margin-top: 16px;
+
+        div {
+            border: 1px solid white;
+            padding: 0.5em;
+        }
+    }
+}
+
+.stats {
+    max-width: 400px;
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 5fr;
+    }
+}

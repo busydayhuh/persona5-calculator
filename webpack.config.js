@@ -16,7 +16,7 @@ module.exports = {
         filename: "[name].[contenthash].js", // новое название с хешом при изменении файла
         path: path.resolve(__dirname, "dist"),
         clean: true,
-        assetModuleFilename: "[name][ext]",
+        assetModuleFilename: "assets/[name][ext]",
     },
     optimization: {
         splitChunks: {
@@ -29,7 +29,7 @@ module.exports = {
             directory: path.join(__dirname, "dist"),
         },
         port: 3000,
-        open: ["/compendiumPage", "personaPage"],
+        open: ["/compendiumPage.html", "/personaPage.html"],
         hot: true,
         compress: true,
         historyApiFallback: true,
@@ -37,7 +37,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.scss$/,
+                test: /\.(c|sa|sc)ss$/i,
                 use: ["style-loader", "css-loader", "sass-loader"],
             },
             {

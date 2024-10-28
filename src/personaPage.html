@@ -9,223 +9,151 @@
     <body>
         <header>Persona 5 Fusion Calc</header>
         <article class="persona-all-data">
-            <div class="name-container">
-                <div class="name-container_arcana">Lovers</div>
-                <div class="name-container_name">Saki Mitama</div>
-                <div class="name-container_lvl">Lv 6</div>
-                <div class="type" id="type">--</div>
-            </div>
-            <div class="resistance-container">
-                <div class="elem phys">phys</div>
-                <div class="elem gun">gun</div>
-                <div class="elem fire">fire</div>
-                <div class="elem ice str">ice</div>
-                <div class="elem elec">elec</div>
-                <div class="elem wind wk">wind</div>
-                <div class="elem psy">psy</div>
-                <div class="elem nuke">nuke</div>
-                <div class="elem bless">bless</div>
-                <div class="elem curse">curse</div>
-            </div>
-            <div class="skills-container">
-                <div class="skills-container skill-row">
-                    <div class="skills-container_elem">ice</div>
-                    <div class="skills-container_name">Bufu</div>
-                    <div class="skills-container_cost">4 SP</div>
-                    <div class="skills-container_effect">
-                        √40 pwr, 12% Freeze
+            <section class="title">
+                <div class="title__arcana"></div>
+                <h2 class="title__name"></h2>
+                <div class="title__lvl"></div>
+                <div class="title__type" id="type"></div>
+            </section>
+            <section class="resistance">
+                <h2>Resistance</h2>
+                <div class="resistance__container">
+                    <div
+                        class="resistance__elem elem--phys"
+                        data-elem-name="phys"
+                    >
+                        phys
                     </div>
-                    <div class="skills-container_lvl">6</div>
-                </div>
-                <div class="skills-container skill-row">
-                    <div class="skills-container_elem">healing</div>
-                    <div class="skills-container_name">Energy Drop</div>
-                    <div class="skills-container_cost">4 SP</div>
-                    <div class="skills-container_effect">
-                        Cure Confuse/Fear/Despair/Rage/Brainwash of 1 ally.
+                    <div
+                        class="resistance__elem elem--gun"
+                        data-elem-name="gun"
+                    >
+                        gun
                     </div>
-                    <div class="skills-container_lvl">6</div>
-                </div>
-                <div class="skills-container skill-row">
-                    <div class="skills-container_elem">support</div>
-                    <div class="skills-container_name">Wind Wall</div>
-                    <div class="skills-container_cost">18 SP</div>
-                    <div class="skills-container_effect">
-                        Create a shield on 1 ally to reduce damage of Wind
-                        attacks for 3 turns.
+                    <div
+                        class="resistance__elem elem--fire"
+                        data-elem-name="fire"
+                    >
+                        fire
                     </div>
-                    <div class="skills-container_lvl">6</div>
+                    <div
+                        class="resistance__elem elem--ice"
+                        data-elem-name="ice"
+                    >
+                        ice
+                    </div>
+                    <div
+                        class="resistance__elem elem--elec"
+                        data-elem-name="elec"
+                    >
+                        elec
+                    </div>
+                    <div
+                        class="resistance__elem elem--wind"
+                        data-elem-name="wind"
+                    >
+                        wind
+                    </div>
+                    <div
+                        class="resistance__elem elem--psy"
+                        data-elem-name="psy"
+                    >
+                        psy
+                    </div>
+                    <div
+                        class="resistance__elem elem--nuke"
+                        data-elem-name="nuke"
+                    >
+                        nuke
+                    </div>
+                    <div
+                        class="resistance__elem elem--bless"
+                        data-elem-name="bless"
+                    >
+                        bless
+                    </div>
+                    <div
+                        class="resistance__elem elem--curse"
+                        data-elem-name="curse"
+                    >
+                        curse
+                    </div>
                 </div>
-            </div>
-            <div class="inheritance-container">
-                <div class="inheritance-type">Healing</div>
-                <div class="inheritance-chart">
-                    <div class="elem fire">fire</div>
-                    <div class="elem ice str">ice</div>
-                    <div class="elem elec">elec</div>
-                    <div class="elem wind wk">wind</div>
-                    <div class="elem psy">psy</div>
-                    <div class="elem nuke">nuke</div>
-                    <div class="elem bless">bless</div>
-                    <div class="elem healing">healing</div>
-                    <div class="elem ailment">ailment</div>
+            </section>
+            <section class="skills">
+                <h2>Skills</h2>
+                <div class="skills__container js-skills"></div>
+            </section>
+            <section class="inheritance">
+                <h2>Inheritance</h2>
+                <div class="inheritance__type js-inheritance-type"></div>
+                <div class="inheritance__grid js-inheritance-grid"></div>
+            </section>
+            <section class="mementos"></section>
+            <section class="stats">
+                <h2>Stats</h2>
+                <div class="stats__grid">
+                    <div class="stats__name">St</div>
+                    <div class="stats__value">4</div>
+                    <div class="stats__progressbar"></div>
+                    <div class="stats__name">Ma</div>
+                    <div class="stats__value">6</div>
+                    <div class="stats__progressbar"></div>
+                    <div class="stats__name">En</div>
+                    <div class="stats__value">5</div>
+                    <div class="stats__progressbar"></div>
+                    <div class="stats__name">Ag</div>
+                    <div class="stats__value">6</div>
+                    <div class="stats__progressbar"></div>
+                    <div class="stats__name">Lu</div>
+                    <div class="stats__value">4</div>
+                    <div class="stats__progressbar"></div>
                 </div>
-            </div>
-            <div class="mementos-location-container">
-                <p class="mementos-location_place">-</p>
-                <p class="mementos-location_personality">-</p>
-            </div>
-            <div class="stats-container">
-                <div class="stats">
-                    <div class="stats_name">St</div>
-                    <div class="stats_value">4</div>
-                    <div class="stats_progressbar"></div>
-                </div>
-                <div class="stats">
-                    <div class="stats_name">Ma</div>
-                    <div class="stats_value">6</div>
-                    <div class="stats_progressbar"></div>
-                </div>
-                <div class="stats">
-                    <div class="stats_name">En</div>
-                    <div class="stats_value">5</div>
-                    <div class="stats_progressbar"></div>
-                </div>
-                <div class="stats">
-                    <div class="stats_name">Ag</div>
-                    <div class="stats_value">6</div>
-                    <div class="stats_progressbar"></div>
-                </div>
-                <div class="stats">
-                    <div class="stats_name">Lu</div>
-                    <div class="stats_value">4</div>
-                    <div class="stats_progressbar"></div>
-                </div>
-            </div>
+            </section>
         </article>
-        <article class="fusions-data">
-            <section class="fusion_to-this-persona">
-                <h2>How to fuse this persona</h2>
-                <input
-                    class="input"
-                    name="tabs"
-                    type="radio"
-                    id="ordinary-fusion"
-                    checked="checked"
-                />
-                <label class="label" for="ordinary"
-                    >with ordinary persona</label
-                >
-                <div class="table">
-                    <table>
-                        <thead>
-                            <th>Persona 1</th>
-                            <th>Persona 2</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Hermit 4 B</td>
-                                <td>Magician 2 Jack-O-Lantern</td>
-                            </tr>
-                            <tr>
-                                <td>Moon 7 Succubus</td>
-                                <td>Magician 2 Jack-O-Lantern</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <input
-                    class="input"
-                    name="tabs"
-                    type="radio"
-                    id="gem-shadow-fusion"
-                />
-                <label class="label" for="gem-shadow-fusion"
-                    >with gem shadow</label
-                >
-                <div class="table">
-                    <table>
-                        <thead>
-                            <th>Persona 1</th>
-                            <th>Levels</th>
-                            <th>Persona 2</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Lovers Pixie</td>
-                                <td>2 - 5</td>
-                                <td>Empress 15 Queen's Necklace</td>
-                            </tr>
-                            <tr>
-                                <td>Lovers Pixie</td>
-                                <td>7 - 19</td>
-                                <td>Priestess 25 Koh-i-Noor</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-            <section class="fusion_from-this-persona">
-                <h2>Fusions from this persona</h2>
-                <input
-                    class="input"
-                    name="tabs"
-                    type="radio"
-                    id="ordinary-fusion"
-                    checked="checked"
-                />
-                <label class="label" for="ordinary"
-                    >with ordinary persona</label
-                >
-                <div class="table">
-                    <table>
-                        <thead>
-                            <th>Persona</th>
-                            <th>Result</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Fool 1 Arsene</td>
-                                <td>Chariot 10 Slime</td>
-                            </tr>
-                            <tr>
-                                <td>Magician 2 Jack-O-Lantern</td>
-                                <td>Devil 5 Incubus</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <input
-                    class="input"
-                    name="tabs"
-                    type="radio"
-                    id="gem-shadow-fusion"
-                />
-                <label class="label" for="gem-shadow-fusion"
-                    >with gem shadow</label
-                >
-                <div class="table">
-                    <table>
-                        <thead>
-                            <th>Persona 1</th>
-                            <th>Levels</th>
-                            <th>Persona 2</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Lovers Pixie</td>
-                                <td>2 - 5</td>
-                                <td>Empress 15 Queen's Necklace</td>
-                            </tr>
-                            <tr>
-                                <td>Lovers Pixie</td>
-                                <td>7 - 19</td>
-                                <td>Priestess 25 Koh-i-Noor</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
+        <article class="fusion">
+            <h2>Fusions</h2>
+            <h3>To this persona</h3>
+            <div class="fusion__table" id="fusion-table-v1">
+                <table>
+                    <thead>
+                        <th>Persona 1</th>
+                        <th>Persona 2</th>
+                    </thead>
+                    <tbody class="fusion__list js-fusion-list">
+                        <tr>
+                            <td>Hermit 4 B</td>
+                            <td>Magician 2 Jack-O-Lantern</td>
+                        </tr>
+                        <tr>
+                            <td>Moon 7 Succubus</td>
+                            <td>Magician 2 Jack-O-Lantern</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3>From this persona</h3>
+            <div class="fusion__table" id="fusion-table-v2">
+                <table>
+                    <thead>
+                        <th>Persona 1</th>
+                        <th>Levels</th>
+                        <th>Persona 2</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lovers Pixie</td>
+                            <td>2 - 5</td>
+                            <td>Empress 15 Queen's Necklace</td>
+                        </tr>
+                        <tr>
+                            <td>Lovers Pixie</td>
+                            <td>7 - 19</td>
+                            <td>Priestess 25 Koh-i-Noor</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </article>
     </body>
 </html>
