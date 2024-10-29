@@ -89,25 +89,45 @@
                 <div class="inheritance__type js-inheritance-type"></div>
                 <div class="inheritance__grid js-inheritance-grid"></div>
             </section>
+            <section class="item">
+                <h2>Itemization</h2>
+                <div class="item__grid js-item-grid">
+                    <div class="item__type"></div>
+                    <div class="item__name"></div>
+                    <div class="item__user"></div>
+                    <div class="item__description"></div>
+                    <div class="item__cost"></div>
+                </div>
+            </section>
             <section class="mementos"></section>
             <section class="stats">
                 <h2>Stats</h2>
-                <div class="stats__grid">
+                <div class="stats__grid js-stats-grid">
                     <div class="stats__name">St</div>
                     <div class="stats__value">4</div>
-                    <div class="stats__progressbar"></div>
+                    <div class="stats__barcontainer">
+                        <div class="stats__progressbar"></div>
+                    </div>
                     <div class="stats__name">Ma</div>
                     <div class="stats__value">6</div>
-                    <div class="stats__progressbar"></div>
+                    <div class="stats__barcontainer">
+                        <div class="stats__progressbar"></div>
+                    </div>
                     <div class="stats__name">En</div>
                     <div class="stats__value">5</div>
-                    <div class="stats__progressbar"></div>
+                    <div class="stats__barcontainer">
+                        <div class="stats__progressbar"></div>
+                    </div>
                     <div class="stats__name">Ag</div>
                     <div class="stats__value">6</div>
-                    <div class="stats__progressbar"></div>
+                    <div class="stats__barcontainer">
+                        <div class="stats__progressbar"></div>
+                    </div>
                     <div class="stats__name">Lu</div>
                     <div class="stats__value">4</div>
-                    <div class="stats__progressbar"></div>
+                    <div class="stats__barcontainer">
+                        <div class="stats__progressbar"></div>
+                    </div>
                 </div>
             </section>
         </article>
@@ -133,25 +153,13 @@
                 </table>
             </div>
             <h3>From this persona</h3>
-            <div class="fusion__table" id="fusion-table-v2">
+            <div class="fusion__table">
                 <table>
                     <thead>
                         <th>Persona 1</th>
-                        <th>Levels</th>
                         <th>Persona 2</th>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Lovers Pixie</td>
-                            <td>2 - 5</td>
-                            <td>Empress 15 Queen's Necklace</td>
-                        </tr>
-                        <tr>
-                            <td>Lovers Pixie</td>
-                            <td>7 - 19</td>
-                            <td>Priestess 25 Koh-i-Noor</td>
-                        </tr>
-                    </tbody>
+                    <tbody id="fusion-table-v2"></tbody>
                 </table>
             </div>
         </article>

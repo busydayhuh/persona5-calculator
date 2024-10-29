@@ -22,7 +22,7 @@ const fusablePersonaListSorted = _.chain(fusablePersonaList)
     .groupBy("arcana")
     .value();
 
-export function findForwardFusions(currentPersona) {
+function findForwardFusions(currentPersona) {
     const { lvl: currentLvl, arcana: currentArcana } = currentPersona;
 
     const fusionPairs = normalFusions.filter(
@@ -75,20 +75,15 @@ export function findForwardFusions(currentPersona) {
 
                 if (match !== undefined) {
                     fusions.push([match.name, [personaA.name, personaB.name]]);
-                } else {
-                    fusions.push([
-                        resultArcanaFusables.at(-1).name,
-                        [personaA.name, personaB.name],
-                    ]);
                 }
             }
         }
     });
 
-    console.log(fusions);
+    return fusions;
 }
 
-export function findGemPairs(currentPersona) {
+function findGemPairs(currentPersona) {
     const { name: currentName, arcana: currentArcana } = currentPersona;
 
     const resultArcanaCombos = treasureCombos[currentArcana];
@@ -97,21 +92,29 @@ export function findGemPairs(currentPersona) {
     );
 
     const result = [];
+    const currentPersonaIndex = resultArcanaPersonas.findIndex(
+        (persona) => persona.name === currentName,
+    );
 
-    for (let i = 0; i < resultArcanaPersonas.length; i++) {
-        for (let gem in resultArcanaCombos) {
-            const calcIndex = i + resultArcanaCombos[gem];
+    for (let gem in resultArcanaCombos) {
+        const calcIndex = currentPersonaIndex + resultArcanaCombos[gem];
 
-            if (resultArcanaPersonas[calcIndex] !== undefined) {
-                result.push([
-                    resultArcanaPersonas[calcIndex],
-                    [currentName, gem],
-                ]);
-            }
+        if (calcIndex >= 0 && calcIndex < resultArcanaPersonas.length) {
+            result.push([
+                resultArcanaPersonas[calcIndex].name,
+                [currentName, gem],
+            ]);
         }
     }
 
-    console.log(result);
+    return result;
+}
+
+export function findAllForwardPairs(currentPersona) {
+    const normalFusions = findForwardFusions(currentPersona);
+    const personaWithGemFusions = findGemPairs(currentPersona);
+
+    const result = normalFusions.concat(personaWithGemFusions);
 
     return result;
 }

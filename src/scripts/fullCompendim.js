@@ -29,6 +29,7 @@ export function makePersonaList(checkedDLC) {
 
         for (const name of checkedDLC) {
             for (const persona of dlcPersonas) {
+                // eslint-disable-next-line no-useless-escape
                 const regex = new RegExp(`^${name}(\sPicaro)?`);
                 if (regex.test(persona["name"])) dlcPersonasToAdd.push(persona);
             }

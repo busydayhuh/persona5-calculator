@@ -74,6 +74,20 @@
     }
 }
 
+.item {
+    max-width: 600px;
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr 5fr 1fr;
+
+        div {
+            border: 1px solid white;
+            padding: 0.5em;
+        }
+    }
+}
+
 .inheritance {
     max-width: 400px;
 
@@ -94,5 +108,11 @@
     &__grid {
         display: grid;
         grid-template-columns: 1fr 1fr 5fr;
+        gap: 0.5em;
+    }
+
+    &__progressbar {
+        height: 1em;
+        background-color: red;
     }
 }

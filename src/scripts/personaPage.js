@@ -3,7 +3,8 @@ import { getType, getPersonaDetails } from "./fullCompendim.js";
 import { getSkillDetails, getCost } from "../data/skills.js";
 import { getInheritedElements } from "../data/skillInheritance.js";
 import { findAllPairs } from "./reverseFusion.js";
-import { findForwardFusions, findGemPairs } from "./forwardFusion.js";
+import { findAllForwardPairs } from "./forwardFusion.js";
+import { getItemDetails } from "../data/items.js";
 
 const url = new URL(window.location.href);
 const name = url.searchParams.get("name");
@@ -17,6 +18,9 @@ renderSkills();
 renderInheritance();
 renderMementos();
 renderReverseFusionList();
+renderForwardFusionList();
+renderItem();
+renderStats();
 
 function renderTitle() {
     document.querySelector(".title").innerHTML =
@@ -78,6 +82,38 @@ function renderMementos() {
     }
 }
 
+function renderItem() {
+    const itemDetails = getItemDetails(item);
+    document.querySelector(".js-item-grid").innerHTML = ` 
+                <div class="item__type item--${itemDetails.type}">${itemDetails.type}</div>
+                <div class="item__name">${item}</div>
+                <div class="item__user user--${itemDetails.user || "unisex"}">${itemDetails.user || "unisex"}</div>
+                <div class="item__description">${itemDetails.description || ""}</div>
+                <div class="item__cost">${itemDetails.skillcard ? getCost(item) : ""}</div>`;
+}
+
+function renderStats() {
+    let statsHtml = "";
+    const statsGrid = document.querySelector(".js-stats-grid");
+
+    for (const stat in stats) {
+        statsHtml += `<div class="stats__name">${stat}</div>
+                    <div class="stats__value">${stats[stat]}</div>
+                    <div class="stats__barcontainer">
+                        <div class="stats__progressbar js-stats-progressbar" data-width="${stats[stat]}"></div>
+                    </div>`;
+    }
+
+    statsGrid.innerHTML = statsHtml;
+
+    document
+        .querySelectorAll(".js-stats-progressbar")
+        .forEach((progressbar) => {
+            const width = progressbar.dataset.width;
+            progressbar.style.width = `${width}%`;
+        });
+}
+
 function renderReverseFusionList() {
     const fusionTableBody = document.querySelector(".js-fusion-list");
     const fusionsArr = findAllPairs(currentPersona);
@@ -111,5 +147,26 @@ function renderReverseFusionList() {
     fusionTableBody.innerHTML = html;
 }
 
-findForwardFusions(currentPersona);
-findGemPairs(currentPersona);
+function renderForwardFusionList() {
+    const fusionTableBody = document.querySelector("#fusion-table-v2");
+    const fusionsArr = findAllForwardPairs(currentPersona);
+
+    let html = "";
+
+    fusionsArr.forEach((pair) => {
+        const personaB = getPersonaDetails(pair[1][1]);
+        const resultPersona = getPersonaDetails(pair[0]);
+
+        if (resultPersona === undefined) {
+            console.log(pair[0]);
+            getPersonaDetails;
+        }
+
+        html += `<tr>
+        <td>${personaB.arcana} ${personaB.lvl} ${personaB.name}</td>
+        <td>${resultPersona.arcana} ${resultPersona.lvl} ${resultPersona.name}</td>
+    </tr>`;
+
+        fusionTableBody.innerHTML = html;
+    });
+}
