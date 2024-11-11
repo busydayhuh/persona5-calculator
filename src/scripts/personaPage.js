@@ -75,7 +75,7 @@ function renderMementos() {
         currentPersona.floor ||
         currentPersona.personality
     ) {
-        document.querySelector(".mementos").innerHTML = `<h2>Mementos</h2>
+        document.querySelector(".js-mementos").innerHTML = `
                 <p class="mementos__place">Area: ${currentPersona.area || "--"}, Floors: ${currentPersona.floor || "No info"}</p>
                 <p class="mementos__personality"${currentPersona.personality || "--"}</p>`;
     }

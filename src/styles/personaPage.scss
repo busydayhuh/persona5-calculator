@@ -1,17 +1,35 @@
 @forward "globals";
+@use "globals" as g;
+
+.persona-all-data {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "title"
+        "resistance"
+        "image"
+        "stats"
+        "skills"
+        "inherit"
+        "item"
+        "fusion";
+}
 
 .title {
+    grid-area: title;
     display: flex;
-    gap: 1em;
 }
 
 .resistance {
+    grid-area: resistance;
+
     margin-bottom: 24px;
 
     &__container {
         display: flex;
         justify-content: flex-start;
         gap: 10px;
+        flex-wrap: wrap;
     }
 
     &__elem {
@@ -61,6 +79,7 @@
 }
 
 .skills {
+    grid-area: skills;
     max-width: 600px;
 
     &__container {
@@ -75,6 +94,7 @@
 }
 
 .item {
+    grid-area: item;
     max-width: 600px;
 
     &__grid {
@@ -83,12 +103,13 @@
 
         div {
             border: 1px solid white;
-            padding: 0.5em;
+            //padding: 0.5em;
         }
     }
 }
 
 .inheritance {
+    grid-area: inherit;
     max-width: 400px;
 
     &__grid {
@@ -98,12 +119,12 @@
 
         div {
             border: 1px solid white;
-            padding: 0.5em;
         }
     }
 }
 
 .stats {
+    grid-area: stats;
     max-width: 400px;
     &__grid {
         display: grid;
@@ -115,4 +136,8 @@
         height: 1em;
         background-color: red;
     }
+}
+
+.fusion {
+    grid-area: fusion;
 }

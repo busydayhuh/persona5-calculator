@@ -7,13 +7,23 @@
     </head>
 
     <body>
-        <header>Persona 5 Fusion Calc</header>
-        <article class="persona-all-data">
+        <header class="header">
+            <div class="header__flex page-wrap">
+                <div class="header__logo"></div>
+                <div class="header__link">
+                    <a href="#" target="_blank"
+                        ><span class="header__text">Open on Github</span></a
+                    >
+                </div>
+            </div>
+        </header>
+        <article class="persona-all-data page-wrap">
             <section class="title">
                 <div class="title__arcana"></div>
                 <h2 class="title__name"></h2>
                 <div class="title__lvl"></div>
                 <div class="title__type" id="type"></div>
+                <div class="title__mementos js-mementos">gfhh</div>
             </section>
             <section class="resistance">
                 <h2>Resistance</h2>
@@ -80,6 +90,11 @@
                     </div>
                 </div>
             </section>
+            <section class="image"></section>
+            <section class="stats">
+                <h2>Stats</h2>
+                <div class="stats__grid js-stats-grid"></div>
+            </section>
             <section class="skills">
                 <h2>Skills</h2>
                 <div class="skills__container js-skills"></div>
@@ -99,13 +114,9 @@
                     <div class="item__cost"></div>
                 </div>
             </section>
-            <section class="mementos"></section>
-            <section class="stats">
-                <h2>Stats</h2>
-                <div class="stats__grid js-stats-grid"></div>
-            </section>
-        </article>
-        <article class="fusion">
+            
+        
+        <section class="fusion">
             <h2>Fusions</h2>
             <h3>To this persona</h3>
             <div class="fusion__table" id="fusion-table-v1">
@@ -136,6 +147,6 @@
                     <tbody id="fusion-table-v2"></tbody>
                 </table>
             </div>
-        </article>
+        </section>
     </body>
 </html>
