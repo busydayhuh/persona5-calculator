@@ -6,36 +6,67 @@
         <title>Persona 5 Fusion Calculator</title>
     </head>
     <body>
-        <header>Persona 5 Fusion Calculator</header>
-        <div class="all-personas-container">
-            <p>Choose your DLC:</p>
-            <form>
-                <fieldset id="dlc-form"></fieldset>
-            </form>
-            <div class="input-container">
-                <input
-                    class="search-bar js-search-bar"
-                    type="text"
-                    placeholder="Search"
-                    id="search"
-                />
-                <button class="delete-button js-delete-button">&times;</button>
+        <header class="header">
+            <div class="header__flex page-wrap">
+                <div class="header__logo"></div>
+                <div class="header__link">
+                    <a href="#" target="_blank"
+                        ><span class="header__text">Open on Github</span></a
+                    >
+                </div>
             </div>
-            <label for="sorting">Sort by:</label>
-            <select name="sorting" id="sorting">
-                <option value="arcana">Arcana</option>
-                <option value="lvl">Level</option>
-            </select>
+        </header>
+        <div class="backdrop"></div>
+        <section class="grid page-wrap">
+            <main class="main">
+                <div class="table">
+                    <div class="table__filters">
+                        <div class="table__button table__button--icon">
+                            <select name="sorting" id="sorting">
+                                <option value="arcana">by Arcana</option>
+                                <option value="lvl">by Level</option>
+                            </select>
+                        </div>
+                        <div class="table__dlc not-visible-on-desktop">
+                            <button
+                                class="table__button"
+                                id="show-dlc-settings"
+                            >
+                                DLC Settings
+                            </button>
+                        </div>
 
-            <table>
-                <thead>
-                    <td>Arcana</td>
-                    <td>Level</td>
-                    <td>Name</td>
-                    <td>Type</td>
-                </thead>
-                <tbody id="compendium"></tbody>
-            </table>
-        </div>
+                        <div class="table__search">
+                            <input
+                                class="table__input js-search-bar"
+                                type="text"
+                                placeholder="Search"
+                            />
+                            <button
+                                class="table__search-button js-delete-button"
+                            ></button>
+                        </div>
+                    </div>
+                    <div
+                        class="table__content styled-scrollbars"
+                        id="compendium"
+                    ></div>
+                </div>
+            </main>
+            <aside class="aside">
+                <div class="aside__header">DLC settings</div>
+                <form class="aside__form">
+                    <fieldset id="dlc-form"></fieldset>
+                </form>
+                <button
+                    class="aside__button not-visible-on-desktop"
+                    id="close-dlc-settings"
+                >
+                    Ok
+                </button>
+            </aside>
+        </section>
+
+        <footer class="footer"></footer>
     </body>
 </html>

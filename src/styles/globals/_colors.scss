@@ -1,8 +1,9 @@
-:root {
-    --accent-red-color: #dd0508;
-    --background-black-color: #020004;
-    --accent-black-color: #000000;
-    --accent-turquoise-color: #00f6ff;
-    --accent-grey-color: #7e7e7e;
-    --white-color: #ffffff;
-}
+$accent-red-color: hsl(0, 100%, 38%);
+$background-black-color: hsl(270, 100%, 1%);
+$backdrop-color: hsla(0, 0%, 1%, 0.944);
+$accent-turquoise-color: hsl(182, 100%, 50%);
+$accent-yellow-color: hsl(59, 100%, 56%);
+$accent-blue-color: hsl(182, 97%, 85%);
+$accent-lime-color: hsl(94, 94%, 72%);
+$background-grey-color: hsl(0, 1%, 18%);
+$white-color: hsl(0, 0%, 100%);

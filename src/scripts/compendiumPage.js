@@ -23,7 +23,7 @@ function renderDlcSettings() {
     const dlcForm = document.getElementById("dlc-form");
     let html = "";
     dlcNames.forEach((name) => {
-        html += `<div>
+        html += `<div class="aside__checkbox">
                 <input type="checkbox" id="${name[0]}" name="dlc" value="${
                     name[0]
                 }" ${isChecked(name[0])}>
@@ -35,6 +35,20 @@ function renderDlcSettings() {
     function isChecked(dlc) {
         return checkedDLC.includes(dlc) ? "checked" : "";
     }
+
+    document
+        .querySelector("#show-dlc-settings")
+        .addEventListener("click", () => {
+            document.querySelector(".backdrop").classList.add("open");
+            document.querySelector(".aside").classList.add("slide-in");
+        });
+
+    document
+        .querySelector("#close-dlc-settings")
+        .addEventListener("click", () => {
+            document.querySelector(".backdrop").classList.remove("open");
+            document.querySelector(".aside").classList.remove("slide-in");
+        });
 }
 
 function renderPersonaTable(personaList = makePersonaList(checkedDLC)) {
@@ -49,19 +63,27 @@ function renderPersonaTable(personaList = makePersonaList(checkedDLC)) {
     for (let persona of sortedPersonaList) {
         if (persona === undefined) continue;
 
-        html += `<tr><td>${persona["arcana"]}</td><td>${
-            persona["lvl"]
-        }</td><td><a href="personaPage.html?name=${persona["name"]}" target="_blank">${persona["name"]}</a></td><td>${hasType(persona)}</td></tr>`;
+        html += `<a href="/personaPage.html?name=${persona.name}" target="_blank"><div class="table__row table__row${hasType(persona)[0]}">
+                                <span
+                                    class="table__arcana arcana--small type${hasType(persona)[0]}"
+                                    >${persona.arcana}</span
+                                >
+                                <span class="table__level numbers--regular"
+                                    >${persona.lvl}</span
+                                >
+                                <span class="table__circle type${hasType(persona)[0]}"></span>
+                                <span class="table__name">${persona.name}</span>
+                                <span class="table__badge type${hasType(persona)[0]}">${hasType(persona)[1]}</span>
+                            </div></a>`;
     }
 
     document.getElementById("compendium").innerHTML = html;
 
     function hasType(p) {
-        if (p.special) return "special recipe";
-        if (p.max) return "max arcana";
-        if (p.treasure) return "gem shadow";
-        if (p.dlc) return "DLC";
-        return "—";
+        if (p.special) return ["--special", "SPECIAL"];
+        if (p.treasure) return ["--gem", "GEM"];
+        if (p.dlc) return ["--dlc", "DLC"];
+        return ["", ""];
     }
 }
 
@@ -118,6 +140,12 @@ function searchForItem() {
     );
 
     renderPersonaTable(searchResult);
+
+    document.querySelector(".js-delete-button").classList.add("typing");
+
+    if (query === "") {
+        document.querySelector(".js-delete-button").classList.remove("typing");
+    }
 }
 
 document
@@ -126,5 +154,6 @@ document
 
 function clearSearchBar() {
     document.querySelector(".js-search-bar").value = "";
+    this.classList.remove("typing");
     renderPersonaTable();
 }

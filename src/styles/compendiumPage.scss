@@ -1,1 +1,495 @@
+@forward "globals";
+@use "./globals/functions" as func;
+@use "./globals/colors" as c;
+@use "./globals/fonts" as font;
+@use "./globals/breakpoints" as break;
 
+body {
+    background: url("/src/assets/images/interface/Persona5Equipment1PNG.png")
+        no-repeat;
+    background-size: cover;
+    background-position: 120px 0;
+    background-attachment: fixed;
+    background-color: c.$accent-red-color;
+
+    @include break.breakpoint(small) {
+        background: c.$background-black-color;
+        background-image: none;
+    }
+}
+
+.backdrop {
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: c.$backdrop-color;
+    transition:
+        visibility 200ms ease-in-out,
+        opacity 200ms ease-in-out;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: transparent;
+    border: 0;
+    padding: func.rem(8) func.rem(32) func.rem(8) func.rem(24);
+    margin: 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    color: c.$white-color;
+    cursor: inherit;
+    line-height: inherit;
+    outline: none;
+}
+
+select option {
+    color: c.$white-color;
+    background-color: c.$background-black-color;
+    border: 0;
+    cursor: pointer;
+}
+
+select option:hover {
+    color: c.$background-black-color;
+    background-color: c.$accent-red-color;
+    border: 0;
+    cursor: pointer;
+}
+
+select option:focus {
+    color: c.$background-black-color;
+    background-color: c.$accent-red-color;
+    border: 0;
+    cursor: pointer;
+}
+
+select:focus {
+    outline: none;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 7fr 4fr;
+    align-items: start;
+
+    @include break.breakpoint(medium) {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+}
+
+.main {
+    background: url("/src/assets/images/interface/main_table_bg.svg") no-repeat;
+    min-height: func.rem(1100);
+    margin-top: func.rem(80);
+    margin-bottom: func.rem(100);
+    position: relative;
+    padding: func.rem(80) func.rem(120) func.rem(100) func.rem(100);
+
+    &::before {
+        content: "";
+        background: url("/src/assets/images/interface/main_header.svg")
+            no-repeat;
+        display: block;
+        background-size: contain;
+        width: min(func.em(300), 90vw);
+        height: min(func.em(100), 30vw);
+        position: absolute;
+        top: func.rem(-48);
+        left: 5%;
+    }
+
+    @include break.breakpoint(medium) {
+        background: c.$background-black-color;
+        border: 6px solid c.$white-color;
+        min-width: 70%;
+        margin-inline: auto;
+        padding: func.rem(80) func.rem(40) func.rem(100) func.rem(40);
+    }
+
+    @include break.breakpoint(small) {
+        background: c.$background-black-color;
+        border: none;
+        min-width: 100%;
+        margin-bottom: 0;
+        padding: func.rem(80) func.rem(16) 0 func.rem(16);
+    }
+}
+
+input[type="checkbox"] {
+    /* Remove default style */
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+
+    /* My style */
+    background-color: c.$white-color;
+    width: func.rem(18);
+    height: func.rem(18);
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    background: url("/src/assets/images/interface/check_icon.svg");
+    width: func.rem(24);
+    height: func.rem(20);
+    margin-left: 0.5rem;
+    transform: scale(0);
+    transform-origin: bottom left;
+    transition: 120ms transform ease-in-out;
+}
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+.aside {
+    margin-top: func.rem(140);
+    padding: 0 min(func.rem(42), 6vw);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: func.rem(8);
+    min-height: func.rem(580);
+    position: relative;
+
+    background: url("/src/assets/images/interface/aside_bg.svg") no-repeat;
+
+    &::after {
+        content: "";
+        background: url("/src/assets/images/interface/aside_mark.svg") no-repeat;
+        width: func.rem(110);
+        height: func.rem(54);
+        position: absolute;
+        bottom: 5rem;
+        right: 0;
+
+        @include break.breakpoint(medium) {
+            display: none;
+        }
+    }
+
+    &__header {
+        display: block;
+        font-family: font.$main-font;
+        font-size: func.rem(36);
+        color: c.$background-black-color;
+        position: relative;
+        align-self: center;
+        width: 100%;
+        background-color: c.$white-color;
+        padding: func.rem(12) func.rem(64);
+        margin-top: func.rem(24);
+        clip-path: polygon(0 1%, 100% 17%, 99% 81%, 1% 94%);
+    }
+
+    &__checkbox {
+        display: grid;
+        grid-template-columns: 2rem auto;
+        align-items: flex-start;
+    }
+
+    &__checkbox + &__checkbox {
+        margin-top: 0.4rem;
+    }
+
+    fieldset {
+        border: none;
+    }
+
+    &__button {
+        font-size: func.rem(32);
+        font-family: inherit;
+        border: none;
+        background-color: c.$accent-red-color;
+        color: c.$white-color;
+        padding: func.rem(8) func.rem(24);
+        align-self: center;
+        clip-path: polygon(0 7%, 100% 6%, 98% 82%, 0 99%);
+        cursor: pointer;
+        transition:
+            background-color 200ms ease-in-out,
+            clip-path 200ms ease-in-out;
+
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                clip-path: polygon(0 10%, 88% 6%, 100% 100%, 0 75%);
+                background-color: c.$accent-turquoise-color;
+            }
+        }
+    }
+
+    @include break.breakpoint(medium) {
+        visibility: hidden;
+        opacity: 0;
+        transition:
+            opacity 300ms ease-in-out,
+            top 300ms ease-in-out;
+
+        margin-top: 0;
+        padding-bottom: func.rem(32);
+        min-width: min(90%, func.em(300));
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -40%);
+        background-color: c.$background-grey-color;
+        background-image: none;
+        min-height: 0;
+        clip-path: polygon(0 2%, 98% 5%, 93% 99%, 3% 96%);
+    }
+}
+
+.table {
+    margin-top: func.rem(36);
+
+    &__filters {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: func.rem(40);
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    &__content {
+        max-height: func.em(540);
+        overflow-y: scroll;
+    }
+
+    &__button {
+        clip-path: polygon(6% 12%, 100% 0%, 98% 100%, 0% 100%);
+        -webkit-clip-path: polygon(6% 12%, 100% 0%, 98% 100%, 0% 100%);
+
+        background-color: c.$accent-red-color;
+        color: c.$white-color;
+        cursor: pointer;
+        position: relative;
+
+        &--icon::after {
+            content: "";
+            background: url("/src/assets/images/interface/arrow_btn_icon.svg")
+                no-repeat;
+            background-position: center;
+            display: block;
+            width: 2rem;
+            height: 100%;
+            background-color: c.$accent-red-color;
+            position: absolute;
+            top: 0;
+            right: 0;
+            pointer-events: none;
+        }
+    }
+
+    button.table__button {
+        font-size: inherit;
+        font-family: inherit;
+        border: none;
+        padding: func.rem(8) func.rem(24);
+        flex-grow: 1;
+    }
+
+    &__search {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: func.rem(8);
+        border-bottom: 2px solid c.$white-color;
+
+        @include break.breakpoint(medium) {
+            flex-grow: 1;
+        }
+    }
+
+    &__input {
+        display: block;
+        background-color: c.$background-black-color;
+        border: none;
+        font-size: inherit;
+        font-family: inherit;
+        color: inherit;
+    }
+
+    &__input:focus {
+        outline: none;
+    }
+
+    &__search-button {
+        display: inline-block;
+        width: 1.5rem;
+        height: 1.5rem;
+        padding: 0.5rem;
+        background-color: c.$background-black-color;
+        border: none;
+        background: url("/src/assets/images/interface/search_icon.svg")
+            no-repeat;
+        background-position: center;
+        background-size: 0.8rem 0.8rem;
+    }
+
+    .typing {
+        background: url("/src/assets/images/interface/close_icon.svg") no-repeat;
+        background-position: center;
+        background-size: 0.8rem 0.8rem;
+    }
+
+    .typing:hover {
+        clip-path: polygon(6% 12%, 100% 0%, 98% 100%, 0% 100%);
+        -webkit-clip-path: polygon(6% 12%, 100% 0%, 98% 100%, 0% 100%);
+        background-color: c.$accent-red-color;
+        cursor: pointer;
+    }
+
+    &__row {
+        max-width: calc(100% - func.rem(12));
+        padding: 0.8rem 0.6rem 0.4rem 0.6rem;
+        display: flex;
+        align-items: flex-end;
+        gap: 0.5rem;
+        color: c.$white-color;
+        transform: rotate(-2deg);
+        //border-bottom: func.rem(1) solid c.$white-color;
+
+        &--dlc {
+            color: c.$accent-yellow-color;
+        }
+
+        &--special {
+            color: c.$accent-blue-color;
+        }
+
+        &--gem {
+            color: c.$accent-lime-color;
+        }
+    }
+
+    &__row span {
+        display: inline-block;
+    }
+
+    &__arcana {
+        background-color: c.$white-color;
+        color: c.$background-black-color;
+        padding: func.rem(2) func.rem(12) func.rem(4) func.rem(12);
+        border-radius: func.rem(2);
+    }
+
+    &__level {
+        font-size: func.rem(28);
+        letter-spacing: -6%;
+    }
+
+    &__circle {
+        background-color: c.$white-color;
+        border-radius: 50%;
+        width: func.rem(6);
+        height: func.rem(6);
+        align-self: center;
+    }
+
+    &__badge {
+        font-family: font.$arcana-font-small;
+        font-size: func.rem(12);
+        padding: 0.1rem 0.5rem 0.4rem 0.5rem;
+        color: c.$background-black-color;
+        clip-path: polygon(0 0, 100% 0%, 100% 67%, 9% 100%);
+    }
+
+    .type {
+        &--dlc {
+            background-color: c.$accent-yellow-color;
+        }
+
+        &--special {
+            background-color: c.$accent-blue-color;
+        }
+
+        &--gem {
+            background-color: c.$accent-lime-color;
+        }
+    }
+
+    &__row:hover {
+        background-color: c.$accent-red-color;
+        clip-path: polygon(2% 0, 91% 10%, 100% 91%, 0 100%);
+    }
+
+    &__row:hover &__arcana {
+        color: c.$accent-red-color;
+    }
+}
+
+.not-visible-on-desktop {
+    display: none;
+
+    @include break.breakpoint(medium) {
+        display: block;
+    }
+}
+
+.open {
+    visibility: visible;
+    opacity: 1;
+}
+
+.slide-in {
+    visibility: visible;
+    opacity: 1;
+    top: 50%;
+    z-index: 999;
+}
+
+@supports (scrollbar-color: auto) {
+    .styled-scrollbars {
+        scrollbar-color: c.$white-color c.$background-black-color;
+    }
+
+    html {
+        scrollbar-width: none;
+    }
+}
+
+/* Otherwise, use `::-webkit-scrollbar-*` pseudo-elements */
+@supports selector(::-webkit-scrollbar) {
+    .styled-scrollbars::-webkit-scrollbar {
+        background: c.$background-black-color;
+    }
+    .styled-scrollbars::-webkit-scrollbar-thumb {
+        background: c.$white-color;
+    }
+
+    .styled-scrollbars::-webkit-scrollbar-button {
+        width: 0;
+        height: 0;
+        display: none;
+        background-color: #000000;
+    }
+
+    html::-webkit-scrollbar {
+        width: 0px;
+    }
+}
+
+.footer {
+    height: func.em(100);
+    //background-color: c.$background-black-color;
+}

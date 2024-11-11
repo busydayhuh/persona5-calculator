@@ -79,6 +79,10 @@ export const items = {
         user: "Haru",
         description: "Atk 308 / Acc 86 / Ma +5 / +Dizzy (high)",
     },
+    "Fire Boost": {
+        type: "Skillcard",
+        skillCard: true,
+    },
     "Frost Hood": {
         type: "Protector",
         user: "Morgana",

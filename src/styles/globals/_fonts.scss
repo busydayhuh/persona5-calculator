@@ -1,0 +1,74 @@
+@font-face {
+    font-family: "Expose";
+    font-style: normal;
+    font-weight: 400;
+    src:
+        local(""),
+        url("/src/assets/fonts/Expose-Regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Franklin Gothic Demi Cond";
+    font-style: normal;
+    font-weight: 400;
+    src:
+        local(""),
+        url("/src/assets/fonts/Franklin-Gothic-Demi-Cond-Regular.woff2")
+            format("woff2");
+}
+
+@font-face {
+    font-family: "Franklin Gothic Medium Cond";
+    font-style: normal;
+    font-weight: 400;
+    src:
+        local(""),
+        url("/src/assets/fonts/Franklin-Gothic-Medium-Cond-Regular.woff2")
+            format("woff2");
+}
+
+@font-face {
+    font-family: "Franklin Gothic Heavy Regular";
+    font-style: normal;
+    font-weight: 400;
+    src:
+        local(""),
+        url("/src/assets/fonts/Franklin-Gothic-Heavy-Regular.woff2")
+            format("woff2");
+}
+
+@font-face {
+    font-family: "Franklin Gothic Heavy Italic";
+    font-style: italic;
+    font-weight: 400;
+    src:
+        local(""),
+        url("/src/assets/fonts/Franklin-Gothic-Heavy-Italic.woff2")
+            format("woff2");
+}
+
+@font-face {
+    font-family: "Persona 5 Main";
+    font-style: normal;
+    font-weight: 400;
+    src:
+        local(""),
+        url("/src/assets/fonts/Persona5main.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "p5hatty";
+    font-style: normal;
+    font-weight: 400;
+    src:
+        local(""),
+        url("/src/assets/fonts/p5hatty.woff2") format("woff2");
+}
+
+$expose-font: "Expose";
+$main-font: "p5hatty";
+$arcana-font-small: "Franklin Gothic Medium Cond";
+$arcana-font-large: "Franklin Gothic Demi Cond";
+$numbers-font-regular: "Franklin Gothic Heavy Regular";
+$numbers-font-italic: "Franklin Gothic Heavy Italic";
+$headers-font: "Persona 5 Main";

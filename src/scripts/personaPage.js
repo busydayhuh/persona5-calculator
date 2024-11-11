@@ -34,7 +34,6 @@ resistances.forEach((resistance) => {
 
     if (Object.keys(resists).includes(elementName)) {
         resistance.classList.add(resists[elementName]);
-        //console.log(resists[elementName]);
     }
 });
 
@@ -83,6 +82,8 @@ function renderMementos() {
 }
 
 function renderItem() {
+    console.log(item);
+
     const itemDetails = getItemDetails(item);
     document.querySelector(".js-item-grid").innerHTML = ` 
                 <div class="item__type item--${itemDetails.type}">${itemDetails.type}</div>

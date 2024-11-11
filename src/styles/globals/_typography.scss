@@ -1,17 +1,39 @@
+@use "fonts" as f;
+@use "functions" as func;
+
 h1,
 h2,
 h3 {
     font-weight: 700;
-    line-height: 1.1;
+    line-height: 1;
     margin-top: 1em;
 }
 
+body {
+    font-family: f.$main-font;
+    font-size: func.rem(24);
+    color: white;
+}
+
 p {
-    margin-top: 0;
+    margin: 0;
+    line-height: 1;
 }
 
 a,
 a:visited,
 a:active {
     text-decoration: none;
+    color: inherit;
+    line-height: 1;
+}
+
+.arcana--small {
+    font-family: f.$arcana-font-small;
+    font-size: func.rem(20);
+    letter-spacing: -6%;
+}
+
+.numbers--regular {
+    font-family: f.$numbers-font-regular;
 }

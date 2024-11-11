@@ -1,3 +1,6 @@
+@use "colors" as c;
+@use "functions" as func;
+
 html {
     box-sizing: border-box;
     font-size: 100%;
@@ -12,6 +15,18 @@ html {
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--background-black-color);
-    color: var(--white-color);
+    background-color: c.$background-black-color;
+    color: c.$white-color;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+// основной контейнер для контента
+
+.page-wrap {
+    width: min(100% - func.rem(24), func.rem(1176));
+    margin-inline: auto;
 }
