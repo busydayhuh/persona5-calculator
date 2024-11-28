@@ -1,0 +1,100 @@
+@use "../globals" as g;
+
+.header {
+    z-index: 1000;
+    position: sticky;
+
+    top: 0;
+    left: 0;
+
+    padding: g.rem(8) 0;
+    background-color: g.$accent-red-color;
+
+    font-size: g.rem(20);
+    color: g.$background-black-color;
+
+    &--black {
+        background-color: g.$background-black-color;
+        color: g.$white-color;
+    }
+
+    &__logo {
+        width: g.rem(180);
+        min-height: g.rem(65);
+
+        background: url("/src/assets/images/interface/header_logo_desk.svg")
+            center / contain no-repeat;
+
+        a {
+            display: block;
+
+            width: 100%;
+            height: 100%;
+        }
+
+        &--black {
+            background: url("/src/assets/images/interface/header_logo_inverted.svg")
+                center / contain no-repeat;
+        }
+    }
+
+    &__flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__link {
+        clip-path: polygon(0 16%, 96% 11%, 100% 100%, 6% 81%);
+        transition: all 200ms ease-in;
+
+        padding: g.rem(12) g.rem(16);
+
+        a::before {
+            content: "";
+
+            display: inline-block;
+            vertical-align: top;
+
+            margin-right: g.rem(8);
+            width: g.rem(22);
+            height: g.rem(22);
+
+            background: url("/src/assets/images/interface/github-alt-icon-original.svg")
+                center / contain no-repeat;
+        }
+
+        &:hover {
+            background-color: g.$background-black-color;
+            color: g.$white-color;
+        }
+
+        &:hover a::before {
+            background: url("/src/assets/images/interface/github-alt-icon-white.svg")
+                center / contain no-repeat;
+        }
+
+        &--black {
+            a::before {
+                background: url("/src/assets/images/interface/github-alt-icon-white.svg")
+                    center / contain no-repeat;
+            }
+
+            &:hover {
+                background-color: g.$accent-red-color;
+                color: g.$background-black-color;
+            }
+
+            &:hover a::before {
+                background: url("/src/assets/images/interface/github-alt-icon-original.svg")
+                    center / contain no-repeat;
+            }
+        }
+    }
+
+    &__text {
+        @include g.for-phone-only {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,161 @@
+@use "../globals" as g;
+
+.table {
+    font-size: clamp(g.rem(22), 4vw, g.rem(24));
+
+    &__filters {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+
+        margin-top: g.rem(24);
+        margin-bottom: g.rem(40);
+    }
+
+    &__colnames {
+        display: flex;
+        gap: g.rem(8);
+
+        margin: 3rem auto 1rem auto;
+    }
+
+    &__content {
+        &--single-col {
+            overflow-y: auto;
+
+            max-height: g.em(540);
+            padding-right: 0.5rem;
+
+            .table__cell {
+                transform: rotate(-2deg);
+            }
+        }
+
+        &--two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            overflow-y: auto;
+            margin-inline: auto;
+            max-height: g.em(400);
+        }
+    }
+
+    &__cell {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        overflow: hidden;
+        padding: 0.8rem 0.3rem 0.6rem 0.3rem;
+
+        &--dlc,
+        &--dlc:visited,
+        &--dlc:active {
+            color: g.$accent-yellow-color;
+        }
+
+        &--special,
+        &--special:visited,
+        &--special:active {
+            color: g.$accent-blue-color;
+        }
+
+        &--gem,
+        &--gem:visited,
+        &--gem:active {
+            color: g.$accent-lime-color;
+        }
+
+        &:hover {
+            clip-path: polygon(0 0, 91% 10%, 100% 91%, 0 100%);
+            background-color: g.$accent-red-color;
+        }
+
+        &:hover .table__arcana {
+            color: g.$accent-red-color;
+        }
+
+        span {
+            display: inline-block;
+            flex-shrink: 0;
+        }
+    }
+
+    &__arcana {
+        background-color: g.$white-color;
+        color: g.$background-black-color;
+        padding: g.rem(2) g.rem(12) g.rem(4) g.rem(12);
+        border-radius: g.rem(2);
+
+        @include g.for-desktop-down {
+            max-width: 8ch;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
+    &__circle {
+        background-color: g.$white-color;
+        border-radius: 50%;
+        width: g.rem(6);
+        height: g.rem(6);
+        align-self: center;
+    }
+
+    &__circle.type,
+    &__arcana.type {
+        &--dlc {
+            background-color: g.$accent-yellow-color;
+        }
+
+        &--special {
+            background-color: g.$accent-blue-color;
+        }
+
+        &--gem {
+            background-color: g.$accent-lime-color;
+        }
+    }
+
+    &__note {
+        flex-grow: 1;
+        flex-basis: g.rem(600);
+        font-size: clamp(g.rem(20), 3vw, g.rem(22));
+    }
+}
+
+.note {
+    &__main,
+    &__optional {
+        display: inline;
+    }
+    &__optional {
+        padding: 0 0.3rem;
+        background-color: g.$accent-red-color;
+    }
+}
+
+.th {
+    flex-grow: 1;
+
+    flex-basis: 50%;
+    padding: 0.5rem 1.5rem;
+
+    background-color: g.$white-color;
+
+    &:first-of-type {
+        clip-path: polygon(97% 0, 100% 49%, 97% 100%, 0.1rem 100%, 0 0);
+    }
+
+    &:nth-of-type(2) {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 2% 54%);
+    }
+
+    &:only-of-type {
+        clip-path: polygon(1% 0, 99% 0, 100% 97%, 0% 100%);
+    }
+}

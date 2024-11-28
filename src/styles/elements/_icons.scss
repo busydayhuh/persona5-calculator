@@ -1,0 +1,212 @@
+@use "../globals" as g;
+
+.icon {
+    $width: min(g.rem(85), 16vw);
+
+    position: relative;
+
+    width: $width;
+    height: calc($width / 1.5);
+
+    background-repeat: no-repeat;
+    background-size: 70% 70%;
+    background-position: center;
+    background-color: g.$background-black-color;
+}
+
+.elem {
+    &--phys {
+        background-image: url("/src/assets/images/affinities/P5_Phys_Icon.png");
+    }
+
+    &--gun {
+        background-image: url("/src/assets/images/affinities/P5_Gun_Icon.png");
+    }
+
+    &--fire {
+        background-image: url("/src/assets/images/affinities/P5_Fire_Icon.png");
+    }
+
+    &--ice {
+        background-image: url("/src/assets/images/affinities/P5_Ice_Icon.png");
+    }
+
+    &--elec {
+        background-image: url("/src/assets/images/affinities/P5_Elec_Icon.png");
+    }
+
+    &--wind {
+        background-image: url("/src/assets/images/affinities/P5_Wind_Icon.png");
+    }
+
+    &--psy {
+        background-image: url("/src/assets/images/affinities/P5_Psy_Icon.png");
+    }
+
+    &--nuke {
+        background-image: url("/src/assets/images/affinities/P5_Nuke_Icon.png");
+    }
+
+    &--bless {
+        background-image: url("/src/assets/images/affinities/P5_Bless_Icon.png");
+    }
+
+    &--curse {
+        background-image: url("/src/assets/images/affinities/P5_Curse_Icon.png");
+    }
+
+    &--passive {
+        background-image: url("/src/assets/images/affinities/P5_Passive_Icon.png");
+    }
+
+    &--support {
+        background-image: url("/src/assets/images/affinities/P5_Support_Icon.png");
+    }
+
+    &--ailment {
+        background-image: url("/src/assets/images/affinities/P5_Ailment_Icon.png");
+    }
+
+    &--almighty {
+        background-image: url("/src/assets/images/affinities/P5_Almi_Icon.png");
+    }
+
+    &--healing {
+        background-image: url("/src/assets/images/affinities/P5_Healing_Icon.png");
+    }
+}
+
+.item {
+    &--gun-Ann {
+        background-image: url("/src/assets/images/items/P5R_Gun_Panther_Icon.png");
+    }
+
+    &--gun-Joker {
+        background-image: url("/src/assets/images/items/P5R_Gun_Joker_Icon.png");
+    }
+
+    &--gun-Morgana {
+        background-image: url("/src/assets/images/items/P5R_Gun_Mona_Icon.png");
+    }
+
+    &--gun-Haru {
+        background-image: url("/src/assets/images/items/P5R_Gun_Noir_Icon.png");
+    }
+
+    &--gun-Yusuke {
+        background-image: url("/src/assets/images/items/P5R_Gun_Fox_Icon.png");
+    }
+
+    &--gun-Makoto {
+        background-image: url("/src/assets/images/items/P5R_Gun_Queen_Icon.png");
+    }
+
+    &--gun-Ryuji {
+        background-image: url("/src/assets/images/items/P5R_Gun_Skull_Icon.png");
+    }
+
+    &--weapon-Ann {
+        background-image: url("/src/assets/images/items/P5R_Melee_Panther_Icon.png");
+    }
+
+    &--weapon-Joker {
+        background-image: url("/src/assets/images/items/P5R_Melee_Joker_Icon.png");
+    }
+
+    &--weapon-Morgana {
+        background-image: url("/src/assets/images/items/P5R_Melee_Mona_Icon.png");
+    }
+
+    &--weapon-Haru {
+        background-image: url("/src/assets/images/items/P5R_Melee_Noir_Icon.png");
+    }
+
+    &--weapon-Yusuke {
+        background-image: url("/src/assets/images/items/P5R_Melee_Fox_Icon.png");
+    }
+
+    &--weapon-Makoto {
+        background-image: url("/src/assets/images/items/P5R_Melee_Queen_Icon.png");
+    }
+
+    &--weapon-Ryuji {
+        background-image: url("/src/assets/images/items/P5R_Melee_Skull_Icon.png");
+    }
+
+    &--accessory-unisex {
+        background-image: url("/src/assets/images/items/P5R_Accessory_Icon.png");
+    }
+
+    &--skillcard-unisex {
+        background-image: url("/src/assets/images/affinities/P5_Skill_Icon.png");
+        background-color: #241b25;
+    }
+
+    &--protector-women {
+        background-image: url("/src/assets/images/items/P5R_Protector_Female_Icon.png");
+    }
+
+    &--protector-men {
+        background-image: url("/src/assets/images/items/P5R_Protector_Male_Icon.png");
+    }
+
+    &--protector-unisex {
+        background-image: url("/src/assets/images/items/P5R_Protector_Human_Icon.png");
+    }
+
+    &--protector-Morgana {
+        background-image: url("/src/assets/images/items/P5_Protector_Morgana_Icon.png");
+    }
+}
+
+.user {
+    &--Ann {
+        background-image: url("/src/assets/images/party/AnnTextIcon.webp");
+        background-color: g.$user-pink-color;
+    }
+
+    &--Joker {
+        background-image: url("/src/assets/images/party/Levelup_joker.webp");
+        background-color: g.$accent-red-color;
+    }
+
+    &--Morgana {
+        background-image: url("/src/assets/images/party/Levelup_Morgana.webp");
+        background-color: g.$accent-grey-color;
+    }
+
+    &--Haru {
+        background-image: url("/src/assets/images/party/Haru_Text_Icon.webp");
+        background-color: g.$user-violet-color;
+    }
+
+    &--Yusuke {
+        background-image: url("/src/assets/images/party/Yusuke_Text_Icon.webp");
+        background-color: g.$user-lightblue-color;
+    }
+
+    &--Makoto {
+        background-image: url("/src/assets/images/party/Makoto_Text_Icon.webp");
+        background-color: g.$user-darkblue-color;
+    }
+
+    &--Ryuji {
+        background-image: url("/src/assets/images/party/Ryuji_Text_Icon.webp");
+        background-color: g.$user-yellow-color;
+    }
+
+    &--unisex {
+        background-image: url("/src/assets/images/items/unisex.svg");
+        background-color: transparent;
+    }
+
+    &--women {
+        background-image: url("/src/assets/images/items/female.svg");
+        background-color: transparent;
+    }
+
+    &--men {
+        background-image: url("/src/assets/images/items/male.svg");
+        background-color: transparent;
+    }
+}

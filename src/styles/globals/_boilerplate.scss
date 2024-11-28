@@ -15,18 +15,22 @@ html {
 body {
     margin: 0;
     padding: 0;
+
     background-color: c.$background-black-color;
     color: c.$white-color;
 }
 
-img {
-    display: block;
-    max-width: 100%;
+button,
+.button,
+input {
+    border: none;
+
+    font-size: inherit;
+    font-family: inherit;
+    color: inherit;
 }
 
-// основной контейнер для контента
-
-.page-wrap {
-    width: min(100% - func.rem(24), func.rem(1176));
-    margin-inline: auto;
+button,
+.button {
+    cursor: pointer;
 }

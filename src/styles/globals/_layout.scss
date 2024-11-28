@@ -1,0 +1,53 @@
+@use "functions" as func;
+
+/* 599px, 600px, 900x, 1200px */
+
+@mixin for-phone-only {
+    @media (max-width: 37.44em) {
+        @content;
+    }
+}
+@mixin for-tablet-portrait-up {
+    @media (min-width: 37.5em) {
+        @content;
+    }
+}
+@mixin for-tablet-landscape-up {
+    @media (min-width: 56.25em) {
+        @content;
+    }
+}
+@mixin for-desktop-up {
+    @media (min-width: 75em) {
+        @content;
+    }
+}
+
+@mixin for-desktop-down {
+    @media (max-width: 75em) {
+        @content;
+    }
+}
+
+.page-wrap {
+    width: min(100% - func.rem(32), func.rem(1200));
+    margin-inline: auto;
+}
+
+.index-page-wrap {
+    width: min(100% - func.rem(32), func.rem(1176));
+    margin-left: 7vw;
+
+    @include for-desktop-down {
+        margin-inline: auto;
+    }
+}
+
+.index-header-wrap {
+    max-width: 100%;
+    margin: 0 8vw;
+
+    @include for-desktop-down {
+        margin-inline: auto;
+    }
+}

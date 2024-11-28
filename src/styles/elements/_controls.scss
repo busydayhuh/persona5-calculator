@@ -1,0 +1,231 @@
+@use "../globals" as g;
+
+// inputs, buttons, select, scrollbars, tooltips, links
+
+.button {
+    position: relative;
+
+    clip-path: polygon(6% 12%, 100% 0%, 98% 100%, 0% 100%);
+    padding: g.rem(8) g.rem(24);
+
+    cursor: pointer;
+    background-color: g.$accent-red-color;
+
+    color: g.$white-color;
+
+    &--icon::after {
+        content: "";
+
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        display: block;
+        pointer-events: none;
+
+        width: 2rem;
+        height: 100%;
+
+        background: url("/src/assets/images/interface/arrow_btn_icon.svg")
+            center no-repeat g.$accent-red-color;
+    }
+
+    &:active {
+        box-shadow:
+            rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+            rgba(255, 255, 255, 0.3) 0px 18px 36px -18px inset;
+    }
+}
+
+.search {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    margin-left: auto;
+
+    @include g.for-desktop-down {
+        flex-grow: 1;
+        margin-top: 1rem;
+        margin-inline: auto;
+        max-width: 95%;
+    }
+
+    &__input {
+        display: block;
+        transition: width 200ms linear;
+
+        border-bottom: 2px solid g.$accent-grey-color;
+        width: 40%;
+        padding-bottom: 0.3rem;
+
+        background-color: transparent;
+        font-family: g.$arcana-font-small;
+        font-size: g.rem(18);
+    }
+
+    &__input:focus {
+        border-bottom: 2px solid g.$white-color;
+        width: 95%;
+        outline: none;
+    }
+
+    &__button {
+        display: inline-block;
+
+        border: none;
+        width: 1.5rem;
+        height: 1.5rem;
+        padding: 0.5rem;
+
+        background: url("/src/assets/images/interface/search_icon.svg") center /
+            0.8rem 0.8rem no-repeat transparent;
+        filter: opacity(40%);
+    }
+}
+
+.typing {
+    background: url("/src/assets/images/interface/close_icon.svg") center /
+        0.8rem 0.8rem no-repeat transparent;
+    filter: opacity(100%);
+
+    &:hover {
+        clip-path: polygon(6% 12%, 100% 0%, 98% 100%, 0% 100%);
+
+        background-color: g.$accent-red-color;
+        cursor: pointer;
+    }
+}
+
+fieldset {
+    border: none;
+}
+
+.dlc-checkbox {
+    /* Remove default style */
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+
+    /* Custom */
+    display: grid;
+    place-content: center;
+
+    transform: translateY(-0.075em);
+
+    width: g.rem(18);
+    height: g.rem(18);
+
+    background-color: g.$white-color;
+    cursor: pointer;
+
+    &::before {
+        content: "";
+
+        transform: scale(0);
+        transform-origin: bottom left;
+
+        transition: 120ms transform ease-in-out;
+
+        margin-left: 0.5rem;
+        width: g.rem(24);
+        height: g.rem(20);
+
+        background: url("/src/assets/images/interface/check_icon.svg");
+    }
+
+    &:checked::before {
+        transform: scale(1);
+    }
+}
+
+.hovertext {
+    position: relative;
+
+    &::before {
+        content: attr(data-hover);
+
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 0;
+
+        visibility: hidden;
+        opacity: 0;
+
+        transition: opacity 300ms ease-in-out;
+
+        padding: 0.5em;
+        background-color: black;
+
+        font-size: g.rem(16);
+        text-align: center;
+        color: #fff;
+    }
+
+    &:hover::before {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@supports (scrollbar-color: auto) {
+    .styled-scrollbars {
+        scrollbar-color: g.$white-color transparent;
+    }
+
+    html {
+        scrollbar-width: none;
+    }
+}
+
+@supports selector(::-webkit-scrollbar) {
+    .styled-scrollbars::-webkit-scrollbar {
+        background: transparent;
+    }
+    .styled-scrollbars::-webkit-scrollbar-thumb {
+        background: g.$white-color;
+    }
+
+    .styled-scrollbars::-webkit-scrollbar-button {
+        display: none;
+
+        width: 0;
+        height: 0;
+    }
+
+    html::-webkit-scrollbar {
+        width: 0px;
+    }
+}
+
+.switch-field {
+    display: flex;
+    transform: rotate(-2deg);
+
+    overflow: hidden;
+    clip-path: polygon(0 0, 96% 0, 100% 100%, 3% 99%);
+
+    input {
+        display: none;
+
+        &:checked + label {
+            background-color: g.$accent-red-color;
+            color: g.$white-color;
+        }
+    }
+
+    label {
+        transition: all 0.1s ease-in-out;
+        padding: 0.5rem 1rem;
+
+        background-color: g.$background-grey-color;
+
+        text-align: center;
+        color: g.$white-color;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

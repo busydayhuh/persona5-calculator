@@ -7,8 +7,10 @@
     </head>
     <body>
         <header class="header">
-            <div class="header__flex page-wrap">
-                <div class="header__logo"></div>
+            <div class="header__flex index-header-wrap">
+                <a href="compendiumPage.html" target="_blank"
+                    ><div class="header__logo"></div>
+                </a>
                 <div class="header__link">
                     <a href="#" target="_blank"
                         ><span class="header__text">Open on Github</span></a
@@ -17,49 +19,62 @@
             </div>
         </header>
         <div class="backdrop"></div>
-        <section class="grid page-wrap">
+        <section class="grid index-page-wrap">
             <main class="main">
                 <div class="table">
                     <div class="table__filters">
-                        <div class="table__button table__button--icon">
-                            <select name="sorting" id="sorting">
-                                <option value="arcana">by Arcana</option>
-                                <option value="lvl">by Level</option>
-                            </select>
+                        <div class="switch-field">
+                            <input
+                                type="radio"
+                                id="arcana"
+                                name="sorting"
+                                value="arcana"
+                                checked
+                            />
+                            <label for="arcana">Arcana</label>
+                            <input
+                                type="radio"
+                                id="lvl"
+                                name="sorting"
+                                value="lvl"
+                            />
+                            <label for="lvl">Level</label>
                         </div>
                         <div class="table__dlc not-visible-on-desktop">
-                            <button
-                                class="table__button"
-                                id="show-dlc-settings"
-                            >
+                            <button class="button" id="show-dlc-settings">
                                 DLC Settings
                             </button>
                         </div>
 
-                        <div class="table__search">
+                        <div class="search">
                             <input
-                                class="table__input js-search-bar"
+                                class="search__input js-search-bar"
+                                id="v0"
                                 type="text"
-                                placeholder="Search"
+                                placeholder="search"
                             />
                             <button
-                                class="table__search-button js-delete-button"
+                                class="search__button js-search-button"
+                                data-parent="v0"
                             ></button>
                         </div>
                     </div>
                     <div
-                        class="table__content styled-scrollbars"
+                        class="table__content--single-col styled-scrollbars"
                         id="compendium"
                     ></div>
                 </div>
             </main>
             <aside class="aside">
-                <div class="aside__header">DLC settings</div>
+                <div class="aside__header">Include DLC</div>
+                <div class="aside__note">
+                    DLC Personas get inserted into the list of fusion results.
+                </div>
                 <form class="aside__form">
                     <fieldset id="dlc-form"></fieldset>
                 </form>
                 <button
-                    class="aside__button not-visible-on-desktop"
+                    class="button not-visible-on-desktop"
                     id="close-dlc-settings"
                 >
                     Ok

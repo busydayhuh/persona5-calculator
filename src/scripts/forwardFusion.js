@@ -25,18 +25,25 @@ const fusablePersonaListSorted = _.chain(fusablePersonaList)
 function findForwardFusions(currentPersona) {
     const { lvl: currentLvl, arcana: currentArcana } = currentPersona;
 
-    const fusionPairs = normalFusions.filter(
-        (pair) => pair.source[0] === currentArcana,
+    const fusionPairs = normalFusions.filter((pair) =>
+        pair.source.includes(currentArcana),
     );
 
     let fusions = [];
 
     fusionPairs.forEach((pair) => {
         const personaA = currentPersona;
-        const arcanaBPersonas = fusablePersonaListSorted[pair.source[1]];
+        const currentArcanaIndex = pair.source.indexOf(currentArcana);
+        const pairArcanaIndex = currentArcanaIndex === 0 ? 1 : 0;
+        const arcanaBPersonas =
+            fusablePersonaListSorted[pair.source[pairArcanaIndex]];
         const resultArcana = pair.result;
 
         for (const personaB of arcanaBPersonas) {
+            // if (personaA.arcana === personaB.arcana) {
+            //     console.log(personaA.name, personaB.name, resultArcana);
+            // }
+
             if (personaB.name === personaA.name) continue;
 
             const INDEX = Number.isInteger(

@@ -1,0 +1,68 @@
+@use "../globals" as g;
+
+.backdrop {
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    visibility: hidden;
+    opacity: 0;
+    overflow: auto;
+
+    transition:
+        visibility 200ms ease-in-out,
+        opacity 200ms ease-in-out;
+
+    width: 100%;
+    height: 100%;
+    background-color: g.$backdrop-color;
+
+    &--loader {
+        z-index: 1200;
+        background-color: g.$background-black-color;
+    }
+}
+
+.open {
+    visibility: visible;
+    opacity: 1;
+}
+
+.loader {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(50%, 50%);
+    width: 2rem;
+    height: 4rem;
+    animation:
+        l3-1 2s infinite linear,
+        l3-2 3s infinite steps(1) -0.5s;
+}
+
+@keyframes l3-1 {
+    0% {
+        transform: perspective(150px) rotateX(0deg) rotateY(0deg);
+    }
+    50% {
+        transform: perspective(150px) rotateX(180deg) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(150px) rotateX(180deg) rotateY(180deg);
+    }
+}
+@keyframes l3-2 {
+    0% {
+        background: url("/src/assets/images/interface/loader_mask.png") center /
+            100% no-repeat;
+    }
+    33% {
+        background: url("/src/assets/images/interface/loader_back.png") center /
+            100% no-repeat;
+    }
+    66% {
+        background: url("/src/assets/images/interface/loader_front.png") center /
+            100% no-repeat;
+    }
+}

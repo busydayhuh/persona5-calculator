@@ -2,27 +2,27 @@ export const specialFusions = [
     {
         result: "Alice",
         sources: ["Nebiros", "Belial"],
-        condition: "Complete Death Confidant",
+        condition: "complete Death Confidant.",
     },
     {
         result: "Ardha",
         sources: ["Parvati", "Shiva"],
-        condition: "Complete Temperance Confidant",
+        condition: "complete Temperance Confidant.",
     },
     {
-        result: "Asura-Oh",
+        result: "Asura-Ou",
         sources: ["Zouchouten", "Jikokuten", "Koumokuten", "Bishamonten"],
-        condition: "Complete Sun Confidant",
+        condition: "complete Sun Confidant.",
     },
     {
         result: "Black Frost",
         sources: ["Jack-o'-Lantern", "Jack Frost", "King Frost"],
-        condition: "Complete «One who bullies bullies» Request",
+        condition: "complete 'One who bullies bullies' request.",
     },
     {
         result: "Bugs",
         sources: ["Pixie", "Pisaca", "Hariti"],
-        condition: "Complete «The Lovesick Cyberstalking Girl» Request",
+        condition: "complete 'The Lovesick Cyberstalking Girl' request.",
     },
     {
         result: "Chi You",
@@ -33,7 +33,7 @@ export const specialFusions = [
             "Yoshitsune",
             "Cu Chulainn",
         ],
-        condition: "Complete Chariot Confidant",
+        condition: "complete Chariot Confidant.",
     },
     {
         result: "Flauros",
@@ -42,7 +42,7 @@ export const specialFusions = [
     {
         result: "Kohryu",
         sources: ["Genbu", "Seiryu", "Suzaku", "Byakko"],
-        condition: "Complete Hierophant Confidant",
+        condition: "complete Hierophant Confidant.",
     },
     {
         result: "Lucifer",
@@ -54,7 +54,7 @@ export const specialFusions = [
             "Metatron",
             "Satan",
         ],
-        condition: "Complete Star Confidant",
+        condition: "complete Star Confidant.",
     },
     {
         result: "Metatron",
@@ -66,7 +66,7 @@ export const specialFusions = [
             "Sandalphon",
             "Michael",
         ],
-        condition: "Complete Justice Confidant",
+        condition: "complete Justice Confidant.",
     },
     {
         result: "Michael",
@@ -79,12 +79,12 @@ export const specialFusions = [
     {
         result: "Ongyo-Ki",
         sources: ["Kin-Ki", "Sui-Ki", "Fuu-Ki"],
-        condition: "Complete Hermit Confidant",
+        condition: "complete Hermit Confidant.",
     },
     {
         result: "Satanael",
         sources: ["Arsene", "Anzu", "Ishtar", "Satan", "Lucifer", "Michael"],
-        condition: "Complete the game, and reach its True Ending",
+        condition: "complete the game and reach its True Ending.",
     },
     {
         result: "Seth",
@@ -121,3 +121,10 @@ export const specialFusions = [
         ],
     },
 ];
+
+export function getCondition(personaName) {
+    const recipe = specialFusions.find(
+        (recipe) => recipe.result === personaName,
+    );
+    return recipe.condition ? recipe.condition : "no special conditions.";
+}

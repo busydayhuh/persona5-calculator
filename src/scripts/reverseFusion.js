@@ -190,7 +190,6 @@ function gemWithGem(resultPersona) {
     );
 
     if (findResultPersona === undefined) return false;
-    console.log(findResultPersona[1]);
 
     return [findResultPersona[1]];
 }

@@ -1,6 +1,7 @@
 import { makePersonaList } from "./fullCompendim.js";
 import { arcanaOrder } from "../data/arcanaOrder.js";
 import { dlcNames } from "../data/dlcList.js";
+import { searchForItem, clearSearchBar } from "./tableSearch.js";
 
 import * as _ from "lodash";
 import "../styles/compendiumPage.scss";
@@ -24,7 +25,7 @@ function renderDlcSettings() {
     let html = "";
     dlcNames.forEach((name) => {
         html += `<div class="aside__checkbox">
-                <input type="checkbox" id="${name[0]}" name="dlc" value="${
+                <input type="checkbox" class="dlc-checkbox" id="${name[0]}" name="dlc" value="${
                     name[0]
                 }" ${isChecked(name[0])}>
                 <label for="${name[0]}">${name[0]} and ${name[1]}</label>
@@ -63,7 +64,7 @@ function renderPersonaTable(personaList = makePersonaList(checkedDLC)) {
     for (let persona of sortedPersonaList) {
         if (persona === undefined) continue;
 
-        html += `<a href="/personaPage.html?name=${persona.name}" target="_blank"><div class="table__row table__row${hasType(persona)[0]}">
+        html += `<a href="/personaPage.html?name=${persona.name}" target="_blank" class="table__cell table__cell${hasType(persona)[0]}">
                                 <span
                                     class="table__arcana arcana--small type${hasType(persona)[0]}"
                                     >${persona.arcana}</span
@@ -73,8 +74,8 @@ function renderPersonaTable(personaList = makePersonaList(checkedDLC)) {
                                 >
                                 <span class="table__circle type${hasType(persona)[0]}"></span>
                                 <span class="table__name">${persona.name}</span>
-                                <span class="table__badge type${hasType(persona)[0]}">${hasType(persona)[1]}</span>
-                            </div></a>`;
+                                <span class="badge--small badge${hasType(persona)[0]}">${hasType(persona)[1]}</span>
+                            </a>`;
     }
 
     document.getElementById("compendium").innerHTML = html;
@@ -102,11 +103,13 @@ function sortPersonaList(personaList) {
 
 // Events (re-render persona list):
 
-const sortOptions = document.getElementById("sorting");
-sortOptions.addEventListener("change", (e) => {
-    sortBy = e.target.value;
-    localStorage.setItem("sortBy", sortBy);
-    renderPersonaTable();
+const sortOptions = document.querySelectorAll("[name='sorting']");
+sortOptions.forEach((option) => {
+    option.addEventListener("change", (e) => {
+        sortBy = e.target.value;
+        localStorage.setItem("sortBy", sortBy);
+        renderPersonaTable();
+    });
 });
 
 const dlcFilters = document.querySelectorAll('input[name = "dlc"]');
@@ -121,39 +124,13 @@ dlcFilters.forEach((option) =>
     }),
 );
 
-document
-    .querySelector(".js-search-bar")
-    .addEventListener("keyup", searchForItem);
-
-function searchForItem() {
-    const query = document.querySelector(".js-search-bar").value;
-    const personaList = makePersonaList(checkedDLC);
-
-    const searchResult = personaList.filter(
-        (persona) =>
-            persona["name"]
-                .toLowerCase()
-                .includes(query.trim().toLowerCase()) ||
-            persona["arcana"]
-                .toLowerCase()
-                .includes(query.trim().toLowerCase()),
-    );
-
-    renderPersonaTable(searchResult);
-
-    document.querySelector(".js-delete-button").classList.add("typing");
-
-    if (query === "") {
-        document.querySelector(".js-delete-button").classList.remove("typing");
-    }
-}
-
-document
-    .querySelector(".js-delete-button")
-    .addEventListener("click", clearSearchBar);
-
-function clearSearchBar() {
-    document.querySelector(".js-search-bar").value = "";
-    this.classList.remove("typing");
+document.querySelector(".js-search-button").addEventListener("click", (e) => {
+    clearSearchBar(e.target, e.target.dataset.parent);
     renderPersonaTable();
-}
+});
+
+document.querySelector(".js-search-bar").addEventListener("keyup", (e) => {
+    const personaList = makePersonaList(checkedDLC);
+    const result = searchForItem(personaList, e.target.value, e.target.id);
+    renderPersonaTable(result);
+});

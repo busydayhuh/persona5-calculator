@@ -260,7 +260,7 @@ export const skills = {
     "Atomic Flare": {
         cost: 4800,
         effect: "Deal severe Nuclear damage to 1 foe.",
-        element: "nuclear",
+        element: "nuke",
         personas: {
             "Asura-Ou": 0,
         },
@@ -561,7 +561,7 @@ export const skills = {
     "Cosmic Flare": {
         cost: 5400,
         effect: "Deal severe Nuclear damage to all foes.",
-        element: "nuclear",
+        element: "nuke",
         personas: {
             Ardha: 0,
             Michael: 92,
@@ -1052,7 +1052,7 @@ export const skills = {
     "Wild Thunder": {
         cost: 5400,
         effect: "Deal severe Electric damage to all foes.",
-        element: "electric",
+        element: "elec",
         personas: {
             Odin: 84,
         },
@@ -1358,7 +1358,7 @@ export const skills = {
     "Frei": {
         cost: 400,
         effect: "Deal light Nuclear damage to 1 foe.",
-        element: "nuclear",
+        element: "nuke",
         personas: {
             Makami: 0,
             Suzaku: 0,
@@ -1368,7 +1368,7 @@ export const skills = {
     "Freidyne": {
         cost: 1200,
         effect: "Deal heavy Nuclear damage to 1 foe.",
-        element: "nuclear",
+        element: "nuke",
         personas: {
             "Ananta": 48,
             "Bishamonten": 0,
@@ -1381,7 +1381,7 @@ export const skills = {
     "Freila": {
         cost: 800,
         effect: "Deal medium Nuclear damage to 1 foe.",
-        element: "nuclear",
+        element: "nuke",
         fuse: "Ara Mitama",
         personas: {
             "Ara Mitama": 0,
@@ -1938,7 +1938,7 @@ export const skills = {
     "Mafrei": {
         cost: 1000,
         effect: "Deal light Nuclear damage to all foes.",
-        element: "nuclear",
+        element: "nuke",
         fuse: "Suzaku",
         personas: {
             Makami: 17,
@@ -1949,7 +1949,7 @@ export const skills = {
     "Mafreidyne": {
         cost: 2200,
         effect: "Deal heavy Nuclear damage to all foes.",
-        element: "nuclear",
+        element: "nuke",
         fuse: "Bishamonten",
         personas: {
             "Asura-Ou": 79,
@@ -1962,7 +1962,7 @@ export const skills = {
     "Mafreila": {
         cost: 1600,
         effect: "Deal medium Nuclear damage to all foes.",
-        element: "nuclear",
+        element: "nuke",
         personas: {
             Ananta: 0,
             Mithras: 0,
@@ -2378,7 +2378,7 @@ export const skills = {
     "Mazio": {
         cost: 1000,
         effect: "Deal light Electric damage to all foes.",
-        element: "electric",
+        element: "elec",
         fuse: "Shiisaa",
         personas: {
             "Ame-no-Uzume": 0,
@@ -2388,7 +2388,7 @@ export const skills = {
     "Maziodyne": {
         cost: 2200,
         effect: "Deal heavy Electric damage to all foes.",
-        element: "electric",
+        element: "elec",
         personas: {
             "Barong": 57,
             "Crystal Skull": 0,
@@ -2406,7 +2406,7 @@ export const skills = {
     "Mazionga": {
         cost: 1600,
         effect: "Deal medium Electric damage to all foes.",
-        element: "electric",
+        element: "elec",
         fuse: "Atropos",
         personas: {
             "Atropos": 0,
@@ -3789,7 +3789,7 @@ export const skills = {
     "Thunder Reign": {
         cost: 4800,
         effect: "Deal severe Electric damage to 1 foe.",
-        element: "electric",
+        element: "elec",
         personas: {
             Odin: 0,
         },
@@ -3982,7 +3982,7 @@ export const skills = {
     "Zio": {
         cost: 400,
         effect: "Deal light Electric damage to 1 foe.",
-        element: "electric",
+        element: "elec",
         fuse: "Agathion",
         personas: {
             Agathion: 0,
@@ -3993,7 +3993,7 @@ export const skills = {
     "Ziodyne": {
         cost: 1200,
         effect: "Deal heavy Electric damage to 1 foe.",
-        element: "electric",
+        element: "elec",
         fuse: "Raja Naga",
         personas: {
             "Baphomet": 61,
@@ -4010,7 +4010,7 @@ export const skills = {
     "Zionga": {
         cost: 800,
         effect: "Deal medium Electric damage to 1 foe.",
-        element: "electric",
+        element: "elec",
         fuse: "Isis",
         personas: {
             "Hariti": 0,
@@ -4033,9 +4033,9 @@ export function getSkillDetails(name) {
 export function getCost(name) {
     if (skills[name]["cost"]) {
         return skills[name]["cost"] > 100
-            ? `${skills[name]["cost"] / 100} SP`
-            : `${skills[name]["cost"]}% HP`;
+            ? `${skills[name]["cost"] / 100}SP`
+            : `${skills[name]["cost"]}%HP`;
     }
 
-    return "&times;";
+    return "";
 }

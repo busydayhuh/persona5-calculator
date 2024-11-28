@@ -1222,7 +1222,7 @@ export const compendiumData = {
             Mafreidyne: 0,
             Magarudyne: 0,
             Makougaon: 0,
-            Mapsoidyne: 0,
+            Mapsiodyne: 0,
             Maragidyne: 0,
             Maziodyne: 0,
         },
@@ -1236,6 +1236,7 @@ export const compendiumData = {
         treasure: true,
         area: "Sheriruth",
         floor: "L7-9. 11-13 (after Palace 7)",
+        item: "Crystal Skull",
     },
     "Cu Chulainn": {
         arcana: "Star",
@@ -1548,7 +1549,7 @@ export const compendiumData = {
         },
         skills: {
             "Evade Psy": 68,
-            "Mapsoidyne": 67,
+            "Mapsiodyne": 67,
             "Marin Karin": 0,
             "Masukunda": 0,
             "Psiodyne": 0,
@@ -2466,7 +2467,7 @@ export const compendiumData = {
             "Absorb Nuke": 82,
             "Evade Ice": 79,
             "High Counter": 80,
-            "Mapsoidyne": 81,
+            "Mapsiodyne": 81,
             "Psiodyne": 0,
             "Tentarafoo": 0,
             "Vorpal Blade": 0,
@@ -2678,7 +2679,7 @@ export const compendiumData = {
         skills: {
             "Concentrate": 79,
             "Life Aid": 78,
-            "Mapsoidyne": 0,
+            "Mapsiodyne": 0,
             "Mediarahan": 0,
             "Psy Amp": 80,
             "Psycho Force": 0,
@@ -4373,7 +4374,7 @@ export const compendiumData = {
             "Energy Shower": 57,
             "Hama Boost": 61,
             "Hamaon": 0,
-            "Mapsoidyne": 59,
+            "Mapsiodyne": 59,
             "Psiodyne": 0,
         },
         stats: {
@@ -5840,6 +5841,7 @@ export const compendiumData = {
             st: 41,
         },
         item: "Spell Master",
+        skillCard: true,
         dlc: true,
     },
     "Unicorn": {

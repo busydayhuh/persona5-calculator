@@ -1,5 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const BundleAnalyzerPlugin =
+    require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 const pages = ["compendiumPage", "personaPage"];
 
@@ -11,7 +13,7 @@ module.exports = {
             }),
         {},
     ),
-    mode: "development",
+    mode: "production",
     output: {
         filename: "[name].[contenthash].js", // новое название с хешом при изменении файла
         path: path.resolve(__dirname, "dist"),
@@ -28,8 +30,9 @@ module.exports = {
         static: {
             directory: path.join(__dirname, "dist"),
         },
+        watchFiles: ["src/*.html"],
         port: 3000,
-        open: ["/compendiumPage.html", "/personaPage.html"],
+        open: ["/compendiumPage.html"],
         hot: true,
         compress: true,
         historyApiFallback: true,
@@ -41,7 +44,7 @@ module.exports = {
                 use: ["style-loader", "css-loader", "sass-loader"],
             },
             {
-                test: /\.(png|svg|jpg|jpeg|gif|ico|woff|woff2|eot|ttf)$/i,
+                test: /\.(png|svg|jpg|jpeg|gif|ico|woff|woff2|eot|ttf|webp)$/i,
                 type: "asset/resource",
             },
         ],
@@ -56,4 +59,6 @@ module.exports = {
                 chunks: [page],
             }),
     ),
+
+    // performance: { hints: false },
 };

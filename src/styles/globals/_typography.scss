@@ -1,13 +1,6 @@
 @use "fonts" as f;
 @use "functions" as func;
-
-h1,
-h2,
-h3 {
-    font-weight: 700;
-    line-height: 1;
-    margin-top: 1em;
-}
+@use "colors" as c;
 
 body {
     font-family: f.$main-font;
@@ -23,17 +16,229 @@ p {
 a,
 a:visited,
 a:active {
+    cursor: pointer;
     text-decoration: none;
     color: inherit;
-    line-height: 1;
 }
 
 .arcana--small {
     font-family: f.$arcana-font-small;
-    font-size: func.rem(20);
+    font-size: clamp(func.rem(15), 4vw, func.rem(20));
     letter-spacing: -6%;
+}
+
+.arcana--title {
+    font-family: f.$arcana-font-large;
+    font-size: clamp(func.rem(36), 6vw, func.rem(48));
+    letter-spacing: -0.2rem;
+    color: c.$background-black-color;
+
+    -webkit-text-stroke-color: c.$white-color;
+    -webkit-text-stroke-width: func.rem(12);
+    paint-order: stroke fill;
 }
 
 .numbers--regular {
     font-family: f.$numbers-font-regular;
+    font-size: clamp(func.rem(20), 5vw, func.rem(28));
+}
+
+.lvl--title {
+    font-family: f.$headers-font;
+    font-size: clamp(func.rem(20), 5vw, func.rem(32));
+    letter-spacing: -0.4em;
+    color: c.$accent-grey-color;
+}
+
+.numbers--italic {
+    font-family: f.$numbers-font-italic;
+    font-size: clamp(func.rem(24), 6vw, func.rem(40));
+}
+
+.badge {
+    &--large {
+        font-family: f.$headers-font;
+        font-size: clamp(func.rem(22), 5vw, func.rem(32));
+        letter-spacing: -0.8rem;
+
+        &.badge--dlc {
+            color: c.$accent-yellow-color;
+        }
+
+        &.badge--special {
+            color: c.$accent-blue-color;
+        }
+
+        &.badge--gem {
+            color: c.$accent-lime-color;
+        }
+    }
+
+    &--small {
+        padding: 0.1rem 0.5rem 0.4rem 0.5rem;
+
+        clip-path: polygon(0 0, 100% 0%, 100% 67%, 9% 100%);
+
+        font-family: f.$arcana-font-small;
+        font-size: func.rem(12);
+        color: c.$background-black-color;
+
+        &.badge--dlc {
+            background-color: c.$accent-yellow-color;
+        }
+
+        &.badge--special {
+            background-color: c.$accent-blue-color;
+        }
+
+        &.badge--gem {
+            background-color: c.$accent-lime-color;
+        }
+    }
+}
+
+.affinity {
+    $font-size: clamp(func.rem(24), 6vw, func.rem(36));
+    $font-family: f.$arcana-font-large;
+    $letter-spacing: -0.2rem;
+
+    $stroke-color: c.$background-black-color;
+    $stroke-width: func.rem(8);
+    $paint-order: stroke fill;
+
+    &--wk::after {
+        content: "Wk";
+
+        position: absolute;
+        right: 10%;
+        bottom: -50%;
+
+        font-family: $font-family;
+        font-size: $font-size;
+        letter-spacing: $letter-spacing;
+        color: c.$white-color;
+
+        -webkit-text-stroke-color: $stroke-color;
+        -webkit-text-stroke-width: $stroke-width;
+        paint-order: $paint-order;
+    }
+
+    &--str::after {
+        content: "Str";
+
+        position: absolute;
+        right: 10%;
+        bottom: -50%;
+
+        font-family: $font-family;
+        font-size: $font-size;
+        letter-spacing: $letter-spacing;
+        color: c.$accent-grey-color;
+
+        -webkit-text-stroke-color: $stroke-color;
+        -webkit-text-stroke-width: $stroke-width;
+        paint-order: $paint-order;
+    }
+    &--nul::after {
+        content: "Nul";
+
+        position: absolute;
+        right: 10%;
+        bottom: -50%;
+
+        font-family: $font-family;
+        font-size: $font-size;
+        letter-spacing: $letter-spacing;
+        color: c.$accent-grey-color;
+
+        -webkit-text-stroke-color: $stroke-color;
+        -webkit-text-stroke-width: $stroke-width;
+        paint-order: $paint-order;
+    }
+
+    &--rpl::after {
+        content: "Rpl";
+
+        position: absolute;
+        right: 10%;
+        bottom: -50%;
+
+        font-family: $font-family;
+        font-size: $font-size;
+        letter-spacing: $letter-spacing;
+        color: c.$accent-grey-color;
+
+        -webkit-text-stroke-color: $stroke-color;
+        -webkit-text-stroke-width: $stroke-width;
+        paint-order: $paint-order;
+    }
+    &--dr::after {
+        content: "Dr";
+
+        position: absolute;
+        right: 10%;
+        bottom: -50%;
+
+        font-family: $font-family;
+        font-size: $font-size;
+        letter-spacing: $letter-spacing;
+        color: c.$accent-grey-color;
+
+        -webkit-text-stroke-color: $stroke-color;
+        -webkit-text-stroke-width: $stroke-width;
+        paint-order: $paint-order;
+    }
+}
+
+.stats {
+    &__name {
+        font-family: f.$arcana-font-large;
+        font-size: clamp(func.rem(24), 5vw, func.rem(32));
+        color: c.$background-black-color;
+
+        -webkit-text-stroke-color: c.$white-color;
+        -webkit-text-stroke-width: func.rem(4);
+        paint-order: stroke fill;
+
+        &::first-letter {
+            text-transform: capitalize;
+        }
+    }
+
+    &__value {
+        font-family: f.$numbers-font-regular;
+        font-size: clamp(func.rem(24), 5vw, func.rem(32));
+        color: c.$background-black-color;
+
+        -webkit-text-stroke-color: c.$white-color;
+        -webkit-text-stroke-width: func.rem(4);
+        paint-order: stroke fill;
+    }
+}
+
+h2 {
+    margin: 0;
+
+    font-family: f.$headers-font;
+    font-size: clamp(func.rem(20), 6vw, func.rem(32));
+    letter-spacing: -0.4rem;
+    color: c.$background-black-color;
+}
+
+h3 {
+    margin: 0;
+
+    font-size: clamp(func.rem(18), 5vw, func.rem(24));
+    color: c.$background-black-color;
+
+    -webkit-text-stroke-color: c.$white-color;
+    -webkit-text-stroke-width: func.rem(4);
+    paint-order: stroke fill;
+}
+
+.th {
+    font-family: f.$headers-font;
+    font-size: clamp(func.rem(18), 5vw, func.rem(24));
+    letter-spacing: -0.4rem;
+    color: c.$background-black-color;
 }

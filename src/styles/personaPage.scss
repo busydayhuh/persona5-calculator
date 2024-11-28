@@ -1,143 +1,540 @@
 @forward "globals";
+@forward "elements";
 @use "globals" as g;
 
-.persona-all-data {
+.data {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas:
-        "title"
         "resistance"
         "image"
+        "mementos"
         "stats"
         "skills"
-        "inherit"
+        "inheritance"
         "item"
         "fusion";
+    gap: g.rem(24);
+
+    @include g.for-desktop-up {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-areas:
+            "resistance resistance resistance resistance"
+            "skills skills image image"
+            "inheritance inheritance mementos mementos"
+            "inheritance inheritance stats stats"
+            "item item item item"
+            "fusion fusion fusion fusion";
+        gap: g.rem(16);
+    }
 }
 
 .title {
-    grid-area: title;
-    display: flex;
+    position: relative;
+    transform: rotate(-3deg);
+    padding: g.rem(28) 0 g.rem(36) 0;
+
+    &__grid {
+        display: grid;
+        grid-template-columns:
+            minmax(g.rem(80), max-content) minmax(g.rem(50), max-content)
+            minmax(g.rem(55), max-content);
+
+        grid-template-areas:
+            "arcana name badge"
+            "arcana lvl badge";
+
+        align-items: center;
+    }
+
+    &__arcana {
+        grid-area: arcana;
+        margin-right: g.rem(32);
+    }
+
+    &__name {
+        grid-area: name;
+        margin-right: g.rem(20);
+    }
+
+    &__lvl {
+        grid-area: lvl;
+
+        margin-right: g.rem(20);
+        margin-left: -0.5rem;
+
+        :first-child {
+            margin-right: 0.5rem;
+        }
+
+        span {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+
+    &__badge {
+        grid-area: badge;
+        align-self: flex-end;
+    }
+
+    &::after {
+        content: "";
+
+        position: absolute;
+        bottom: min(-20px, -1vw);
+        left: -3px;
+
+        clip-path: polygon(0 0, 100% 0, 100% 75%, 0 25%);
+
+        width: 100%;
+        height: min(40px, 6vw);
+
+        background-color: white;
+    }
 }
 
 .resistance {
+    z-index: 999;
     grid-area: resistance;
 
-    margin-bottom: 24px;
+    transform: rotate(-3deg);
+    margin-bottom: g.rem(24);
+
+    @include g.for-desktop-up {
+        margin-bottom: g.rem(48);
+    }
 
     &__container {
+        z-index: 999;
+        position: relative;
+
         display: flex;
         justify-content: flex-start;
-        gap: 10px;
         flex-wrap: wrap;
+
+        margin-top: g.rem(-20);
+
+        :first-child {
+            border-width: g.rem(6) g.rem(3) g.rem(6) g.rem(6);
+        }
+
+        :last-child {
+            border-width: g.rem(6) g.rem(6) g.rem(6) g.rem(3);
+        }
+
+        :nth-child(2),
+        :nth-child(4) {
+            margin-top: g.rem(10);
+        }
+
+        :nth-child(6),
+        :nth-child(9) {
+            margin-top: g.rem(16);
+        }
+
+        :nth-child(8) {
+            margin-top: g.rem(8);
+        }
     }
 
     &__elem {
-        position: relative;
+        border-style: solid;
+        border-width: g.rem(6) g.rem(3);
+        border-color: g.$white-color;
     }
+}
 
-    .wk::after {
-        content: "Wk";
-        position: absolute;
-        color: var(--white-color);
-        right: -2px;
-        bottom: -12px;
-        font-size: 1em;
-    }
-    .str::after {
-        content: "Str";
-        position: absolute;
-        color: var(--white-color);
-        right: -2px;
-        bottom: -12px;
-        font-size: 1em;
-    }
-    .nul::after {
-        content: "Nul";
-        position: absolute;
-        color: var(--white-color);
-        right: -2px;
-        bottom: -12px;
-        font-size: 1em;
-    }
-    .rpl::after {
-        content: "Rpl";
-        position: absolute;
-        color: var(--white-color);
-        right: -2px;
-        bottom: -12px;
-        font-size: 1em;
-    }
-    .dr::after {
-        content: "Dr";
-        position: absolute;
-        color: var(--white-color);
-        right: -2px;
-        bottom: -12px;
-        font-size: 1em;
+.image {
+    grid-area: image;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__persona {
+        display: block;
+
+        max-width: 80%;
+        max-height: min(75vw, 50rem);
+
+        filter: drop-shadow(0px 100px 100px hsla(0, 1%, 33%, 0.575));
+
+        transform: translateY(-1rem);
+        animation: floater 6s infinite;
+        transition: ease 1s;
+
+        @include g.for-desktop-up {
+            z-index: 990;
+            position: absolute;
+
+            left: 0;
+            bottom: 0;
+
+            &.square {
+                &--medium {
+                    left: 15%;
+                    bottom: 0%;
+
+                    max-width: 35rem;
+                    max-height: none;
+                }
+
+                &--small {
+                    left: 15%;
+                    bottom: 15%;
+
+                    max-width: 35rem;
+                    max-height: 35rem;
+                }
+
+                &--big {
+                    left: 0;
+                    bottom: 5%;
+
+                    max-width: 45rem;
+                    max-height: 45rem;
+                }
+            }
+
+            &.horizontal {
+                &--medium {
+                    left: 5%;
+                    bottom: 10%;
+
+                    max-width: 50rem;
+                    max-height: none;
+                }
+
+                &--small {
+                    left: 5%;
+                    bottom: 15%;
+
+                    max-width: 40rem;
+                    max-height: none;
+                }
+
+                &--big {
+                    left: -40%;
+                    bottom: 10%;
+
+                    max-width: 80rem;
+                    max-height: none;
+                }
+            }
+
+            &.vertical {
+                &--big {
+                    left: 15%;
+                    bottom: 0;
+
+                    max-width: 45rem;
+                    max-height: 55rem;
+                }
+
+                &--medium {
+                    left: 15%;
+                    bottom: 5%;
+
+                    max-width: none;
+                    max-height: 50rem;
+                }
+
+                &--small {
+                    left: 20%;
+                    bottom: 20%;
+
+                    width: auto;
+                    max-width: none;
+                    max-height: 40rem;
+                }
+            }
+        }
     }
 }
 
 .skills {
+    z-index: 999;
+    position: relative;
+
     grid-area: skills;
-    max-width: 600px;
+
+    @include g.for-desktop-up {
+        & > .grey-container {
+            clip-path: polygon(0 0, 100% 0, 94% 97%, 2% 95%);
+        }
+    }
 
     &__container {
-        display: grid;
-        grid-template-columns: 1fr 2fr 2fr 5fr 1fr;
+        margin-inline: auto;
+        max-width: 90%;
+    }
 
-        div {
-            border: 1px solid white;
-            padding: 0.5em;
-        }
+    &__row {
+        display: grid;
+        grid-template-columns: min(60px, 10vw) 5fr 2fr 2fr;
+        grid-template-areas:
+            "elem name lvl cost"
+            "elem effect effect effect";
+        grid-column-gap: 0.8rem;
+
+        margin-bottom: g.rem(20);
+    }
+
+    &__elem {
+        grid-area: elem;
+        transform: skew(4deg);
+
+        width: 100%;
+        height: min(g.rem(40), 6.7vw);
+    }
+
+    &__name {
+        grid-area: name;
+    }
+
+    &__effect {
+        grid-area: effect;
+
+        padding-top: g.rem(8);
+        border-top: g.rem(2) solid g.$white-color;
+    }
+
+    &__cost {
+        grid-area: cost;
+    }
+
+    &__lvl {
+        grid-area: lvl;
     }
 }
 
 .item {
     grid-area: item;
-    max-width: 600px;
+    position: relative;
 
-    &__grid {
-        display: grid;
-        grid-template-columns: 1fr 2fr 1fr 5fr 1fr;
-
-        div {
-            border: 1px solid white;
-            //padding: 0.5em;
+    @include g.for-desktop-up {
+        & > .grey-container {
+            clip-path: polygon(2% 2%, 95% 0, 100% 100%, 0% 100%);
         }
     }
-}
-
-.inheritance {
-    grid-area: inherit;
-    max-width: 400px;
 
     &__grid {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        margin-top: 16px;
+        grid-template-columns: min(65px, 12vw) 1fr min(65px, 12vw);
+        grid-template-areas:
+            "th nh uh"
+            "type name user"
+            "dh dh dh"
+            "desc desc desc";
+        grid-row-gap: 0.8rem;
+        align-items: center;
 
-        div {
-            border: 1px solid white;
+        margin-inline: auto;
+        max-width: 90%;
+
+        @include g.for-desktop-up {
+            grid-template-columns: min(65px, 12vw) 1fr 2fr min(65px, 12vw);
+            grid-template-areas:
+                "th nh dh uh"
+                "type name desc user";
+        }
+    }
+
+    &__type {
+        grid-area: type;
+
+        width: 100%;
+        height: min(g.rem(45), 7.7vw);
+
+        background-size: contain;
+
+        &--head {
+            grid-area: th;
+
+            border-bottom: g.rem(2) solid g.$white-color;
+            text-align: center;
+        }
+    }
+
+    &__name {
+        grid-area: name;
+
+        padding-left: 2rem;
+
+        &--head {
+            grid-area: nh;
+
+            padding-left: 2rem;
+            border-bottom: g.rem(2) solid g.$white-color;
+        }
+    }
+
+    &__user {
+        grid-area: user;
+
+        clip-path: polygon(6% 0, 100% 0%, 94% 99%, 0% 100%);
+
+        width: 100%;
+        height: min(g.rem(45), 7.7vw);
+
+        background-size: 75% 100%;
+        background-position: top center;
+
+        &--head {
+            grid-area: uh;
+            border-bottom: g.rem(2) solid g.$white-color;
+        }
+    }
+
+    &__description {
+        grid-area: desc;
+
+        &--head {
+            grid-area: dh;
+            border-bottom: g.rem(2) solid g.$white-color;
         }
     }
 }
 
 .stats {
     grid-area: stats;
-    max-width: 400px;
+
+    @include g.for-desktop-up {
+        padding-left: g.rem(48);
+    }
+
     &__grid {
         display: grid;
-        grid-template-columns: 1fr 1fr 5fr;
-        gap: 0.5em;
+        grid-template-columns: min-content min-content auto;
+        gap: 0.5rem;
+    }
+
+    &__barcontainer {
+        background-color: g.$background-grey-color;
     }
 
     &__progressbar {
-        height: 1em;
-        background-color: red;
+        border: 0.1rem solid g.$white-color;
+        height: 100%;
+
+        background-color: g.$accent-red-color;
     }
 }
 
 .fusion {
     grid-area: fusion;
+
+    &__clip-wrap {
+        position: relative;
+        padding-top: g.rem(4);
+
+        @include g.for-desktop-up {
+            margin-top: g.rem(48);
+
+            & > .grey-container {
+                clip-path: polygon(2% 0, 97% 0, 100% 97%, 0% 100%);
+
+                min-height: g.rem(550);
+            }
+        }
+    }
+}
+
+.mementos {
+    z-index: 999;
+
+    grid-area: mementos;
+    justify-self: center;
+
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    max-width: 80%;
+
+    font-family: g.$arcana-font-small;
+    font-size: g.rem(16);
+    color: g.$accent-grey-color;
+}
+
+.grey-container {
+    position: relative;
+
+    margin-top: g.rem(38);
+    padding: g.rem(64) min(g.rem(42), 3vw) g.rem(52) min(g.rem(36), 2vw);
+
+    background: g.$background-grey-color;
+
+    & > .table {
+        width: min(100%, g.rem(900));
+        margin-inline: auto;
+    }
+}
+
+.head {
+    z-index: 999;
+    position: absolute;
+
+    top: g.rem(0);
+    left: g.rem(40);
+
+    display: flex;
+    align-items: center;
+
+    transition: all 0.2s ease-in-out;
+
+    &--pre {
+        clip-path: polygon(10% 11%, 100% 0%, 98% 93%, 0% 100%);
+        padding: g.rem(16) g.rem(20) g.rem(16) g.rem(24);
+
+        background-color: g.$white-color;
+    }
+
+    &--post {
+        padding-right: g.rem(12);
+        color: g.$white-color;
+    }
+
+    &--sub {
+        position: absolute;
+        top: 80%;
+        right: 0%;
+
+        transform: rotate(-2deg);
+    }
+
+    &:hover {
+        transform: translateY(-5%);
+    }
+}
+
+.inheritance {
+    grid-area: inheritance;
+    position: relative;
+
+    @include g.for-desktop-up {
+        & > .grey-container {
+            clip-path: polygon(0 5%, 100% 0, 87% 100%, 0 89%);
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, min(g.rem(85), 16vw));
+        justify-content: center;
+        gap: g.rem(4);
+    }
+}
+
+@keyframes floater {
+    0% {
+        transform: translateY(-1rem);
+        transition: ease 1s;
+    }
+    50% {
+        transform: translateY(1rem);
+        transition: ease 1s;
+    }
 }
