@@ -29,10 +29,10 @@ renderImage();
 renderSkills();
 renderInheritance();
 renderMementos();
-renderReverseFusionList();
-renderForwardFusionList();
 renderItem();
 renderStats();
+renderReverseFusionList();
+renderForwardFusionList();
 
 function renderTitle() {
     document.querySelector(".title__grid").innerHTML = `
@@ -197,9 +197,9 @@ function renderItem() {
         <div class="item__name--head">Name</div>
         <div class="item__user--head">User</div>
         <div class="item__description--head">Description</div>
-        <div class="item__type icon item--${type}-${user || " unisex"}"></div>
+        <div class="item__type icon item--${type}-${user || "unisex"}"></div>
         <div class="item__name">${item}</div>
-        <div class="item__user icon user--${user || " unisex"}"></div>
+        <div class="item__user icon user--${user || "unisex"}"></div>
         <div class="item__description">${description || ""} <span class="cost">${cost ? "Cost: " + cost : ""}</span>
         </div>`;
 }

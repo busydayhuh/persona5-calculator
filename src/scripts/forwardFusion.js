@@ -40,10 +40,6 @@ function findForwardFusions(currentPersona) {
         const resultArcana = pair.result;
 
         for (const personaB of arcanaBPersonas) {
-            // if (personaA.arcana === personaB.arcana) {
-            //     console.log(personaA.name, personaB.name, resultArcana);
-            // }
-
             if (personaB.name === personaA.name) continue;
 
             const INDEX = Number.isInteger(

@@ -1,7 +1,5 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const BundleAnalyzerPlugin =
-    require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 const pages = ["compendiumPage", "personaPage"];
 
@@ -13,7 +11,8 @@ module.exports = {
             }),
         {},
     ),
-    mode: "production",
+    mode: "development",
+    //performance: { hints: false },
     output: {
         filename: "[name].[contenthash].js", // новое название с хешом при изменении файла
         path: path.resolve(__dirname, "dist"),
