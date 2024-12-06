@@ -1,4 +1,4 @@
-const elements = [
+export const elements = [
     "phys",
     "gun",
     "fire",
@@ -16,7 +16,7 @@ const elements = [
     "passive",
 ];
 
-const inheritanceChart = {
+export const inheritanceChart = {
     phys: [
         "true",
         "true",
@@ -222,16 +222,3 @@ const inheritanceChart = {
         "true",
     ],
 };
-
-export function getInheritedElements(inheritanceType) {
-    const inheritanceList = inheritanceChart[inheritanceType];
-    const inheritedElements = [];
-
-    for (let i = 0; i < inheritanceList.length; i++) {
-        if (inheritanceList[i] === "true") {
-            inheritedElements.push(elements[i]);
-        }
-    }
-
-    return inheritedElements;
-}

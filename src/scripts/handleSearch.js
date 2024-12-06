@@ -14,21 +14,33 @@ export function searchForItem(personaList, query, barId) {
                     .includes(query.trim().toLowerCase()),
         );
     } else if (barId === "v1") {
-        personaList.forEach((pair) => {
-            if (
-                pair[0].toLowerCase().includes(query.trim().toLowerCase()) ||
-                pair[1].toLowerCase().includes(query.trim().toLowerCase())
-            ) {
-                searchResult.push(pair);
-            }
+        console.log(personaList);
+
+        personaList.forEach((recipe) => {
+            const nameList = recipe.source.reduce(
+                (acc, persona) => acc + persona.name + persona.arcana,
+                "",
+            );
+
+            if (nameList.toLowerCase().includes(query.trim().toLowerCase()))
+                searchResult.push(recipe);
         });
     } else {
-        personaList.forEach((pair) => {
+        personaList.forEach((recipe) => {
+            const { source, result } = recipe;
             if (
-                pair[0].toLowerCase().includes(query.trim().toLowerCase()) ||
-                pair[1][1].toLowerCase().includes(query.trim().toLowerCase())
+                source[1].name
+                    .toLowerCase()
+                    .includes(query.trim().toLowerCase()) ||
+                source[1].arcana
+                    .toLowerCase()
+                    .includes(query.trim().toLowerCase()) ||
+                result.arcana
+                    .toLowerCase()
+                    .includes(query.trim().toLowerCase()) ||
+                result.name.toLowerCase().includes(query.trim().toLowerCase())
             ) {
-                searchResult.push(pair);
+                searchResult.push(recipe);
             }
         });
     }

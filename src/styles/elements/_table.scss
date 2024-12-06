@@ -16,9 +16,8 @@
 
     &__colnames {
         display: flex;
-        gap: g.rem(8);
 
-        margin: 3rem auto 1rem auto;
+        margin: 2rem auto 0 auto;
     }
 
     &__content {
@@ -38,8 +37,11 @@
             grid-template-columns: 1fr 1fr;
 
             overflow-y: auto;
+
             margin-inline: auto;
             max-height: g.em(400);
+            padding-top: 1rem;
+            padding-right: 0.35rem;
         }
     }
 
@@ -49,24 +51,40 @@
         gap: 0.5rem;
 
         overflow: hidden;
+        margin-left: 0.3rem;
         padding: 0.8rem 0.3rem 0.6rem 0.3rem;
 
         &--dlc,
         &--dlc:visited,
         &--dlc:active {
             color: g.$accent-yellow-color;
+
+            & > .table__circle,
+            .table__arcana {
+                background-color: g.$accent-yellow-color;
+            }
         }
 
         &--special,
         &--special:visited,
         &--special:active {
             color: g.$accent-blue-color;
+
+            & > .table__circle,
+            .table__arcana {
+                background-color: g.$accent-blue-color;
+            }
         }
 
         &--gem,
         &--gem:visited,
         &--gem:active {
             color: g.$accent-lime-color;
+
+            & > .table__circle,
+            .table__arcana {
+                background-color: g.$accent-lime-color;
+            }
         }
 
         &:hover {
@@ -106,21 +124,6 @@
         align-self: center;
     }
 
-    &__circle.type,
-    &__arcana.type {
-        &--dlc {
-            background-color: g.$accent-yellow-color;
-        }
-
-        &--special {
-            background-color: g.$accent-blue-color;
-        }
-
-        &--gem {
-            background-color: g.$accent-lime-color;
-        }
-    }
-
     &__note {
         flex-grow: 1;
         flex-basis: g.rem(600);
@@ -131,10 +134,9 @@
 .note {
     &__main,
     &__optional {
-        display: inline;
+        display: inline-block;
     }
     &__optional {
-        padding: 0 0.3rem;
         background-color: g.$accent-red-color;
     }
 }
@@ -143,19 +145,7 @@
     flex-grow: 1;
 
     flex-basis: 50%;
-    padding: 0.5rem 1.5rem;
 
-    background-color: g.$white-color;
-
-    &:first-of-type {
-        clip-path: polygon(97% 0, 100% 49%, 97% 100%, 0.1rem 100%, 0 0);
-    }
-
-    &:nth-of-type(2) {
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 2% 54%);
-    }
-
-    &:only-of-type {
-        clip-path: polygon(1% 0, 99% 0, 100% 97%, 0% 100%);
-    }
+    border-bottom: 3px solid g.$white-color;
+    padding: 0.2rem 0;
 }

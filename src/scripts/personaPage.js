@@ -1,38 +1,75 @@
 import "../styles/personaPage.scss";
-import { hasType, getPersonaDetails } from "./fullCompendim.js";
-import { getSkillDetails, getCost } from "../data/skills.js";
-import { getInheritedElements } from "../data/skillInheritance.js";
-import { findAllPairs } from "./reverseFusion.js";
-import { getCondition } from "../data/fusions/specialFusionCombos.js";
-import { findAllForwardPairs } from "./forwardFusion.js";
-import { getItemDetails } from "../data/items.js";
-import { images } from "./handleImages.js";
-import { searchForItem, clearSearchBar } from "./tableSearch.js";
 
-document.addEventListener("readystatechange", (event) => {
-    if (event.target.readyState === "interactive") {
-        document.querySelector(".backdrop--loader").classList.add("open");
-    } else if (event.target.readyState === "complete") {
-        document.querySelector(".backdrop--loader").classList.remove("open");
-    }
+import { getPersonaDetails } from "./handleCompendiumData.js";
+import {
+    getSkillDetails,
+    getInheritedElements,
+    getItemDetails,
+} from "../scripts/hadleSkills.js";
+import { images, indentifyImgShape, indentifyImgSize } from "./handleImages.js";
+
+import {
+    aggregateForwardFusionResults,
+    aggregateReverseFusionResults,
+} from "./handleFusions.js";
+
+import "./handleFusions.js";
+import { searchForItem, clearSearchBar } from "./handleSearch.js";
+
+// document.addEventListener("readystatechange", (event) => {
+//     if (event.target.readyState === "interactive") {
+//         document.querySelector(".backdrop--loader").classList.add("open");
+//     } else if (event.target.readyState === "complete") {
+//         document.querySelector(".backdrop--loader").classList.remove("open");
+//     }
+// });
+
+const name = new URL(window.location.href).searchParams.get("name");
+
+const {
+    arcana,
+    inherits,
+    item,
+    lvl,
+    resists,
+    skills,
+    stats,
+    type,
+    max,
+    area,
+    floor,
+    personality,
+    skillCard,
+} = getPersonaDetails(name);
+
+const forwardFusionsArray = aggregateForwardFusionResults({
+    name,
+    arcana,
+    lvl,
+    type,
 });
 
-const url = new URL(window.location.href);
-const name = url.searchParams.get("name");
+const reverseFusionsArray = aggregateReverseFusionResults({
+    name,
+    arcana,
+    lvl,
+    type,
+});
 
-const currentPersona = getPersonaDetails(name);
+initPage();
 
-const { arcana, inherits, item, lvl, resists, skills, stats } = currentPersona;
-
-renderTitle();
-renderImage();
-renderSkills();
-renderInheritance();
-renderMementos();
-renderItem();
-renderStats();
-renderReverseFusionList();
-renderForwardFusionList();
+function initPage() {
+    renderTitle();
+    renderImage();
+    renderResistances();
+    renderSkills();
+    renderInheritance();
+    renderMementos();
+    renderItem();
+    renderStats();
+    renderReverseFusionList();
+    renderForwardFusionList();
+}
 
 function renderTitle() {
     document.querySelector(".title__grid").innerHTML = `
@@ -42,7 +79,7 @@ function renderTitle() {
         <span class="lvl--title">Lv</span>
         <span class="numbers--italic">${lvl}</span>
         </div>
-        <div class="title__badge badge--large badge${hasType(currentPersona)[0]}">${hasType(currentPersona)[1]}</div>
+        <div class="title__badge badge--large ${type ? "badge--" + type : ""}">${type}</div>
         `;
 }
 
@@ -54,48 +91,8 @@ function renderImage() {
         let width = image.naturalWidth;
         let height = image.naturalHeight;
 
-        const INDEX = width / height;
-
-        let imgClass;
-        let imgSize;
-
-        if (INDEX < 0.7) {
-            imgClass = "vertical";
-        } else if (INDEX >= 0.7 && INDEX <= 1.2) {
-            imgClass = "square";
-        } else if (INDEX > 1.2) {
-            imgClass = "horizontal";
-        }
-
-        switch (imgClass) {
-            case "vertical":
-                if (height <= 1000) {
-                    imgSize = "vertical--small";
-                } else if (height > 1000 && height <= 1300) {
-                    imgSize = "vertical--medium";
-                } else if (height > 1300) {
-                    imgSize = "vertical--big";
-                }
-                break;
-            case "square":
-                if (height <= 800) {
-                    imgSize = "square--small";
-                } else if (height > 800 && height < 1000) {
-                    imgSize = "square--medium";
-                } else if (height >= 1000) {
-                    imgSize = "square--big";
-                }
-                break;
-            case "horizontal":
-                if (width < 1200) {
-                    imgSize = "horizontal--small";
-                } else if (width >= 1200 && width < 1800) {
-                    imgSize = "horizontal--medium";
-                } else if (width >= 1800) {
-                    imgSize = "horizontal--big";
-                }
-                break;
-        }
+        let imgShape = indentifyImgShape(width, height);
+        let imgSize = indentifyImgSize(imgShape, width, height);
 
         image.classList.add("image__persona");
         image.classList.add(imgSize);
@@ -104,40 +101,49 @@ function renderImage() {
     });
 }
 
-const resistances = document.querySelectorAll(".resistance__elem");
+function renderResistances() {
+    const resistancesTable = document.querySelectorAll(".resistance__elem");
 
-resistances.forEach((resistance) => {
-    const elementName = resistance.dataset.elemName;
+    resistancesTable.forEach((resistance) => {
+        const elementName = resistance.dataset.elemName;
 
-    if (Object.keys(resists).includes(elementName)) {
-        resistance.classList.add(`affinity--${resists[elementName]}`);
-    }
-});
+        if (Object.keys(resists).includes(elementName)) {
+            resistance.classList.add(`affinity--${resists[elementName]}`);
+        }
+    });
+}
 
 function renderSkills() {
-    let skillsHtml = "";
-    let sortedByLevel = Object.entries(skills).sort((a, b) => {
+    const skillsTableHtml = document.querySelector(".js-skills");
+    const skillsSortedByLevel = Object.entries(skills).sort((a, b) => {
         return a[1] - b[1];
     });
 
-    sortedByLevel.forEach((skill) => {
-        const skillDetails = getSkillDetails(skill[0]);
-        const { element, effect } = skillDetails;
+    let html = "";
 
-        skillsHtml += `
+    skillsSortedByLevel.forEach((skill) => {
+        const [name, lvl] = skill;
+        const { element, effect, cost } = getSkillDetails(name);
+
+        html += `
         <div class="skills__row">
             <div class="skills__elem icon elem--${element} hovertext" data-hover="${element}"></div>
-            <div class="skills__name">${skill[0]}</div>
+            <div class="skills__name">${name}</div>
             <div class="skills__cost">
-                <span class="cost">${getCost(skill[0])}</span>
+                <span class="cost">${formatSkillCost(cost)}</span>
             </div>
             <div class="skills__effect">${effect}</div>
-            <div class="skills__lvl">${skill[1] > 0 ? skill[1] + " lvl" : "Innate"}</div>
+            <div class="skills__lvl">${lvl > 0 ? lvl + " lvl" : "Innate"}</div>
         </div>
         `;
     });
 
-    document.querySelector(".js-skills").innerHTML = skillsHtml;
+    skillsTableHtml.innerHTML = html;
+}
+
+function formatSkillCost(cost) {
+    if (cost) return cost > 100 ? `${cost / 100}SP` : `${cost}%HP`;
+    return "";
 }
 
 function renderInheritance() {
@@ -155,33 +161,32 @@ function renderInheritance() {
 }
 
 function renderMementos() {
-    if (
-        currentPersona.area ||
-        currentPersona.floor ||
-        currentPersona.personality
-    ) {
+    if (area || floor || personality) {
         document.querySelector(".mementos").innerHTML = `
-                <p class="mementos__place">Location: ${currentPersona.area || "No info"}</p>
-                <p> Floors: ${currentPersona.floor || "No info"}</p>
-                <p class="mementos__personality">Personality: ${currentPersona.personality || "Unknown"}</p>`;
+                <p class="mementos__place">Location: ${area || "No info"}</p>
+                <p> Floors: ${floor || "No info"}</p>
+                <p class="mementos__personality">Personality: ${personality || "Unknown"}</p>`;
     }
 }
 
 function renderItem() {
+    const itemName = document.querySelector(".js-item");
+    const itemTable = document.querySelector(".js-item-grid");
+
     if (!item) {
-        document.querySelector(".js-item-grid").innerHTML = `<p>No item.</p>`;
+        itemTable.innerHTML = `<p>No item.</p>`;
         return;
     }
 
     let itemDetails;
     let type, user, description, cost;
 
-    if (currentPersona.skillCard) {
+    if (skillCard) {
         itemDetails = getSkillDetails(item);
         type = "skillcard";
         user = "unisex";
         description = itemDetails.effect;
-        cost = getCost(item);
+        cost = itemDetails.cost;
     } else {
         itemDetails = getItemDetails(item);
         type = itemDetails.type;
@@ -190,10 +195,8 @@ function renderItem() {
         cost = null;
     }
 
-    document.querySelector(".js-item").innerText = `${item}`;
-
-    document.querySelector(".js-item-grid").innerHTML =
-        `<div class="item__type--head">Type</div>
+    itemName.innerText = `${item}`;
+    itemTable.innerHTML = `<div class="item__type--head">Type</div>
         <div class="item__name--head">Name</div>
         <div class="item__user--head">User</div>
         <div class="item__description--head">Description</div>
@@ -205,12 +208,13 @@ function renderItem() {
 }
 
 function renderStats() {
-    let statsHtml = "";
     const statsGrid = document.querySelector(".js-stats-grid");
     const statOrder = ["st", "ma", "en", "ag", "lu"];
 
+    let html = "";
+
     for (const el of statOrder) {
-        statsHtml += `
+        html += `
         <div class="stats__name">${el}</div>
         <div class="stats__value">${stats[el]}</div>
         <div class="stats__barcontainer">
@@ -219,7 +223,7 @@ function renderStats() {
         `;
     }
 
-    statsGrid.innerHTML = statsHtml;
+    statsGrid.innerHTML = html;
 
     document
         .querySelectorAll(".js-stats-progressbar")
@@ -229,77 +233,27 @@ function renderStats() {
         });
 }
 
-function renderFusionNotes(fusionVersion, numOfResults) {
-    const fusionTableNote = document.querySelector(
-        `#fusion-note-${fusionVersion}`,
-    );
-
-    if (fusionVersion === "v1") {
-        if (currentPersona.max && currentPersona.special) {
-            fusionTableNote.innerHTML = `
-            <p class="note__main">Fuse Personas from the recipe below to get ${name}.</p>
-            <p class="note__optional"><strong>Condition: </strong>${getCondition(name)}`;
-        } else if (currentPersona.max) {
-            fusionTableNote.innerHTML = `
-            <p class="note__main">Fuse two Personas to get ${name}. Follow recipes below (${numOfResults} results).</p>
-            <p class="note__optional">This fusion requires completed ${currentPersona.arcana} Confidant.</p>
-        `;
-        } else if (currentPersona.special) {
-            fusionTableNote.innerHTML = `
-            <p class="note__main">Fuse Personas from the recipe below to get ${name}.</p>
-            <p class="note__optional"><strong>Condition: </strong>${getCondition(name)}</p>
-            `;
-        } else if (currentPersona.treasure) {
-            fusionTableNote.innerHTML = `
-            <p class="note__optional">This Persona cannot be fused.</p>
-            <p class="note__main">You can find it in Mementos on The Path of ${currentPersona.area}.</p>
-        `;
-        } else if (currentPersona.dlc) {
-            fusionTableNote.innerHTML = `
-            <p class="note__main">Fuse two Personas to get ${name}. Follow recipes below (${numOfResults} results).</p>
-            <p class="note__optional">Works only if you have this DLC downloaded.</p>
-        `;
-        } else {
-            fusionTableNote.innerHTML = `
-            <p class="note__main">Fuse two Personas to get ${name}. Follow recipes below (${numOfResults} results).</p>
-           
-        `;
-        }
-    }
-
-    if (fusionVersion === "v2") {
-        if (currentPersona.treasure) {
-            fusionTableNote.innerHTML = `
-            <p class="note__main">Fuse ${name} with another Persona to get specific Result. Follow recipes below (${numOfResults} results).</p>
-            <p class="note__optional">Result is dependent on the current level of your second ingredient. Results may vary.</p>
-        `;
-        } else {
-            fusionTableNote.innerHTML = `
-            <p class="note__main">Fuse ${name} with another Persona to get specific Result. Follow recipes below (${numOfResults} results).</p>
-        `;
-        }
-    }
-}
-
-function renderReverseFusionList(fusionsArr = findAllPairs(currentPersona)) {
+function renderReverseFusionList(fusionsArr = reverseFusionsArray) {
     const fusionTableBody = document.querySelector("#fusion-table-v1");
     const fusionTableHeader = document.querySelector("#fusion-colnames-v1");
-    //const fusionsArr = findAllPairs(currentPersona);
     const numOfResults = fusionsArr.length;
+
+    if (numOfResults === 0) {
+        fusionTableBody.innerHTML = `<p>No results.</p>`;
+        return;
+    }
 
     renderFusionNotes("v1", numOfResults);
 
     let html = "";
 
-    if (currentPersona.special) {
-        fusionsArr.forEach((el) => {
-            const persona = getPersonaDetails(el);
-
+    if (type === "special") {
+        fusionsArr[0].source.forEach((persona) => {
             html += `
-            <a href="/personaPage.html?name=${persona.name}" target="_blank" class="table__cell table__cell${hasType(persona)[0]}">
-                <span class="table__arcana arcana--small type${hasType(persona)[0]}">${persona.arcana}</span>
+            <a href="/personaPage.html?name=${persona.name}" target="_blank" class="table__cell table__cell${persona.type ? "--" + persona.type : ""}">
+                <span class="table__arcana arcana--small">${persona.arcana}</span>
                 <span class="table__level numbers--regular">${persona.lvl}</span>
-                <span class="table__circle type${hasType(persona)[0]}"></span>
+                <span class="table__circle"></span>
                 <span class="table__name">${persona.name}</span>
             </a>
             `;
@@ -309,33 +263,33 @@ function renderReverseFusionList(fusionsArr = findAllPairs(currentPersona)) {
         fusionTableBody.classList.remove("table__content--two-col");
         fusionTableBody.classList.add("table__content--one-col");
 
-        fusionTableHeader.innerHTML = `<div class="th">RECIPE</div>`;
+        fusionTableHeader.innerHTML = `<div class="th">Recipe</div>`;
 
         return;
     }
 
-    if (currentPersona.treasure) {
+    if (type === "gem") {
         fusionTableBody.innerHTML = "";
-        fusionTableHeader.innerHTML = ``;
+        fusionTableHeader.innerHTML = "";
 
         return;
     }
 
-    fusionsArr.forEach((pair) => {
-        const personaA = getPersonaDetails(pair[0]);
-        const personaB = getPersonaDetails(pair[1]);
+    fusionsArr.forEach((recipe) => {
+        const personaA = recipe.source[0];
+        const personaB = recipe.source[1];
 
         html += `
-       <a href="/personaPage.html?name=${personaA.name}" target="_blank" class="table__cell table__cell${hasType(personaA)[0]}">
-            <span class="table__arcana arcana--small type${hasType(personaA)[0]}">${personaA.arcana}</span>
+       <a href="/personaPage.html?name=${personaA.name}" target="_blank" class="table__cell table__cell${personaA.type ? "--" + personaA.type : ""}">
+            <span class="table__arcana arcana--small">${personaA.arcana}</span>
             <span class="table__level numbers--regular">${personaA.lvl}</span>
-            <span class="table__circle type${hasType(personaA)[0]}"></span>
+            <span class="table__circle"></span>
             <span class="table__name">${personaA.name}</span>
         </a>
-            <a href="/personaPage.html?name=${personaB.name}" target="_blank" class="table__cell table__cell${hasType(personaB)[0]}">
-            <span class="table__arcana arcana--small type${hasType(personaB)[0]} cell">${personaB.arcana}</span>
+            <a href="/personaPage.html?name=${personaB.name}" target="_blank" class="table__cell table__cell${personaB.type ? "--" + personaB.type : ""}">
+            <span class="table__arcana arcana--small">${personaB.arcana}</span>
             <span class="table__level numbers--regular">${personaB.lvl}</span>
-            <span class="table__circle type${hasType(personaB)[0]}"></span>
+            <span class="table__circle"></span>
             <span class="table__name">${personaB.name}</span>
         </a>`;
     });
@@ -343,11 +297,8 @@ function renderReverseFusionList(fusionsArr = findAllPairs(currentPersona)) {
     fusionTableBody.innerHTML = html;
 }
 
-function renderForwardFusionList(
-    fusionsArr = findAllForwardPairs(currentPersona),
-) {
+function renderForwardFusionList(fusionsArr = forwardFusionsArray) {
     const fusionTableBody = document.querySelector("#fusion-table-v2");
-    //const fusionsArr = findAllForwardPairs(currentPersona);
     const numOfResults = fusionsArr.length;
 
     renderFusionNotes("v2", numOfResults);
@@ -355,20 +306,20 @@ function renderForwardFusionList(
     let html = "";
 
     fusionsArr.forEach((pair) => {
-        const personaB = getPersonaDetails(pair[1][1]);
-        const resultPersona = getPersonaDetails(pair[0]);
+        const personaB = pair.source[1];
+        const resultPersona = pair.result;
 
         html += `
-        <a href="/personaPage.html?name=${personaB.name}" target="_blank" class="table__cell table__cell${hasType(personaB)[0]}">
-            <span class="table__arcana arcana--small type${hasType(personaB)[0]}">${personaB.arcana}</span>
+        <a href="/personaPage.html?name=${personaB.name}" target="_blank" class="table__cell table__cell${personaB.type ? "--" + personaB.type : ""}">
+            <span class="table__arcana arcana--small">${personaB.arcana}</span>
             <span class="table__level numbers--regular">${personaB.lvl}</span>
-            <span class="table__circle type${hasType(personaB)[0]}"></span>
+            <span class="table__circle"></span>
             <span class="table__name">${personaB.name}</span>
         </a>
-        <a href="/personaPage.html?name=${resultPersona.name}" target="_blank" class="table__cell table__cell${hasType(resultPersona)[0]} result">
-            <span class="table__arcana arcana--small type${hasType(resultPersona)[0]} cell">${resultPersona.arcana}</span>
+        <a href="/personaPage.html?name=${resultPersona.name}" target="_blank" class="table__cell table__cel${resultPersona.type ? "--" + resultPersona.type : ""} result">
+            <span class="table__arcana arcana--small">${resultPersona.arcana}</span>
             <span class="table__level numbers--regular">${resultPersona.lvl}</span>
-            <span class="table__circle type${hasType(resultPersona)[0]}"></span>
+            <span class="table__circle"></span>
             <span class="table__name">${resultPersona.name}</span>
         </a>`;
 
@@ -376,21 +327,80 @@ function renderForwardFusionList(
     });
 }
 
+function renderFusionNotes(fusionVersion, numOfResults) {
+    const fusionTableNote = document.querySelector(
+        `#fusion-note-${fusionVersion}`,
+    );
+
+    if (fusionVersion === "v1") {
+        if (!type) {
+            fusionTableNote.innerHTML = `
+            <p class="note__main">Fuse two Personas to get ${name}. Follow recipes below (${numOfResults} results).</p>`;
+            return;
+        }
+
+        let specialCondition = reverseFusionsArray.condition || "";
+
+        const fusionNotesForDiffTypes = {
+            special: {
+                main: `Fuse Personas from the recipe below to get ${name}.`,
+                optional: `${specialCondition}`,
+            },
+            max: {
+                main: `Fuse two Personas to get ${name}. Follow recipes below (${numOfResults} results).`,
+                optional: `This fusion requires completed ${arcana} Confidant.`,
+            },
+            gem: {
+                main: `This Persona cannot be fused.`,
+                optional: `You can find it in Mementos on The Path of ${area}.`,
+            },
+            dlc: {
+                main: `Fuse two Personas to get ${name}. Follow recipes below (${numOfResults} results).`,
+                optional: `Works only if you have this DLC downloaded.`,
+            },
+        };
+
+        if (max && type !== "special") {
+            fusionTableNote.innerHTML = `
+            <p class="note__main">${fusionNotesForDiffTypes.max.main}</p>
+            <p class="note__optional">${fusionNotesForDiffTypes.max.optional}</p>
+            `;
+            return;
+        }
+
+        fusionTableNote.innerHTML = `
+            <p class="note__main">${fusionNotesForDiffTypes[type].main}</p>
+            <p class="note__optional">${fusionNotesForDiffTypes[type].optional}</p>
+            `;
+    }
+
+    if (fusionVersion === "v2") {
+        if (type === "gem") {
+            fusionTableNote.innerHTML = `
+            <p class="note__main">Fuse ${name} with another Persona to get specific Result. Follow recipes below (${numOfResults} results).</p>
+            <p class="note__optional">Result is dependent on the current level of your second ingredient. Results may vary.</p>
+        `;
+            return;
+        }
+
+        fusionTableNote.innerHTML = `
+            <p class="note__main">Fuse ${name} with another Persona to get specific Result. Follow recipes below (${numOfResults} results).</p>`;
+    }
+}
+
 document.querySelectorAll(".js-search-bar").forEach((bar) => {
     bar.addEventListener("keyup", (e) => {
         if (e.target.id === "v1") {
-            const personaList = findAllPairs(currentPersona);
             const result = searchForItem(
-                personaList,
+                reverseFusionsArray,
                 e.target.value,
                 e.target.id,
             );
 
             renderReverseFusionList(result);
         } else {
-            const personaList = findAllForwardPairs(currentPersona);
             const result = searchForItem(
-                personaList,
+                forwardFusionsArray,
                 e.target.value,
                 e.target.id,
             );

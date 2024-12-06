@@ -331,7 +331,3 @@ export const items = {
         description: "Atk 330 / Acc 80 / Rounds 1 / +Shock (med)",
     },
 };
-
-export function getItemDetails(name) {
-    return items[name];
-}

@@ -1,52 +1,54 @@
 export const specialFusions = [
     {
         result: "Alice",
-        sources: ["Nebiros", "Belial"],
-        condition: "complete Death Confidant.",
+        source: ["Nebiros", "Belial"],
+        condition: "Complete Death Confidant to unlock this Persona.",
     },
     {
         result: "Ardha",
-        sources: ["Parvati", "Shiva"],
+        source: ["Parvati", "Shiva"],
         condition: "complete Temperance Confidant.",
     },
     {
         result: "Asura-Ou",
-        sources: ["Zouchouten", "Jikokuten", "Koumokuten", "Bishamonten"],
-        condition: "complete Sun Confidant.",
+        source: ["Zouchouten", "Jikokuten", "Koumokuten", "Bishamonten"],
+        condition: "Complete Sun Confidant to unlock this Persona.",
     },
     {
         result: "Black Frost",
-        sources: ["Jack-o'-Lantern", "Jack Frost", "King Frost"],
-        condition: "complete 'One who bullies bullies' request.",
+        source: ["Jack-o'-Lantern", "Jack Frost", "King Frost"],
+        condition:
+            "Complete 'One who bullies bullies' request to unlock this Persona.",
     },
     {
         result: "Bugs",
-        sources: ["Pixie", "Pisaca", "Hariti"],
-        condition: "complete 'The Lovesick Cyberstalking Girl' request.",
+        source: ["Pixie", "Pisaca", "Hariti"],
+        condition:
+            "Complete 'The Lovesick Cyberstalking Girl' request to unlock this Persona.",
     },
     {
         result: "Chi You",
-        sources: [
+        source: [
             "Hecatoncheires",
             "White Rider",
             "Thor",
             "Yoshitsune",
             "Cu Chulainn",
         ],
-        condition: "complete Chariot Confidant.",
+        condition: "Complete Chariot Confidant to unlock this Persona.",
     },
     {
         result: "Flauros",
-        sources: ["Berith", "Andras", "Eligor"],
+        source: ["Berith", "Andras", "Eligor"],
     },
     {
         result: "Kohryu",
-        sources: ["Genbu", "Seiryu", "Suzaku", "Byakko"],
-        condition: "complete Hierophant Confidant.",
+        source: ["Genbu", "Seiryu", "Suzaku", "Byakko"],
+        condition: "Complete Hierophant Confidant to unlock this Persona.",
     },
     {
         result: "Lucifer",
-        sources: [
+        source: [
             "Anubis",
             "Ananta",
             "Trumpeter",
@@ -54,11 +56,11 @@ export const specialFusions = [
             "Metatron",
             "Satan",
         ],
-        condition: "complete Star Confidant.",
+        condition: "Complete Star Confidant to unlock this Persona.",
     },
     {
         result: "Metatron",
-        sources: [
+        source: [
             "Principality",
             "Power",
             "Dominion",
@@ -66,53 +68,54 @@ export const specialFusions = [
             "Sandalphon",
             "Michael",
         ],
-        condition: "complete Justice Confidant.",
+        condition: "Complete Justice Confidant to unlock this Persona.",
     },
     {
         result: "Michael",
-        sources: ["Raphael", "Gabriel", "Uriel"],
+        source: ["Raphael", "Gabriel", "Uriel"],
     },
     {
         result: "Neko Shogun",
-        sources: ["Kodama", "Sudama", "Anzu"],
+        source: ["Kodama", "Sudama", "Anzu"],
     },
     {
         result: "Ongyo-Ki",
-        sources: ["Kin-Ki", "Sui-Ki", "Fuu-Ki"],
-        condition: "complete Hermit Confidant.",
+        source: ["Kin-Ki", "Sui-Ki", "Fuu-Ki"],
+        condition: "Complete Hermit Confidant to unlock this Persona.",
     },
     {
         result: "Satanael",
-        sources: ["Arsene", "Anzu", "Ishtar", "Satan", "Lucifer", "Michael"],
-        condition: "complete the game and reach its True Ending.",
+        source: ["Arsene", "Anzu", "Ishtar", "Satan", "Lucifer", "Michael"],
+        condition:
+            "Complete the game and reach its True Ending to unlock this Persona.",
     },
     {
         result: "Seth",
-        sources: ["Isis", "Thoth", "Anubis", "Horus"],
+        source: ["Isis", "Thoth", "Anubis", "Horus"],
     },
     {
         result: "Shiva",
-        sources: ["Rangda", "Barong"],
+        source: ["Rangda", "Barong"],
     },
     {
         result: "Sraosha",
-        sources: ["Mitra", "Mithras", "Melchizedek", "Lilith", "Gabriel"],
+        source: ["Mitra", "Mithras", "Melchizedek", "Lilith", "Gabriel"],
     },
     {
         result: "Throne",
-        sources: ["Power", "Melchizedek", "Dominion"],
+        source: ["Power", "Melchizedek", "Dominion"],
     },
     {
         result: "Trumpeter",
-        sources: ["White Rider", "Red Rider", "Black Rider", "Pale Rider"],
+        source: ["White Rider", "Red Rider", "Black Rider", "Pale Rider"],
     },
     {
         result: "Vasuki",
-        sources: ["Naga", "Raja Naga", "Ananta"],
+        source: ["Naga", "Raja Naga", "Ananta"],
     },
     {
         result: "Yoshitsune",
-        sources: [
+        source: [
             "Okuninushi",
             "Shiki-Ouji",
             "Arahabaki",
@@ -121,10 +124,3 @@ export const specialFusions = [
         ],
     },
 ];
-
-export function getCondition(personaName) {
-    const recipe = specialFusions.find(
-        (recipe) => recipe.result === personaName,
-    );
-    return recipe.condition ? recipe.condition : "no special conditions.";
-}

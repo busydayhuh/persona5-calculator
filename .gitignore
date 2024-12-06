@@ -2,4 +2,5 @@
 *.ini
 /dist
 .prettierrc
+stats.json
 *.config.*

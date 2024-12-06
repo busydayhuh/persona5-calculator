@@ -1,136 +1,127 @@
-import { makePersonaList } from "./fullCompendim.js";
-import { arcanaOrder } from "../data/arcanaOrder.js";
-import { dlcNames } from "../data/dlcList.js";
-import { searchForItem, clearSearchBar } from "./tableSearch.js";
-
-import * as _ from "lodash";
 import "../styles/compendiumPage.scss";
 
-// Globals saved in local storage:
+import {
+    getAllAvailablePersonasArray,
+    sortPersonasArray,
+} from "./handleCompendiumData.js";
+import { dlcNames } from "../data/dlcList.js";
+import { searchForItem, clearSearchBar } from "./handleSearch.js";
 
-let sortBy = localStorage.getItem("sortBy") || "arcana";
+let sortingMode = localStorage.getItem("sortingMode") || "arcana";
 let checkedDLC = JSON.parse(localStorage.getItem("checkedDLC")) || [];
+let allAvailablePersonas = getAllAvailablePersonasArray(checkedDLC);
 
-// Render dynamic HTML:
+initPage();
 
-(function () {
-    renderDlcSettings();
-    renderPersonaTable();
-})();
+function initPage() {
+    const sortedPersonas = sortPersonasArray(allAvailablePersonas, sortingMode);
 
-//Dynamic HTML components:
-
-function renderDlcSettings() {
-    const dlcForm = document.getElementById("dlc-form");
-    let html = "";
-    dlcNames.forEach((name) => {
-        html += `<div class="aside__checkbox">
-                <input type="checkbox" class="dlc-checkbox" id="${name[0]}" name="dlc" value="${
-                    name[0]
-                }" ${isChecked(name[0])}>
-                <label for="${name[0]}">${name[0]} and ${name[1]}</label>
-            </div>`;
-    });
-    dlcForm.innerHTML = html;
-
-    function isChecked(dlc) {
-        return checkedDLC.includes(dlc) ? "checked" : "";
-    }
-
-    document
-        .querySelector("#show-dlc-settings")
-        .addEventListener("click", () => {
-            document.querySelector(".backdrop").classList.add("open");
-            document.querySelector(".aside").classList.add("slide-in");
-        });
-
-    document
-        .querySelector("#close-dlc-settings")
-        .addEventListener("click", () => {
-            document.querySelector(".backdrop").classList.remove("open");
-            document.querySelector(".aside").classList.remove("slide-in");
-        });
+    renderDlcChecklistHtml();
+    renderPersonaTable(sortedPersonas);
 }
 
-function renderPersonaTable(personaList = makePersonaList(checkedDLC)) {
-    if (personaList.length === 0) {
-        document.getElementById("compendium").innerHTML = `<p>No results.</p>`;
+function renderDlcChecklistHtml() {
+    const dlcForm = document.getElementById("dlc-form");
+
+    let html = "";
+    dlcNames.forEach((name) => {
+        html += `
+        <div class="aside__checkbox">
+            <input type="checkbox" class="dlc-checkbox" 
+            id="${name[0]}" name="dlc" value="${name[0]}" ${isDlcChecked(name[0])}>
+            <label for="${name[0]}">${name[0]} and ${name[1]}</label>
+        </div>
+        `;
+    });
+    dlcForm.innerHTML = html;
+}
+
+function isDlcChecked(dlc) {
+    return checkedDLC.flat().includes(dlc) ? "checked" : "";
+}
+
+function renderPersonaTable(personasToDisplay = []) {
+    const compendiumTable = document.getElementById("compendium");
+
+    if (personasToDisplay.length === 0) {
+        compendiumTable.innerHTML = `<p>No results.</p>`;
         return;
     }
 
-    let sortedPersonaList = sortPersonaList(personaList);
-
     let html = "";
-    for (let persona of sortedPersonaList) {
-        if (persona === undefined) continue;
+    for (let persona of personasToDisplay) {
+        if (!persona) continue;
 
-        html += `<a href="/personaPage.html?name=${persona.name}" target="_blank" class="table__cell table__cell${hasType(persona)[0]}">
-                                <span
-                                    class="table__arcana arcana--small type${hasType(persona)[0]}"
-                                    >${persona.arcana}</span
-                                >
-                                <span class="table__level numbers--regular"
-                                    >${persona.lvl}</span
-                                >
-                                <span class="table__circle type${hasType(persona)[0]}"></span>
-                                <span class="table__name">${persona.name}</span>
-                                <span class="badge--small badge${hasType(persona)[0]}">${hasType(persona)[1]}</span>
-                            </a>`;
+        const { arcana, lvl, name, type } = persona;
+
+        html += `
+        <a href="/personaPage.html?name=${name}" target="_blank" class="table__cell table__cell--${type}">
+            <span class="table__arcana arcana--small type--${type}">${arcana}</span>
+            <span class="table__level numbers--regular">${lvl}</span>
+            <span class="table__circle type--${type}"></span>
+            <span class="table__name">${name}</span>
+            <span class="badge--small badge--${type}">${type.toUpperCase()}</span>
+        </a>`;
     }
 
-    document.getElementById("compendium").innerHTML = html;
-
-    function hasType(p) {
-        if (p.special) return ["--special", "SPECIAL"];
-        if (p.treasure) return ["--gem", "GEM"];
-        if (p.dlc) return ["--dlc", "DLC"];
-        return ["", ""];
-    }
+    compendiumTable.innerHTML = html;
 }
 
-function sortPersonaList(personaList) {
-    let sortedList;
-
-    if (sortBy === "arcana") {
-        const groupedByArcana = _.groupBy(personaList, sortBy);
-        sortedList = arcanaOrder.flatMap((arcana) => groupedByArcana[arcana]);
-    } else if (sortBy === "lvl") {
-        sortedList = _.orderBy(personaList, [sortBy], ["asc"]);
-    }
-
-    return sortedList;
+function updatePersonaTable(
+    arrayToDisplay = allAvailablePersonas,
+    sortingMode = "arcana",
+) {
+    const sortedArray = sortPersonasArray(arrayToDisplay, sortingMode);
+    renderPersonaTable(sortedArray);
+    console.trace("updated table");
 }
 
-// Events (re-render persona list):
+const sortingOptions = document.querySelectorAll('[name="sorting"]');
 
-const sortOptions = document.querySelectorAll("[name='sorting']");
-sortOptions.forEach((option) => {
+sortingOptions.forEach((option) => {
     option.addEventListener("change", (e) => {
-        sortBy = e.target.value;
-        localStorage.setItem("sortBy", sortBy);
-        renderPersonaTable();
+        localStorage.setItem("sortingMode", e.target.value);
+
+        updatePersonaTable(allAvailablePersonas, e.target.value);
     });
 });
 
-const dlcFilters = document.querySelectorAll('input[name = "dlc"]');
-dlcFilters.forEach((option) =>
-    option.addEventListener("click", () => {
-        checkedDLC = [...dlcFilters]
+const dlcCheckboxes = document.querySelectorAll('input[name = "dlc"]');
+
+dlcCheckboxes.forEach((option) =>
+    option.addEventListener("change", () => {
+        const updatedDlcArray = [...dlcCheckboxes]
             .filter((el) => el.checked)
-            .map((el) => el.id);
-        localStorage.setItem("checkedDLC", JSON.stringify(checkedDLC));
-        makePersonaList(checkedDLC);
-        renderPersonaTable();
+            .map((el) => [el.id, el.id + " Picaro"]);
+
+        const updatedAvailablePersonasArray =
+            getAllAvailablePersonasArray(updatedDlcArray);
+        updatePersonaTable(updatedAvailablePersonasArray);
+
+        localStorage.setItem("checkedDLC", JSON.stringify(updatedDlcArray));
     }),
 );
 
 document.querySelector(".js-search-button").addEventListener("click", (e) => {
     clearSearchBar(e.target, e.target.dataset.parent);
-    renderPersonaTable();
+    updatePersonaTable();
 });
 
 document.querySelector(".js-search-bar").addEventListener("keyup", (e) => {
-    const personaList = makePersonaList(checkedDLC);
-    const result = searchForItem(personaList, e.target.value, e.target.id);
-    renderPersonaTable(result);
+    const searchResult = searchForItem(
+        allAvailablePersonas,
+        e.target.value,
+        e.target.id,
+    );
+    updatePersonaTable(searchResult, sortingMode);
+});
+
+document.querySelector("#show-dlc-settings").addEventListener("click", () => {
+    document.querySelector(".backdrop").classList.add("open");
+    document.querySelector(".aside").classList.add("slide-in");
+});
+
+document.querySelector("#close-dlc-settings").addEventListener("click", () => {
+    document.querySelector(".backdrop").classList.remove("open");
+    document.querySelector(".aside").classList.remove("slide-in");
 });
