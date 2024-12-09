@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const pages = ["compendiumPage", "personaPage"];
 
@@ -40,7 +41,7 @@ module.exports = {
         rules: [
             {
                 test: /\.(c|sa|sc)ss$/i,
-                use: ["style-loader", "css-loader", "sass-loader"],
+                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif|ico|woff|woff2|eot|ttf|webp)$/i,
@@ -48,16 +49,33 @@ module.exports = {
             },
         ],
     },
-    plugins: pages.map(
-        (page) =>
-            new HtmlWebpackPlugin({
-                title: `Persona 5 Fusion Calculator`,
-                filename: `${page}.html`,
-                favicon: "src/assets/images/favicon.ico",
-                template: `src/${page}.html`,
-                chunks: [page],
-            }),
-    ),
+    // plugins: pages.map(
+    //     (page) =>
+    //         new HtmlWebpackPlugin({
+    //             title: `Compendium | Persona 5 Fusion Calculator`,
+    //             filename: `${page}.html`,
+    //             favicon: "src/assets/images/favicon.ico",
+    //             template: `src/${page}.html`,
+    //             chunks: [page],
+    //         }),
+    // ),
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: `Compendium | Persona 5 Fusion Calculator`,
+            filename: `compendiumPage.html`,
+            favicon: "src/assets/images/favicon.ico",
+            template: `src/compendiumPage.html`,
+            chunks: ["compendiumPage"],
+        }),
+        new HtmlWebpackPlugin({
+            title: `Persona 5 Fusion Calculator`,
+            filename: `personaPage.html`,
+            favicon: "src/assets/images/favicon.ico",
+            template: `src/personaPage.html`,
+            chunks: ["personaPage"],
+        }),
+        new MiniCssExtractPlugin(),
+    ],
 
     // performance: { hints: false },
 };

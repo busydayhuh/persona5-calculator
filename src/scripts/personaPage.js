@@ -16,15 +16,13 @@ import {
 import "./handleFusions.js";
 import { searchForItem, clearSearchBar } from "./handleSearch.js";
 
-// document.addEventListener("readystatechange", (event) => {
-//     if (event.target.readyState === "interactive") {
-//         document.querySelector(".backdrop--loader").classList.add("open");
-//     } else if (event.target.readyState === "complete") {
-//         document.querySelector(".backdrop--loader").classList.remove("open");
-//     }
-// });
+window.addEventListener("load", () => {
+    document.querySelector(".backdrop--loader").classList.remove("open");
+});
 
 const name = new URL(window.location.href).searchParams.get("name");
+document.querySelector("title").innerText =
+    `${name} | Persona 5 Fusion Calculator`;
 
 const {
     arcana,
@@ -86,6 +84,7 @@ function renderTitle() {
 function renderImage() {
     const image = new Image();
     image.src = images[name];
+    console.log(images);
 
     image.addEventListener("load", () => {
         let width = image.naturalWidth;
@@ -127,7 +126,7 @@ function renderSkills() {
 
         html += `
         <div class="skills__row">
-            <div class="skills__elem icon elem--${element} hovertext" data-hover="${element}"></div>
+            <div class="skills__elem icon elem--${element} hovertext" data-elem-name="${element}"></div>
             <div class="skills__name">${name}</div>
             <div class="skills__cost">
                 <span class="cost">${formatSkillCost(cost)}</span>
@@ -154,7 +153,7 @@ function renderInheritance() {
     let inheritanceHtml = "";
 
     inheritedElements.forEach((element) => {
-        inheritanceHtml += `<div class="inheritance__elem icon elem--${element}"></div>`;
+        inheritanceHtml += `<div class="inheritance__elem icon elem--${element} hovertext" data-elem-name="${element}"></div>`;
     });
 
     document.querySelector(".js-inheritance-grid").innerHTML = inheritanceHtml;
@@ -196,13 +195,10 @@ function renderItem() {
     }
 
     itemName.innerText = `${item}`;
-    itemTable.innerHTML = `<div class="item__type--head">Type</div>
-        <div class="item__name--head">Name</div>
-        <div class="item__user--head">User</div>
-        <div class="item__description--head">Description</div>
-        <div class="item__type icon item--${type}-${user || "unisex"}"></div>
+    itemTable.innerHTML += `
+        <div class="item__type icon item--${type}-${user || "unisex"} hovertext" data-elem-name="${type}"></div>
         <div class="item__name">${item}</div>
-        <div class="item__user icon user--${user || "unisex"}"></div>
+        <div class="item__user icon user--${user || "unisex"} hovertext" data-elem-name="${user || "unisex"}"></div>
         <div class="item__description">${description || ""} <span class="cost">${cost ? "Cost: " + cost : ""}</span>
         </div>`;
 }
@@ -332,33 +328,33 @@ function renderFusionNotes(fusionVersion, numOfResults) {
         `#fusion-note-${fusionVersion}`,
     );
 
+    const specialCondition = reverseFusionsArray.condition || "";
+
+    const fusionNotesForDiffTypes = {
+        special: {
+            main: `Fuse Personas from the recipe below to get ${name}.`,
+            optional: `${specialCondition}`,
+        },
+        max: {
+            main: `Fuse two Personas to get ${name}. Follow recipes below ( ${numOfResults} results )`,
+            optional: `This fusion requires completed ${arcana} Confidant.`,
+        },
+        gem: {
+            main: `This Persona cannot be fused.`,
+            optional: `You can find it in Mementos on The Path of ${area}.`,
+        },
+        dlc: {
+            main: `Fuse two Personas to get ${name}. Follow recipes below ( ${numOfResults} results )`,
+            optional: `Works only if you have this DLC downloaded.`,
+        },
+    };
+
     if (fusionVersion === "v1") {
         if (!type) {
             fusionTableNote.innerHTML = `
-            <p class="note__main">Fuse two Personas to get ${name}. Follow recipes below (${numOfResults} results).</p>`;
+            <p class="note__main">Fuse two Personas to get ${name}. Follow recipes below ( ${numOfResults} results )</p>`;
             return;
         }
-
-        let specialCondition = reverseFusionsArray.condition || "";
-
-        const fusionNotesForDiffTypes = {
-            special: {
-                main: `Fuse Personas from the recipe below to get ${name}.`,
-                optional: `${specialCondition}`,
-            },
-            max: {
-                main: `Fuse two Personas to get ${name}. Follow recipes below (${numOfResults} results).`,
-                optional: `This fusion requires completed ${arcana} Confidant.`,
-            },
-            gem: {
-                main: `This Persona cannot be fused.`,
-                optional: `You can find it in Mementos on The Path of ${area}.`,
-            },
-            dlc: {
-                main: `Fuse two Personas to get ${name}. Follow recipes below (${numOfResults} results).`,
-                optional: `Works only if you have this DLC downloaded.`,
-            },
-        };
 
         if (max && type !== "special") {
             fusionTableNote.innerHTML = `
@@ -372,19 +368,22 @@ function renderFusionNotes(fusionVersion, numOfResults) {
             <p class="note__main">${fusionNotesForDiffTypes[type].main}</p>
             <p class="note__optional">${fusionNotesForDiffTypes[type].optional}</p>
             `;
+
+        return;
     }
 
     if (fusionVersion === "v2") {
         if (type === "gem") {
             fusionTableNote.innerHTML = `
-            <p class="note__main">Fuse ${name} with another Persona to get specific Result. Follow recipes below (${numOfResults} results).</p>
+            <p class="note__main">Fuse ${name} with another Persona to get specific Result.<br/>Follow recipes below ( ${numOfResults} results )</p>
             <p class="note__optional">Result is dependent on the current level of your second ingredient. Results may vary.</p>
         `;
             return;
         }
 
         fusionTableNote.innerHTML = `
-            <p class="note__main">Fuse ${name} with another Persona to get specific Result. Follow recipes below (${numOfResults} results).</p>`;
+            <p class="note__main">Fuse ${name} with another Persona to get specific Result.<br/>Follow recipes below ( ${numOfResults} results )</p>`;
+        return;
     }
 }
 

@@ -3,11 +3,11 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Persona Page</title>
+        <title>Persona 5 Fusion Calculator</title>
     </head>
 
     <body>
-        <div class="backdrop backdrop--loader">
+        <div class="backdrop backdrop--loader open">
             <div class="loader"></div>
         </div>
         <header class="header header--black">
@@ -30,43 +30,43 @@
             <section class="resistance">
                 <div class="resistance__container">
                     <div
-                        class="resistance__elem icon elem--phys"
+                        class="resistance__elem icon elem--phys hovertext"
                         data-elem-name="phys"
                     ></div>
                     <div
-                        class="resistance__elem icon elem--gun"
+                        class="resistance__elem icon elem--gun hovertext"
                         data-elem-name="gun"
                     ></div>
                     <div
-                        class="resistance__elem icon elem--fire"
+                        class="resistance__elem icon elem--fire hovertext"
                         data-elem-name="fire"
                     ></div>
                     <div
-                        class="resistance__elem icon elem--ice"
+                        class="resistance__elem icon elem--ice hovertext"
                         data-elem-name="ice"
                     ></div>
                     <div
-                        class="resistance__elem icon elem--elec"
+                        class="resistance__elem icon elem--elec hovertext"
                         data-elem-name="elec"
                     ></div>
                     <div
-                        class="resistance__elem icon elem--wind"
+                        class="resistance__elem icon elem--wind hovertext"
                         data-elem-name="wind"
                     ></div>
                     <div
-                        class="resistance__elem icon elem--psy"
+                        class="resistance__elem icon elem--psy hovertext"
                         data-elem-name="psy"
                     ></div>
                     <div
-                        class="resistance__elem icon elem--nuke"
+                        class="resistance__elem icon elem--nuke hovertext"
                         data-elem-name="nuke"
                     ></div>
                     <div
-                        class="resistance__elem icon elem--bless"
+                        class="resistance__elem icon elem--bless hovertext"
                         data-elem-name="bless"
                     ></div>
                     <div
-                        class="resistance__elem icon elem--curse"
+                        class="resistance__elem icon elem--curse hovertext"
                         data-elem-name="curse"
                     ></div>
                 </div>
@@ -98,11 +98,10 @@
                 </div>
                 <div class="grey-container">
                     <div class="item__grid js-item-grid">
-                        <div class="item__type"></div>
-                        <div class="item__name"></div>
-                        <div class="item__user"></div>
-                        <div class="item__description"></div>
-                        <div class="item__cost"></div>
+                        <div class="item__type--head">Type</div>
+                        <div class="item__name--head">Name</div>
+                        <div class="item__user--head">User</div>
+                        <div class="item__description--head">Description</div>
                     </div>
                 </div>
             </section>
@@ -136,8 +135,7 @@
                                 class="table__colnames"
                                 id="fusion-colnames-v1"
                             >
-                                <div class="th">Persona 1</div>
-                                <div class="th">Persona 2</div>
+                                <div class="th">Materials</div>
                             </div>
                             <div
                                 class="table__content--two-col styled-scrollbars"

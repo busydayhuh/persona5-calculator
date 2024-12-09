@@ -4,8 +4,8 @@
 @use "globals" as g;
 
 body {
-    background: url("/src/assets/images/interface/ConfidantCarolineJustine3Vector.svg")
-        bottom right no-repeat scroll g.$background-black-color;
+    background: url("/src/assets/images/interface/ConfidantCarolineJustine3Vector.webp")
+        bottom right / auto 100% no-repeat scroll g.$background-black-color;
 
     @include g.for-phone-only {
         background: g.$background-black-color;
@@ -60,8 +60,8 @@ body {
         width: min(g.em(300), 90vw);
         height: min(g.em(84), 20vw);
 
-        background: url("/src/assets/images/interface/main_header.svg") top left /
-            contain no-repeat;
+        background: url("/src/assets/images/interface/main_header.webp") top
+            left / contain no-repeat;
     }
 }
 

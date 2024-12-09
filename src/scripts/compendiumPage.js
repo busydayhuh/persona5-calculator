@@ -7,6 +7,10 @@ import {
 import { dlcNames } from "../data/dlcList.js";
 import { searchForItem, clearSearchBar } from "./handleSearch.js";
 
+window.addEventListener("load", () => {
+    document.querySelector(".backdrop--loader").classList.remove("open");
+});
+
 let sortingMode = localStorage.getItem("sortingMode") || "arcana";
 let checkedDLC = JSON.parse(localStorage.getItem("checkedDLC")) || [];
 let allAvailablePersonas = getAllAvailablePersonasArray(checkedDLC);

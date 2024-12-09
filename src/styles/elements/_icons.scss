@@ -196,17 +196,17 @@
     }
 
     &--unisex {
-        background-image: url("/src/assets/images/items/unisex.svg");
+        background-image: url("/src/assets/images/items/unisex_icon.svg");
         background-color: transparent;
     }
 
     &--women {
-        background-image: url("/src/assets/images/items/female.svg");
+        background-image: url("/src/assets/images/items/women_icon.svg");
         background-color: transparent;
     }
 
     &--men {
-        background-image: url("/src/assets/images/items/male.svg");
+        background-image: url("/src/assets/images/items/men_icon.svg");
         background-color: transparent;
     }
 }

@@ -124,17 +124,18 @@
         }
 
         :nth-child(2),
-        :nth-child(4) {
+        :nth-child(4),
+        :nth-child(7),
+        :nth-child(9) {
             margin-top: g.rem(10);
         }
 
-        :nth-child(6),
-        :nth-child(9) {
+        :nth-child(6) {
             margin-top: g.rem(16);
         }
 
         :nth-child(8) {
-            margin-top: g.rem(8);
+            margin-top: g.rem(20);
         }
     }
 
@@ -288,6 +289,10 @@
 
         width: 100%;
         height: min(g.rem(40), 6.7vw);
+
+        &::before {
+            transform: skew(-4deg);
+        }
     }
 
     &__name {
@@ -379,8 +384,8 @@
         width: 100%;
         height: min(g.rem(45), 7.7vw);
 
-        background-size: 75% 100%;
-        background-position: top center;
+        background-size: contain;
+        background-position: bottom center;
 
         &--head {
             grid-area: uh;
@@ -437,6 +442,7 @@
                 clip-path: polygon(2% 0, 97% 0, 100% 97%, 0% 100%);
 
                 min-height: g.rem(450);
+                padding-bottom: g.rem(96);
             }
         }
     }

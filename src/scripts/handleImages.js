@@ -1,6 +1,10 @@
 export const images = importAll(
     // eslint-disable-next-line no-undef
-    require.context("../assets/images/personas", false, /\.(png|jpe?g|svg)$/),
+    require.context(
+        "../assets/images/personas",
+        false,
+        /\.(png|jpe?g|svg|webp)$/,
+    ),
 );
 
 function importAll(r) {
