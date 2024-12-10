@@ -76,7 +76,6 @@ function updatePersonaTable(
 ) {
     const sortedArray = sortPersonasArray(arrayToDisplay, sortingMode);
     renderPersonaTable(sortedArray);
-    console.trace("updated table");
 }
 
 const sortingOptions = document.querySelectorAll('[name="sorting"]');

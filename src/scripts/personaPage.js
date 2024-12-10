@@ -81,7 +81,6 @@ function renderTitle() {
 function renderImage() {
     const image = new Image();
     image.src = images[name];
-    console.log(images);
 
     image.addEventListener("load", () => {
         let width = image.naturalWidth;

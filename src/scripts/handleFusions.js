@@ -314,15 +314,6 @@ function getGemWithPersonasResults(gem) {
     return gemWithPersonasResults;
 }
 
-console.log(
-    aggregateForwardFusionResults({
-        name: "Vishnu",
-        lvl: 83,
-        arcana: "Fool",
-        type: "",
-    }),
-);
-
 export function getMaxCondition(personaName) {
     const recipe = specialFusions.find(
         (recipe) => recipe.result === personaName,

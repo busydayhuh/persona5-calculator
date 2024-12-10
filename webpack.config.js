@@ -14,8 +14,7 @@ module.exports = {
             }),
         {},
     ),
-    mode: "development",
-    //performance: { hints: false },
+    mode: "production",
     output: {
         filename: "[name].[contenthash].js", // новое название с хешом при изменении файла
         path: path.resolve(__dirname, "dist"),
@@ -26,8 +25,10 @@ module.exports = {
         splitChunks: {
             chunks: "all",
         },
+        usedExports: false,
+        sideEffects: true,
     },
-    devtool: "source-map",
+    //devtool: "source-map",
     devServer: {
         static: {
             directory: path.join(__dirname, "dist"),
@@ -49,6 +50,16 @@ module.exports = {
                 test: /\.(png|svg|jpg|jpeg|gif|ico|woff|woff2|eot|ttf|webp)$/i,
                 type: "asset/resource",
             },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ["@babel/preset-env"],
+                    },
+                },
+            },
         ],
     },
 
@@ -68,8 +79,6 @@ module.exports = {
             chunks: ["personaPage"],
         }),
         new MiniCssExtractPlugin(),
-        new BundleAnalyzerPlugin({ analyzerPort: 5000 }),
+        new BundleAnalyzerPlugin({ analyzerPort: 3000 }),
     ],
-
-    // performance: { hints: false },
 };

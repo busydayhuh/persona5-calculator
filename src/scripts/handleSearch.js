@@ -14,8 +14,6 @@ export function searchForItem(personaList, query, barId) {
                     .includes(query.trim().toLowerCase()),
         );
     } else if (barId === "v1") {
-        console.log(personaList);
-
         personaList.forEach((recipe) => {
             const nameList = recipe.source.reduce(
                 (acc, persona) => acc + persona.name + persona.arcana,
