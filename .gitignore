@@ -1,0 +1,6 @@
+/node_modules
+*.ini
+/dist
+.prettierrc
+stats.json
+*.config.*
