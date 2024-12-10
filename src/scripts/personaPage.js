@@ -13,11 +13,8 @@ import {
     aggregateReverseFusionResults,
 } from "./handleFusions.js";
 
-import "./handleFusions.js";
-import { searchForItem, clearSearchBar } from "./handleSearch.js";
-
 window.addEventListener("load", () => {
-    document.querySelector(".backdrop--loader").classList.remove("open");
+    document.querySelector(".loader-backdrop").classList.remove("open");
 });
 
 const name = new URL(window.location.href).searchParams.get("name");
@@ -297,6 +294,11 @@ function renderForwardFusionList(fusionsArr = forwardFusionsArray) {
     const fusionTableBody = document.querySelector("#fusion-table-v2");
     const numOfResults = fusionsArr.length;
 
+    if (numOfResults === 0) {
+        fusionTableBody.innerHTML = `<p>No results.</p>`;
+        return;
+    }
+
     renderFusionNotes("v2", numOfResults);
 
     let html = "";
@@ -389,34 +391,38 @@ function renderFusionNotes(fusionVersion, numOfResults) {
 
 document.querySelectorAll(".js-search-bar").forEach((bar) => {
     bar.addEventListener("keyup", (e) => {
-        if (e.target.id === "v1") {
-            const result = searchForItem(
-                reverseFusionsArray,
-                e.target.value,
-                e.target.id,
-            );
+        import("./handleSearch.js").then(({ searchForItem }) => {
+            if (e.target.id === "v1") {
+                const result = searchForItem(
+                    reverseFusionsArray,
+                    e.target.value,
+                    e.target.id,
+                );
 
-            renderReverseFusionList(result);
-        } else {
-            const result = searchForItem(
-                forwardFusionsArray,
-                e.target.value,
-                e.target.id,
-            );
+                renderReverseFusionList(result);
+            } else {
+                const result = searchForItem(
+                    forwardFusionsArray,
+                    e.target.value,
+                    e.target.id,
+                );
 
-            renderForwardFusionList(result);
-        }
+                renderForwardFusionList(result);
+            }
+        });
     });
 });
 
 document.querySelectorAll(".js-search-button").forEach((button) => {
     button.addEventListener("click", (e) => {
-        clearSearchBar(e.target, e.target.dataset.parent);
+        import("./handleSearch.js").then(({ clearSearchBar }) => {
+            clearSearchBar(e.target, e.target.dataset.parent);
 
-        if (e.target.dataset.parent === "v1") {
-            renderReverseFusionList();
-        } else {
-            renderForwardFusionList();
-        }
+            if (e.target.dataset.parent === "v1") {
+                renderReverseFusionList();
+            } else {
+                renderForwardFusionList();
+            }
+        });
     });
 });

@@ -36,18 +36,20 @@
 
 .index-page-wrap {
     width: min(100% - func.rem(32), func.rem(1176));
-    margin-left: 7vw;
+    margin-left: 8vw;
 
     @include for-desktop-down {
         margin-inline: auto;
     }
 }
 
-.index-header-wrap {
+.index-header-wrap,
+.index-footer-wrap {
     max-width: 100%;
     margin: 0 8vw;
 
     @include for-desktop-down {
+        max-width: 95%;
         margin-inline: auto;
     }
 }

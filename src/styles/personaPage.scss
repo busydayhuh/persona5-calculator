@@ -431,6 +431,8 @@
 .fusion {
     grid-area: fusion;
 
+    margin-bottom: min(g.rem(62), 7vw);
+
     &__clip-wrap {
         position: relative;
         padding-top: g.rem(4);
@@ -511,8 +513,10 @@
         transform: rotate(-2deg);
     }
 
-    &:hover {
-        transform: translateY(-5%);
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            transform: translateY(-5%);
+        }
     }
 }
 

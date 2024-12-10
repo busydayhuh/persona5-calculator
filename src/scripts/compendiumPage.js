@@ -5,10 +5,9 @@ import {
     sortPersonasArray,
 } from "./handleCompendiumData.js";
 import { dlcNames } from "../data/dlcList.js";
-import { searchForItem, clearSearchBar } from "./handleSearch.js";
 
 window.addEventListener("load", () => {
-    document.querySelector(".backdrop--loader").classList.remove("open");
+    document.querySelector(".loader-backdrop").classList.remove("open");
 });
 
 let sortingMode = localStorage.getItem("sortingMode") || "arcana";
@@ -107,17 +106,21 @@ dlcCheckboxes.forEach((option) =>
 );
 
 document.querySelector(".js-search-button").addEventListener("click", (e) => {
-    clearSearchBar(e.target, e.target.dataset.parent);
-    updatePersonaTable();
+    import("./handleSearch.js").then(({ clearSearchBar }) => {
+        clearSearchBar(e.target, e.target.dataset.parent);
+        updatePersonaTable();
+    });
 });
 
 document.querySelector(".js-search-bar").addEventListener("keyup", (e) => {
-    const searchResult = searchForItem(
-        allAvailablePersonas,
-        e.target.value,
-        e.target.id,
-    );
-    updatePersonaTable(searchResult, sortingMode);
+    import("./handleSearch.js").then(({ searchForItem }) => {
+        const searchResult = searchForItem(
+            allAvailablePersonas,
+            e.target.value,
+            e.target.id,
+        );
+        updatePersonaTable(searchResult, sortingMode);
+    });
 });
 
 document.querySelector("#show-dlc-settings").addEventListener("click", () => {

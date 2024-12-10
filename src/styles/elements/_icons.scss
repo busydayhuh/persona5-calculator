@@ -197,16 +197,16 @@
 
     &--unisex {
         background-image: url("/src/assets/images/items/unisex_icon.svg");
-        background-color: transparent;
+        background-color: g.$background-black-color;
     }
 
     &--women {
         background-image: url("/src/assets/images/items/women_icon.svg");
-        background-color: transparent;
+        background-color: g.$background-black-color;
     }
 
     &--men {
         background-image: url("/src/assets/images/items/men_icon.svg");
-        background-color: transparent;
+        background-color: g.$background-black-color;
     }
 }

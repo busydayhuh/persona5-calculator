@@ -1,0 +1,33 @@
+@use "../globals" as g;
+
+.footer {
+    &__wrapper {
+        position: relative;
+
+        display: grid;
+        grid-template-columns: 6fr 1fr 1fr;
+
+        margin-bottom: 0.8rem;
+        padding: 1.5rem 0rem 1rem 3rem;
+
+        background-color: g.$background-grey-color;
+
+        @include g.for-desktop-down {
+            grid-template-columns: 1fr;
+        }
+
+        @include g.for-phone-only {
+            padding: 1.5rem 1rem 1rem 1rem;
+        }
+    }
+
+    &__contacts {
+        @include g.for-desktop-up {
+            text-align: center;
+        }
+    }
+
+    &__link {
+        text-decoration: underline;
+    }
+}

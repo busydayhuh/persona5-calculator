@@ -1,6 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const BundleAnalyzerPlugin =
+    require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 const pages = ["compendiumPage", "personaPage"];
 
@@ -49,16 +51,7 @@ module.exports = {
             },
         ],
     },
-    // plugins: pages.map(
-    //     (page) =>
-    //         new HtmlWebpackPlugin({
-    //             title: `Compendium | Persona 5 Fusion Calculator`,
-    //             filename: `${page}.html`,
-    //             favicon: "src/assets/images/favicon.ico",
-    //             template: `src/${page}.html`,
-    //             chunks: [page],
-    //         }),
-    // ),
+
     plugins: [
         new HtmlWebpackPlugin({
             title: `Compendium | Persona 5 Fusion Calculator`,
@@ -75,6 +68,7 @@ module.exports = {
             chunks: ["personaPage"],
         }),
         new MiniCssExtractPlugin(),
+        new BundleAnalyzerPlugin({ analyzerPort: 5000 }),
     ],
 
     // performance: { hints: false },

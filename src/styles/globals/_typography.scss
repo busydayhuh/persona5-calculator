@@ -236,9 +236,24 @@ h3 {
     paint-order: stroke fill;
 }
 
+h4 {
+    margin: 0 0 1.2rem 0;
+
+    font-family: f.$arcana-font-small;
+    font-size: clamp(func.rem(16), 5vw, func.rem(18));
+}
+
 .th {
     font-family: f.$main-font;
     font-size: clamp(func.rem(20), 6vw, func.rem(28));
 
     color: c.$background-grey-color;
+}
+
+footer {
+    font-size: clamp(func.rem(14), 5vw, func.rem(18));
+
+    p {
+        margin-bottom: 0.5rem;
+    }
 }

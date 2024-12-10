@@ -46,7 +46,8 @@
             padding-right: 0.35rem;
 
             & > .table__cell {
-                border-bottom: 1px solid #434242;
+                // border-bottom: 1px solid #434242;
+                border-bottom: 1px solid white;
                 padding-top: 1rem;
 
                 &:nth-last-of-type(-n + 2) {
@@ -97,13 +98,14 @@
             }
         }
 
-        &:hover {
-            //clip-path: polygon(0 0, 91% 10%, 100% 91%, 0 100%);
-            background-color: g.$accent-red-color;
-        }
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                background-color: g.$accent-red-color;
+            }
 
-        &:hover .table__arcana {
-            color: g.$accent-red-color;
+            &:hover .table__arcana {
+                color: g.$accent-red-color;
+            }
         }
 
         span {

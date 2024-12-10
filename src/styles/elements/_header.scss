@@ -64,14 +64,16 @@
                 center / contain no-repeat;
         }
 
-        &:hover {
-            background-color: g.$background-black-color;
-            color: g.$white-color;
-        }
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                background-color: g.$background-black-color;
+                color: g.$white-color;
+            }
 
-        &:hover a::before {
-            background: url("/src/assets/images/interface/github-alt-icon-white.svg")
-                center / contain no-repeat;
+            &:hover a::before {
+                background: url("/src/assets/images/interface/github-alt-icon-white.svg")
+                    center / contain no-repeat;
+            }
         }
 
         &--black {
@@ -80,14 +82,16 @@
                     center / contain no-repeat;
             }
 
-            &:hover {
-                background-color: g.$accent-red-color;
-                color: g.$background-black-color;
-            }
+            @media (hover: hover) and (pointer: fine) {
+                &:hover {
+                    background-color: g.$accent-red-color;
+                    color: g.$background-black-color;
+                }
 
-            &:hover a::before {
-                background: url("/src/assets/images/interface/github-alt-icon-original.svg")
-                    center / contain no-repeat;
+                &:hover a::before {
+                    background: url("/src/assets/images/interface/github-alt-icon-original.svg")
+                        center / contain no-repeat;
+                }
             }
         }
     }

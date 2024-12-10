@@ -71,11 +71,13 @@
         0.8rem 0.8rem no-repeat transparent;
     filter: opacity(100%);
 
-    &:hover {
-        clip-path: polygon(6% 12%, 100% 0%, 98% 100%, 0% 100%);
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            clip-path: polygon(6% 12%, 100% 0%, 98% 100%, 0% 100%);
 
-        background-color: g.$accent-red-color;
-        cursor: pointer;
+            background-color: g.$accent-red-color;
+            cursor: pointer;
+        }
     }
 }
 
@@ -151,39 +153,22 @@ fieldset {
         color: #fff;
     }
 
-    &:hover::before {
-        opacity: 1;
-        visibility: visible;
+    @media (hover: hover) and (pointer: fine) {
+        &:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
     }
 }
 
 @supports (scrollbar-color: auto) {
     .styled-scrollbars {
         scrollbar-color: g.$accent-grey-color transparent;
+        scrollbar-width: 2px;
     }
 
     html {
         scrollbar-width: none;
-    }
-}
-
-@supports selector(::-webkit-scrollbar) {
-    .styled-scrollbars::-webkit-scrollbar {
-        background: transparent;
-    }
-    .styled-scrollbars::-webkit-scrollbar-thumb {
-        background: g.$white-color;
-    }
-
-    .styled-scrollbars::-webkit-scrollbar-button {
-        display: none;
-
-        width: 0;
-        height: 0;
-    }
-
-    html::-webkit-scrollbar {
-        width: 0px;
     }
 }
 
@@ -212,8 +197,10 @@ fieldset {
         text-align: center;
         color: g.$white-color;
 
-        &:hover {
-            cursor: pointer;
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
 }

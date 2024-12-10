@@ -5,7 +5,7 @@
 
 body {
     background: url("/src/assets/images/interface/ConfidantCarolineJustine3Vector.webp")
-        bottom right / auto 100% no-repeat scroll g.$background-black-color;
+        bottom right / 100% no-repeat scroll g.$background-black-color;
 
     @include g.for-phone-only {
         background: g.$background-black-color;
@@ -27,7 +27,7 @@ body {
     position: relative;
 
     margin-top: g.rem(80);
-    margin-bottom: g.rem(100);
+    margin-bottom: g.rem(60);
     min-height: g.rem(1100);
     padding: g.rem(80) g.rem(120) g.rem(100) g.rem(100);
 
@@ -43,9 +43,10 @@ body {
     }
 
     @include g.for-phone-only {
-        margin-bottom: 0;
+        margin-bottom: g.rem(12);
         border: none;
         min-width: 100%;
+        min-height: g.rem(1020);
         padding: g.rem(80) g.rem(16) 0 g.rem(16);
     }
 
@@ -103,8 +104,10 @@ body {
         grid-template-columns: 2rem auto;
         align-items: flex-start;
 
-        label:hover {
-            cursor: pointer;
+        @media (hover: hover) and (pointer: fine) {
+            label:hover {
+                cursor: pointer;
+            }
         }
     }
 
