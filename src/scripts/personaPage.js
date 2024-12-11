@@ -242,7 +242,7 @@ function renderReverseFusionList(fusionsArr = reverseFusionsArray) {
     if (type === "special") {
         fusionsArr[0].source.forEach((persona) => {
             html += `
-            <a href="/personaPage.html?name=${persona.name}" target="_blank" class="table__cell table__cell${persona.type ? "--" + persona.type : ""}">
+            <a href="./personaPage.html?name=${persona.name}" target="_blank" class="table__cell table__cell${persona.type ? "--" + persona.type : ""}">
                 <span class="table__arcana arcana--small">${persona.arcana}</span>
                 <span class="table__level numbers--regular">${persona.lvl}</span>
                 <span class="table__circle"></span>
