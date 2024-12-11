@@ -65,8 +65,8 @@ module.exports = {
 
     plugins: [
         new HtmlWebpackPlugin({
-            title: `Compendium | Persona 5 Fusion Calculator`,
-            filename: `compendiumPage.html`,
+            title: `Persona 5 Fusion Calculator`,
+            filename: `index.html`,
             favicon: "src/assets/images/favicon.ico",
             template: `src/compendiumPage.html`,
             chunks: ["compendiumPage"],
@@ -79,6 +79,6 @@ module.exports = {
             chunks: ["personaPage"],
         }),
         new MiniCssExtractPlugin(),
-        new BundleAnalyzerPlugin({ analyzerPort: 3000 }),
+        //new BundleAnalyzerPlugin({ analyzerPort: 3000 }),
     ],
 };

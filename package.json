@@ -1,11 +1,16 @@
 {
     "name": "persona5-calculator",
     "version": "1.0.0",
+    "repository": {
+        "url": "git+https://github.com/busydayhuh/persona-5-fusion-calculator.git"
+    },
     "description": "",
     "private": true,
     "scripts": {
         "build": "webpack",
-        "start": "webpack serve"
+        "start": "webpack serve",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d dist"
     },
     "keywords": [],
     "author": "",

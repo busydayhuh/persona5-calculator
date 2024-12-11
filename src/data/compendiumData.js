@@ -470,7 +470,7 @@ export const compendiumData = {
         skillCard: true,
         dlc: "true",
     },
-    "Arsene": {
+    "Arséne": {
         arcana: "Fool",
         inherits: "curse",
         lvl: 1,
@@ -493,7 +493,7 @@ export const compendiumData = {
             ma: 2,
             st: 2,
         },
-        item: "Arsene's Cane",
+        item: "Arséne's Cane",
     },
     "Asterius": {
         arcana: "Fortune",
