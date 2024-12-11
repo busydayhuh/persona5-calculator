@@ -242,7 +242,7 @@ function renderReverseFusionList(fusionsArr = reverseFusionsArray) {
     if (type === "special") {
         fusionsArr[0].source.forEach((persona) => {
             html += `
-            <a href="./personaPage.html?name=${persona.name}" target="_blank" class="table__cell table__cell${persona.type ? "--" + persona.type : ""}">
+            <a href="personaPage.html?name=${persona.name}" target="_blank" class="table__cell table__cell${persona.type ? "--" + persona.type : ""}">
                 <span class="table__arcana arcana--small">${persona.arcana}</span>
                 <span class="table__level numbers--regular">${persona.lvl}</span>
                 <span class="table__circle"></span>
@@ -272,13 +272,13 @@ function renderReverseFusionList(fusionsArr = reverseFusionsArray) {
         const personaB = recipe.source[1];
 
         html += `
-       <a href="/personaPage.html?name=${personaA.name}" target="_blank" class="table__cell table__cell${personaA.type ? "--" + personaA.type : ""}">
+       <a href="personaPage.html?name=${personaA.name}" target="_blank" class="table__cell table__cell${personaA.type ? "--" + personaA.type : ""}">
             <span class="table__arcana arcana--small">${personaA.arcana}</span>
             <span class="table__level numbers--regular">${personaA.lvl}</span>
             <span class="table__circle"></span>
             <span class="table__name">${personaA.name}</span>
         </a>
-            <a href="/personaPage.html?name=${personaB.name}" target="_blank" class="table__cell table__cell${personaB.type ? "--" + personaB.type : ""}">
+            <a href="personaPage.html?name=${personaB.name}" target="_blank" class="table__cell table__cell${personaB.type ? "--" + personaB.type : ""}">
             <span class="table__arcana arcana--small">${personaB.arcana}</span>
             <span class="table__level numbers--regular">${personaB.lvl}</span>
             <span class="table__circle"></span>
@@ -307,13 +307,13 @@ function renderForwardFusionList(fusionsArr = forwardFusionsArray) {
         const resultPersona = pair.result;
 
         html += `
-        <a href="/personaPage.html?name=${personaB.name}" target="_blank" class="table__cell table__cell${personaB.type ? "--" + personaB.type : ""}">
+        <a href="personaPage.html?name=${personaB.name}" target="_blank" class="table__cell table__cell${personaB.type ? "--" + personaB.type : ""}">
             <span class="table__arcana arcana--small">${personaB.arcana}</span>
             <span class="table__level numbers--regular">${personaB.lvl}</span>
             <span class="table__circle"></span>
             <span class="table__name">${personaB.name}</span>
         </a>
-        <a href="/personaPage.html?name=${resultPersona.name}" target="_blank" class="table__cell table__cel${resultPersona.type ? "--" + resultPersona.type : ""} result">
+        <a href="personaPage.html?name=${resultPersona.name}" target="_blank" class="table__cell table__cel${resultPersona.type ? "--" + resultPersona.type : ""} result">
             <span class="table__arcana arcana--small">${resultPersona.arcana}</span>
             <span class="table__level numbers--regular">${resultPersona.lvl}</span>
             <span class="table__circle"></span>

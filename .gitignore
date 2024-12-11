@@ -3,3 +3,4 @@
 .prettierrc
 stats.json
 *.config.*
+/dist
