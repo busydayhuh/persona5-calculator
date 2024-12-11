@@ -58,7 +58,7 @@ function renderPersonaTable(personasToDisplay = []) {
         const { arcana, lvl, name, type } = persona;
 
         html += `
-        <a href="/personaPage.html?name=${name}" target="_blank" class="table__cell table__cell--${type}">
+        <a href="./personaPage.html?name=${name}" target="_blank" class="table__cell table__cell--${type}">
             <span class="table__arcana arcana--small type--${type}">${arcana}</span>
             <span class="table__level numbers--regular">${lvl}</span>
             <span class="table__circle type--${type}"></span>
