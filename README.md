@@ -1,6 +1,6 @@
 # Persona 5 Fusion Calculator
 
-My humble take on the Fusion Calculator for Persona 5.
+My humble take on the Fusion Calculator for Persona 5. 
 
 ![preview](https://github.com/user-attachments/assets/fed81ada-f23a-4d56-bb10-5de6210e8fc9)
 
@@ -78,3 +78,4 @@ All assets and information about Personas have been gathered from various source
 
 Distributed under the MIT License. See LICENSE.txt for more information.
 
+[![forthebadge](https://forthebadge.com/images/badges/uses-js.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/contains-17-coffee-cups.svg)](https://forthebadge.com) 
