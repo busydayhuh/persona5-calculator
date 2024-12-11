@@ -85,7 +85,7 @@ export const specialFusions = [
     },
     {
         result: "Satanael",
-        source: ["Arséne", "Anzu", "Ishtar", "Satan", "Lucifer", "Michael"],
+        source: ["Arsene", "Anzu", "Ishtar", "Satan", "Lucifer", "Michael"],
         condition:
             "Complete the game and reach its True Ending to unlock this Persona.",
     },

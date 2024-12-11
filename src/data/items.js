@@ -4,7 +4,7 @@ export const items = {
         user: "women",
         description: "Def 200 / Ev 18 / +Reduce Elec dmg (high)",
     },
-    "Arséne's Cane": {
+    "Arsene's Cane": {
         type: "weapon",
         user: "Joker",
         description: "Atk 130 / Acc 92 / +Random ailment (low)",
