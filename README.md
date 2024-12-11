@@ -1,6 +1,6 @@
 # Persona 5 Fusion Calculator
 
-My humble take on the Fusion Calculator for Persona 5. 
+My humble take on the Fusion Calculator for Persona 5. Build using vanilla JavaScript.
 
 ![preview](https://github.com/user-attachments/assets/fed81ada-f23a-4d56-bb10-5de6210e8fc9)
 
