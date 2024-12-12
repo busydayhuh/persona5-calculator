@@ -58,11 +58,9 @@ $ npm install
 $ npm start
 ```
 
-## 📝 Disclaimer
+## ⭐ Credits
 
 This project is a fan-made tribute and is not affiliated with or endorsed by Atlus or any of its subsidiaries.
-
-## ⭐ Credits
 
 This project utilizes images and characters from the game **Persona 5**, developed by **Atlus**. All rights to the characters, artwork, and other assets are owned by their respective copyright holders. This project is intended for personal use only, and no commercial use is intended.
 
