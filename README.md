@@ -49,7 +49,7 @@ To clone and run this application, you'll need Git and Node.js (which comes with
 $ git clone https://github.com/busydayhuh/persona-5-fusion-calculator
 
 # Go into the repository
-$ cd electron-markdownify
+$ cd persona-5-fusion-calculator
 
 # Install dependencies
 $ npm install
